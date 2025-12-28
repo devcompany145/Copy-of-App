@@ -43,6 +43,30 @@ const translations: Record<Language, Record<string, string>> = {
     hero_desc: "Exclusive strategic development through sovereign engineering. We deploy proprietary AI frameworks to automate critical business operations and reclaim operational excellence.",
     hero_btn_main: "Initiate Dialogue",
     hero_btn_sec: "The Architecture",
+    metrics_title: "Institutional Impact",
+    metrics_1_val: "82%",
+    metrics_1_label: "Efficiency Yield",
+    metrics_2_val: "4.2PB",
+    metrics_2_label: "Data Throughput",
+    metrics_3_val: "12ms",
+    metrics_3_label: "Inference Latency",
+    metrics_4_val: "0",
+    metrics_4_label: "Security Breaches",
+    methodology_title: "The Sovereign Protocol",
+    methodology_desc: "Our 4-stage systematic deployment architecture.",
+    method_1_title: "I. Diagnostic Audit",
+    method_1_desc: "Mapping institutional data structures and identifying friction points.",
+    method_2_title: "II. Neural Architecture",
+    method_2_desc: "Bespoke engineering of private models and secure pipelines.",
+    method_3_title: "III. Seamless Integration",
+    method_3_desc: "Non-disruptive deployment into high-load operational environments.",
+    method_4_title: "IV. Total Autonomy",
+    method_4_desc: "Continuous self-optimization and institutional scaling.",
+    testimonials_title: "Institutional Briefings",
+    test_1_quote: "The precision of their neural architecture changed our global logistics overnight.",
+    test_1_author: "Chief Architect, Global Logistics Hub",
+    test_2_quote: "Sovereign intelligence is no longer optional. Business Developers is the gold standard.",
+    test_2_author: "Director of Innovation, Sovereign Fund",
     services_title: "Core Expertise",
     services_desc: "A systematic approach to artificial intelligence for the most ambitious global organizations.",
     service_1_title: "Strategic Architecture",
@@ -66,25 +90,25 @@ const translations: Record<Language, Record<string, string>> = {
     about_badge: "Institutional Profile",
     about_title: "Architecting the future.",
     about_desc: "We are a premier intelligence firm based on precision. Our mission is to transform theoretical AI into practical, sovereign strategic assets.",
-    about_content: "Established as a beacon of high-fidelity engineering, Business Developers represents the intersection of capital strategy and machine intelligence. We operate on a global scale, providing the architectural foundation for the next century of enterprise operations. Our guild consists of senior architects, security specialists, and strategic partners dedicated to data sovereignty.",
+    about_content: "Established as a beacon of high-fidelity engineering, Business Developers represents the intersection of capital strategy and machine intelligence. We operate on a global scale, providing the architectural foundation for the next century of enterprise operations.",
     audit_title: "Feasibility Audit",
     audit_desc: "The Protocol for Technical Validation",
-    audit_content: "Every engagement begins with a rigorous multi-stage audit. We evaluate existing data infrastructure, computational readiness, and strategic alignment. Our reports provide a clear path from legacy operations to total AI autonomy, backed by deep technical verification.",
+    audit_content: "Every engagement begins with a rigorous multi-stage audit. We evaluate existing data infrastructure, computational readiness, and strategic alignment.",
     security_title: "Sovereign Security",
     security_desc: "Zero-Knowledge & Data Sovereignty",
-    security_content: "We implement sovereign security protocols that ensure your proprietary intelligence remains yours. Our frameworks prioritize localized hosting, encrypted neural pathways, and institutional-grade access control. Security is not a feature; it is our foundation.",
+    security_content: "We implement sovereign security protocols that ensure your proprietary intelligence remains yours.",
     scalability_title: "Industrial Scalability",
     scalability_desc: "High-Load Resilience",
-    scalability_content: "Our systems are built to withstand the rigors of global institutional demand. From petabyte-scale data ingestion to millisecond latency inference, we engineer for resilience. Scaling intelligence means scaling your entire competitive advantage without compromise.",
+    scalability_content: "Our systems are built to withstand the rigors of global institutional demand.",
     compliance_title: "Institutional Compliance",
     compliance_desc: "Regulatory & Ethical Alignment",
-    compliance_content: "Business Developers operates within the highest standards of international regulatory frameworks. We ensure all AI deployments are transparent, auditable, and compliant with regional data protection laws and institutional governance standards.",
+    compliance_content: "Business Developers operates within the highest standards of international regulatory frameworks.",
     privacy_title: "Privacy Protocol",
     privacy_desc: "Proprietary Data Protection",
-    privacy_content: "Your data is your most valuable asset. Our Privacy Protocol guarantees that no client information is used for external model training. We deploy air-gapped systems and advanced encryption to maintain the absolute confidentiality of your strategic brief.",
+    privacy_content: "Your data is your most valuable asset. Our Privacy Protocol guarantees that no client information is used for external training.",
     terms_title: "Terms of Engagement",
     terms_desc: "Contractual Standards",
-    terms_content: "Engagement with Business Developers is governed by a strict framework of professional ethics and technical standards. We provide clear deliverables, transparent timelines, and guaranteed uptime protocols for all sovereign AI clusters.",
+    terms_content: "Engagement with Business Developers is governed by a strict framework of professional ethics and technical standards.",
     contact_title: "Operational Brief",
     contact_desc: "Brief our senior architecture team on your strategic objectives to begin the feasibility audit.",
     form_btn: "Transmit Brief",
@@ -98,6 +122,12 @@ const translations: Record<Language, Record<string, string>> = {
     status_3: "Referencing global benchmarks...",
     status_4: "Synthesizing response...",
     status_5: "Finalizing audit...",
+    form_name: "Full Name",
+    form_email: "Corporate Email",
+    form_desc_placeholder: "Describe your institutional objectives...",
+    success_title: "Confirmed",
+    success_msg: "Brief received. Awaiting architectural review.",
+    success_btn: "New Dialogue",
   },
   ar: {
     brand: "بيزنس ديفلوبرز",
@@ -112,6 +142,30 @@ const translations: Record<Language, Record<string, string>> = {
     hero_desc: "تطوير استراتيجي حصري من خلال الهندسة السيادية. نقوم بنشر أطر ذكاء اصطناعي خاصة لأتمتة العمليات التجارية الحيوية واستعادة التميز التشغيلي.",
     hero_btn_main: "بدء الحوار",
     hero_btn_sec: "المعمارية",
+    metrics_title: "الأثر المؤسسي",
+    metrics_1_val: "82%",
+    metrics_1_label: "عائد الكفاءة",
+    metrics_2_val: "4.2PB",
+    metrics_2_label: "تدفق البيانات",
+    metrics_3_val: "12ms",
+    metrics_3_label: "زمن الاستجابة",
+    metrics_4_val: "0",
+    metrics_4_label: "خروقات أمنية",
+    methodology_title: "البروتوكول السيادي",
+    methodology_desc: "معمارية النشر المنهجية المكونة من 4 مراحل.",
+    method_1_title: "١. تدقيق تشخيصي",
+    method_1_desc: "رسم خرائط هياكل البيانات المؤسسية وتحديد نقاط الاحتكاك.",
+    method_2_title: "٢. معمارية عصبية",
+    method_2_desc: "هندسة مخصصة للنماذج الخاصة وخطوط الأنابيب الآمنة.",
+    method_3_title: "٣. تكامل سلس",
+    method_3_desc: "نشر غير معطل في بيئات التشغيل ذات الأحمال العالية.",
+    method_4_title: "٤. استقلالية كاملة",
+    method_4_desc: "تحسين ذاتي مستمر وتوسيع النطاق المؤسسي.",
+    testimonials_title: "إيجازات مؤسسية",
+    test_1_quote: "لقد غيرت دقة معماريتهم العصبية خدماتنا اللوجستية العالمية بين عشية وضحاها.",
+    test_1_author: "كبير المعماريين، مركز لوجستيات عالمي",
+    test_2_quote: "الذكاء السيادي لم يعد خياراً. بيزنس ديفلوبرز هم المعيار الذهبي.",
+    test_2_author: "مدير الابتكار، صندوق سيادي",
     services_title: "الخبرات الجوهرية",
     services_desc: "نهج منهجي للذكاء الاصطناعي لأكثر المنظمات العالمية طموحاً.",
     service_1_title: "المعمارية الاستراتيجية",
@@ -135,25 +189,25 @@ const translations: Record<Language, Record<string, string>> = {
     about_badge: "ملف المؤسسة",
     about_title: "هندسة المستقبل.",
     about_desc: "نحن مؤسسة استخبارات تقنية رائدة قائمة على الدقة. مهمتنا هي تحويل الذكاء الاصطناعي النظري إلى أصول استراتيجية سيادية.",
-    about_content: "تأسست بيزنس ديفلوبرز كمنارة للهندسة عالية الدقة، وهي تمثل نقطة التقاء استراتيجية رأس المال وذكاء الآلة. نحن نعمل على نطاق عالمي، ونوفر الأساس المعماري للقرن القادم من العمليات المؤسسية. تضم نقابتنا كبار المهندسين المعماريين والمتخصصين في الأمن والشركاء الاستراتيجيين المخصصين لسيادة البيانات.",
+    about_content: "تأسست بيزنس ديفلوبرز كمنارة للهندسة عالية الدقة، وهي تمثل نقطة التقاء استراتيجية رأس المال وذكاء الآلة. نحن نعمل على نطاق عالمي، ونوفر الأساس المعماري للقرن القادم من العمليات المؤسسية.",
     audit_title: "تدقيق الجدوى",
     audit_desc: "بروتوكول التحقق الفني",
-    audit_content: "يبدأ كل تعاون بتدقيق صارم متعدد المراحل. نقوم بتقييم البنية التحتية الحالية للبيانات، والجاهزية الحسابية، والمواءمة الاستراتيجية. توفر تقاريرنا مساراً واضحاً من العمليات التقليدية إلى الاستقلالية الكاملة للذكاء الاصطناعي، مدعومة بتحقق فني عميق.",
+    audit_content: "يبدأ كل تعاون بتدقيق صارم متعدد المراحل. نقوم بتقييم البنية التحتية الحالية للبيانات، والجاهزية الحسابية، والمواءمة الاستراتيجية.",
     security_title: "الأمن السيادي",
     security_desc: "المعرفة الصفرية وسيادة البيانات",
-    security_content: "نحن نطبق بروتوكولات أمنية سيادية تضمن بقاء ذكائك الخاص ملكاً لك. تعطي أطر عملنا الأولوية للاستضافة المحلية، والمسارات العصبية المشفرة، والتحكم في الوصول على مستوى المؤسسات. الأمن ليس ميزة؛ بل هو أساسنا.",
+    security_content: "نحن نطبق بروتوكولات أمنية سيادية تضمن بقاء ذكائك الخاص ملكاً لك.",
     scalability_title: "القابلية للتوسع الصناعي",
     scalability_desc: "المرونة تحت الأحمال العالية",
-    scalability_content: "أنظمتنا مبنية لتتحمل ضغوط الطلب المؤسسي العالمي. من استيعاب البيانات بمقياس بيتابايت إلى الاستدلال بزمن وصول يقاس بالمللي ثانية، نحن نهندس من أجل المرونة. توسيع الذكاء يعني توسيع ميزتك التنافسية بالكامل دون مساومة.",
+    scalability_content: "أنظمتنا مبنية لتتحمل ضغوط الطلب المؤسسي العالمي.",
     compliance_title: "الامتثال المؤسسي",
     compliance_desc: "المواءمة التنظيمية والأخلاقية",
-    compliance_content: "تعمل بيزنس ديفلوبرز ضمن أعلى معايير الأطر التنظيمية الدولية. نحن نضمن أن جميع عمليات نشر الذكاء الاصطناعي شفافة وقابلة للتدقيق ومتوافقة مع قوانين حماية البيانات الإقليمية ومعايير الحوكمة المؤسسية.",
+    compliance_content: "تعمل بيزنس ديفلوبرز ضمن أعلى معايير الأطر التنظيمية الدولية.",
     privacy_title: "بروتوكول الخصوصية",
     privacy_desc: "حماية البيانات المملوكة",
-    privacy_content: "بياناتك هي أثمن أصولك. يضمن بروتوكول الخصوصية لدينا عدم استخدام أي معلومات للعملاء لتدريب نماذج خارجية. نحن ننشر أنظمة معزولة وتشفيرًا متقدمًا للحفاظ على السرية المطلقة لموجزك الاستراتيجي.",
+    privacy_content: "بياناتك هي أثمن أصولك. يضمن بروتوكول الخصوصية لدينا عدم استخدام أي معلومات للعملاء لتدريب النماذج.",
     terms_title: "شروط التعاقد",
     terms_desc: "المعايير التعاقدية",
-    terms_content: "تخضع المشاركة مع بيزنس ديفلوبرز لإطار صارم من الأخلاقيات المهنية والمعايير الفنية. نحن نقدم مخرجات واضحة وجداول زمنية شفافة وبروتوكولات وقت تشغيل مضمونة لجميع مجموعات الذكاء الاصطناعي السيادية.",
+    terms_content: "تخضع المشاركة مع بيزنس ديفلوبرز لإطار صارم من الأخلاقيات المهنية والمعايير الفنية.",
     contact_title: "موجز تشغيلي",
     contact_desc: "أطلع فريقنا المعماري على أهدافك الاستراتيجية لبدء تدقيق الجدوى.",
     form_btn: "إرسال الموجز",
@@ -167,13 +221,19 @@ const translations: Record<Language, Record<string, string>> = {
     status_3: "مراجعة المقاييس العالمية...",
     status_4: "توليف الرد...",
     status_5: "نهائي التدقيق...",
+    form_name: "الاسم الكامل",
+    form_email: "البريد الرسمي",
+    form_desc_placeholder: "لخص أهدافك المؤسسية...",
+    success_title: "تم التأكيد",
+    success_msg: "تم استلام الموجز. في انتظار المراجعة المعمارية.",
+    success_btn: "حوار جديد",
   }
 };
 
 // --- Icons ---
 const Icons = {
-  Logo: () => (
-    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  Logo: ({ size = 40 }: { size?: number }) => (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="25" y="45" width="4" height="35" fill="currentColor" />
       <rect x="35" y="35" width="4" height="45" fill="currentColor" />
       <rect x="45" y="40" width="4" height="40" fill="currentColor" />
@@ -200,10 +260,15 @@ const Icons = {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }}>
       <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
     </svg>
+  ),
+  MethodStep: ({ num }: { num: number }) => (
+    <div style={{ width: '40px', height: '40px', border: '1px solid currentColor', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 900 }}>
+      {num}
+    </div>
   )
 };
 
-// --- Components ---
+// --- Helper Components ---
 
 function Header() {
   const { isDarkMode, toggleDarkMode, language, setLanguage, setActivePage, t } = useTheme();
@@ -221,7 +286,7 @@ function Header() {
 
   return (
     <header style={{ 
-      position: 'sticky', top: 0, zIndex: 50, 
+      position: 'sticky', top: 0, zIndex: 100, 
       backgroundColor: isDarkMode ? 'rgba(0,26,42,0.98)' : 'rgba(252,252,252,0.98)', 
       borderBottom: '1px solid var(--gray-200)', transition: 'all var(--transition-speed)'
     }}>
@@ -235,12 +300,12 @@ function Header() {
         </div>
 
         <nav style={{ display: window.innerWidth > 768 ? 'flex' : 'none', gap: '3.5rem', alignItems: 'center' }}>
-          <a onClick={() => handleNav('home', 'services')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_services')}</a>
-          <a onClick={() => handleNav('home', 'packages')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_packages')}</a>
-          <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_about')}</a>
+          <a onClick={() => handleNav('home', 'services')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_services')}</a>
+          <a onClick={() => handleNav('home', 'packages')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_packages')}</a>
+          <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_about')}</a>
           
           <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.65rem', fontWeight: 900 }}>
+            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.6rem', fontWeight: 900 }}>
               {language === 'en' ? 'AR' : 'EN'}
             </button>
             <button onClick={toggleDarkMode} className="theme-toggle">
@@ -248,7 +313,7 @@ function Header() {
             </button>
           </div>
           
-          <a onClick={() => handleNav('home', 'contact')} className="btn btn-primary">{t('btn_consultation')}</a>
+          <a onClick={() => handleNav('home', 'contact')} className="btn btn-primary" style={{ padding: '0.75rem 1.75rem' }}>{t('btn_consultation')}</a>
         </nav>
       </div>
     </header>
@@ -301,28 +366,98 @@ function Hero() {
   }, []);
 
   return (
-    <section className="section" style={{ padding: '12rem 0', background: isDarkMode ? '#001a2a' : '#fcfcfc', overflow: 'hidden', position: 'relative' }}>
+    <section className="section" style={{ padding: '14rem 0', background: isDarkMode ? '#001a2a' : '#fcfcfc', overflow: 'hidden', position: 'relative' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="grid grid-2" style={{ alignItems: 'center' }}>
           <div>
             <span className="badge">{t('hero_badge')}</span>
-            <h1 style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', marginBottom: '3rem', fontWeight: 900, lineHeight: 0.95, color: 'var(--dark)' }}>
+            <h1 style={{ fontSize: 'clamp(4.5rem, 10vw, 8rem)', marginBottom: '3.5rem', fontWeight: 900, lineHeight: 0.9, color: 'var(--dark)', letterSpacing: '-0.05em' }}>
               {t('hero_title')} <br/>
-              <span style={{ borderBottom: '8px solid var(--primary)' }}>{t('hero_title_accent')}</span>
+              <span style={{ borderBottom: '10px solid var(--primary)' }}>{t('hero_title_accent')}</span>
             </h1>
-            <p style={{ fontSize: '1.45rem', color: 'var(--gray-500)', maxWidth: '680px', margin: '0 0 5rem', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '1.6rem', color: 'var(--gray-500)', maxWidth: '700px', margin: '0 0 6rem', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.6 }}>
               {t('hero_desc')}
             </p>
-            <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap' }}>
-              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-primary" style={{ minWidth: '260px', height: '65px' }}>
+            <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-primary" style={{ minWidth: '280px', height: '75px', fontSize: '1rem' }}>
                 {t('hero_btn_main')}
               </button>
-              <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-outline" style={{ minWidth: '260px', height: '65px' }}>
+              <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-outline" style={{ minWidth: '280px', height: '75px', fontSize: '1rem' }}>
                 {t('hero_btn_sec')}
               </button>
             </div>
           </div>
-          <div ref={container} style={{ width: '100%', maxWidth: '650px', opacity: 0.95, filter: 'contrast(1.1) brightness(0.9)' }} />
+          <div ref={container} style={{ width: '100%', maxWidth: '700px', opacity: 0.95, filter: 'contrast(1.1) brightness(0.9)' }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Metrics() {
+  const { t } = useTheme();
+  const metrics = [
+    { val: t('metrics_1_val'), label: t('metrics_1_label') },
+    { val: t('metrics_2_val'), label: t('metrics_2_label') },
+    { val: t('metrics_3_val'), label: t('metrics_3_label') },
+    { val: t('metrics_4_val'), label: t('metrics_4_label') }
+  ];
+  return (
+    <section style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '6rem 0' }}>
+      <div className="container">
+        <div className="grid grid-4" style={{ gap: '2rem' }}>
+          {metrics.map((m, i) => (
+            <div key={i} style={{ textAlign: 'center', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none' }}>
+              <div style={{ fontSize: '4.5rem', fontWeight: 900, marginBottom: '0.5rem', letterSpacing: '-0.05em' }}>{m.val}</div>
+              <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.7 }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Methodology() {
+  const { t, language } = useTheme();
+  return (
+    <section className="section">
+      <div className="container">
+        <div className="text-center" style={{ marginBottom: '8rem' }}>
+          <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>{t('methodology_title')}</h2>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.35rem' }}>{t('methodology_desc')}</p>
+        </div>
+        <div className="grid grid-4">
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} className="card" style={{ padding: '3rem', border: '1px solid var(--gray-200)' }}>
+              <div style={{ color: 'var(--primary)', marginBottom: '2rem' }}><Icons.MethodStep num={i} /></div>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>{t(`method_${i}_title`)}</h3>
+              <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem', lineHeight: 1.7 }}>{t(`method_${i}_desc`)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const { t } = useTheme();
+  return (
+    <section className="section bg-light" style={{ borderTop: '1px solid var(--gray-200)', borderBottom: '1px solid var(--gray-200)' }}>
+      <div className="container">
+        <div className="text-center" style={{ marginBottom: '8rem' }}>
+          <h2 style={{ fontSize: '1rem', letterSpacing: '0.3em', color: 'var(--gray-500)', textTransform: 'uppercase' }}>{t('testimonials_title')}</h2>
+        </div>
+        <div className="grid grid-2" style={{ gap: '6rem' }}>
+          {[1, 2].map(i => (
+            <div key={i} style={{ borderLeft: '4px solid var(--primary)', paddingLeft: '3rem' }}>
+              <p style={{ fontSize: '2.2rem', fontWeight: 300, color: 'var(--dark)', marginBottom: '3rem', lineHeight: 1.3, fontStyle: 'italic' }}>
+                "{t(`test_${i}_quote`)}"
+              </p>
+              <div style={{ fontSize: '0.85rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t(`test_${i}_author`)}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -331,7 +466,7 @@ function Hero() {
 
 function Contact() {
   const { language, t } = useTheme();
-  const [formState, setFormState] = useState({ name: '', email: '', phone: '', company: '', budget: '', description: '' });
+  const [formState, setFormState] = useState({ name: '', email: '', description: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(t('status_1'));
   const [submitted, setSubmitted] = useState(false);
@@ -349,7 +484,7 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="section bg-light" style={{ borderTop: '1px solid var(--gray-200)' }}>
+    <section id="contact" className="section" style={{ borderTop: '1px solid var(--gray-200)' }}>
       <div className="container" style={{ maxWidth: '1100px' }}>
         <div className="text-center" style={{ marginBottom: '6rem' }}>
           <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem', color: 'var(--dark)' }}>{t('contact_title')}</h2>
@@ -357,7 +492,7 @@ function Contact() {
         </div>
         
         {submitted ? (
-          <div className="card text-center success-card" style={{ padding: '8rem 4rem', animation: 'popIn 0.5s ease' }}>
+          <div className="card text-center success-card" style={{ padding: '8rem 4rem', animation: 'popIn 0.5s ease', border: '2px solid var(--primary)' }}>
             <h3 style={{ fontSize: '4rem', marginBottom: '2.5rem' }}>{t('success_title')}</h3>
             <p style={{ color: 'var(--gray-500)', fontSize: '1.45rem', marginBottom: '5rem', maxWidth: '700px', margin: '0 auto 5rem', lineHeight: 1.7 }}>{t('success_msg')}</p>
             <button className="btn btn-primary" onClick={() => setSubmitted(false)}>{t('success_btn')}</button>
@@ -365,12 +500,21 @@ function Contact() {
         ) : (
           <form onSubmit={handleSubmit} className="card" style={{ border: '2px solid var(--gray-200)', padding: '6rem' }}>
             <div className="grid grid-2" style={{ marginBottom: '4rem' }}>
-              <input required className="input-field" placeholder={t('form_name')} />
-              <input required className="input-field" type="email" placeholder={t('form_email')} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('form_name')}</label>
+                <input required className="input-field" value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('form_email')}</label>
+                <input required className="input-field" type="email" value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} />
+              </div>
             </div>
-            <textarea required className="input-field" rows={7} placeholder={t('form_desc_placeholder')}></textarea>
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '80px', marginTop: '4rem' }} disabled={isSubmitting}>
-              {isSubmitting ? <Icons.Loader /> : t('form_btn')}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.1em' }}>{t('contact_title')}</label>
+              <textarea required className="input-field" rows={7} placeholder={t('form_desc_placeholder')} value={formState.description} onChange={e => setFormState({...formState, description: e.target.value})}></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '85px', marginTop: '4rem', fontSize: '1.1rem' }} disabled={isSubmitting}>
+              {isSubmitting ? <><Icons.Loader /> <span style={{ marginLeft: '1rem' }}>{loadingStatus}</span></> : t('form_btn')}
             </button>
           </form>
         )}
@@ -395,19 +539,19 @@ function Footer() {
             <h3 style={{ fontSize: '1.35rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', color: 'inherit', letterSpacing: '0.5em' }}>
               <Icons.Logo /> {t('brand')}
             </h3>
-            <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '450px', fontSize: '1rem', lineHeight: '1.9' }}>{t('footer_desc')}</p>
+            <p style={{ color: 'rgba(255,255,255,0.4)', maxWidth: '450px', fontSize: '1rem', lineHeight: '2' }}>{t('footer_desc')}</p>
           </div>
           <div>
-            <h4 style={{ fontSize: '0.9rem', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>{t('footer_company')}</h4>
+            <h4 style={{ fontSize: '0.8rem', letterSpacing: '0.3em', marginBottom: '2.5rem', opacity: 0.6 }}>{t('footer_company')}</h4>
             <div className="footer-links">
               <a onClick={() => handlePage('about')}>{t('nav_about')}</a>
-              <a onClick={() => handlePage('audit')}>Audit</a>
-              <a onClick={() => handlePage('security')}>Security</a>
-              <a onClick={() => handlePage('scalability')}>Scalability</a>
+              <a onClick={() => handlePage('audit')}>Feasibility Audit</a>
+              <a onClick={() => handlePage('security')}>Sovereign Security</a>
+              <a onClick={() => handlePage('scalability')}>Industrial Scale</a>
             </div>
           </div>
           <div>
-            <h4 style={{ fontSize: '0.9rem', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>{t('footer_legal')}</h4>
+            <h4 style={{ fontSize: '0.8rem', letterSpacing: '0.3em', marginBottom: '2.5rem', opacity: 0.6 }}>{t('footer_legal')}</h4>
             <div className="footer-links">
               <a onClick={() => handlePage('compliance')}>{t('compliance_title')}</a>
               <a onClick={() => handlePage('privacy')}>Privacy Protocol</a>
@@ -415,7 +559,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '5rem', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', letterSpacing: '0.25em' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '5rem', textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', letterSpacing: '0.25em' }}>
           &copy; {new Date().getFullYear()} {t('brand')}. {t('footer_copy')}
         </div>
       </div>
@@ -450,6 +594,8 @@ function App() {
         {activePage === 'home' ? (
           <>
             <Hero />
+            <Metrics />
+            <Methodology />
             <section id="services" className="section bg-light" style={{ borderTop: '1px solid var(--gray-200)' }}>
               <div className="container">
                 <div className="text-center" style={{ marginBottom: '8rem' }}>
@@ -458,14 +604,15 @@ function App() {
                 </div>
                 <div className="grid grid-4">
                   {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="card" style={{ borderTop: '8px solid var(--primary)' }}>
-                      <h3 style={{ marginBottom: '1.75rem', fontSize: '1.25rem' }}>{t(`service_${i}_title`)}</h3>
-                      <p style={{ color: 'var(--gray-500)', fontSize: '1rem' }}>{t(`service_${i}_desc`)}</p>
+                    <div key={i} className="card" style={{ borderTop: '10px solid var(--primary)', padding: '4rem 3rem' }}>
+                      <h3 style={{ marginBottom: '2rem', fontSize: '1.4rem', fontWeight: 800 }}>{t(`service_${i}_title`)}</h3>
+                      <p style={{ color: 'var(--gray-500)', fontSize: '1rem', lineHeight: 1.8 }}>{t(`service_${i}_desc`)}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
+            <Testimonials />
             <section id="packages" className="section">
               <div className="container">
                 <div className="text-center" style={{ marginBottom: '8rem' }}>
@@ -473,10 +620,16 @@ function App() {
                 </div>
                 <div className="grid grid-3">
                   {[1, 2, 3].map(i => (
-                    <div key={i} className="card" style={{ transform: i === 2 ? 'scale(1.08)' : 'none', border: i === 2 ? '3px solid var(--primary)' : '1px solid var(--gray-200)' }}>
-                      <h3 style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>{t(`pkg_${i}_name`)}</h3>
-                      <p style={{ color: 'var(--primary)', fontWeight: 800, marginBottom: '3rem' }}>{t(`pkg_${i}_target`)}</p>
-                      <button className="btn btn-primary" style={{ width: '100%' }}>{t('pkg_btn')}</button>
+                    <div key={i} className="card" style={{ 
+                      padding: '5rem 4rem',
+                      transform: i === 2 ? 'scale(1.08)' : 'none', 
+                      border: i === 2 ? '3px solid var(--primary)' : '1px solid var(--gray-200)',
+                      boxShadow: i === 2 ? 'var(--shadow-xl)' : 'none',
+                      zIndex: i === 2 ? 10 : 1
+                    }}>
+                      <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: 900 }}>{t(`pkg_${i}_name`)}</h3>
+                      <p style={{ color: 'var(--primary)', fontWeight: 800, marginBottom: '5rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t(`pkg_${i}_target`)}</p>
+                      <button className={`btn ${i === 2 ? 'btn-primary' : 'btn-outline'}`} style={{ width: '100%', height: '70px' }}>{t('pkg_btn')}</button>
                     </div>
                   ))}
                 </div>

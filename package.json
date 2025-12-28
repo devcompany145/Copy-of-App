@@ -11,7 +11,8 @@
   "dependencies": {
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "lottie-web": "5.12.2"
+    "lottie-web": "5.12.2",
+    "@google/genai": "latest"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

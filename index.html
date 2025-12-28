@@ -12,6 +12,7 @@
       --primary: #4f46e5;
       --secondary: #7c3aed;
       --accent: #2563eb;
+      --error: #ef4444;
       --dark: #0f172a;
       --light: #f8fafc;
       --white: #ffffff;
@@ -24,9 +25,22 @@
       --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
       --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
       --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-      /* Pronounced but smooth shadow for hover state */
       --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1);
       --radius: 0.75rem;
+      --transition-speed: 0.3s;
+    }
+
+    body.dark-mode {
+      --white: #0f172a;
+      --light: #1e293b;
+      --dark: #f8fafc;
+      --gray-100: #1e293b;
+      --gray-200: #334155;
+      --gray-500: #94a3b8;
+      --gray-800: #cbd5e1;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
     }
 
     * {
@@ -41,6 +55,7 @@
       background-color: var(--white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -60,7 +75,6 @@
       font-family: inherit;
     }
 
-    /* Utility Classes */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -86,7 +100,6 @@
       background-clip: text;
     }
 
-    /* Button Styles */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -98,15 +111,13 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Universal Hover Effect: Scale up */
     .btn:hover {
       transform: scale(1.05);
     }
 
-    /* Universal Active Effect: Pronounced scale down */
     .btn:active {
       transform: scale(0.95); 
-      transition-duration: 0.05s; /* Snappy response */
+      transition-duration: 0.05s;
     }
 
     .btn-primary {
@@ -121,13 +132,21 @@
     }
 
     .btn-primary:active {
-      transform: scale(0.92); /* Pronounced scale-down for primary */
-      filter: brightness(0.8); /* Darker */
-      box-shadow: inset 0 3px 8px rgba(0,0,0,0.4); /* Deeper shadow */
+      transform: scale(0.92);
+      filter: brightness(0.8);
+      box-shadow: inset 0 3px 8px rgba(0,0,0,0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      filter: grayscale(0.5);
+      transform: none !important;
+      box-shadow: none;
     }
 
     .btn-outline {
-      background: white;
+      background: var(--white);
       color: var(--primary);
       border: 1px solid var(--gray-200);
     }
@@ -138,14 +157,6 @@
       box-shadow: var(--shadow-md);
     }
 
-    .btn-outline:active {
-      background-color: rgba(79, 70, 229, 0.25); /* Darker tint */
-      box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
-      border-color: var(--primary);
-      transform: scale(0.95);
-    }
-
-    /* Specificity for the Learn More button hover */
     .learn-more-btn:hover {
       background-color: rgba(79, 70, 229, 0.1);
     }
@@ -178,22 +189,21 @@
     }
 
     .card {
-      background: white;
+      background: var(--white);
       border-radius: var(--radius);
       padding: 2rem;
       border: 1px solid var(--gray-200);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color var(--transition-speed);
     }
 
     .card:hover {
-      transform: translateY(-5px); /* Subtle lift */
-      box-shadow: var(--shadow-xl); /* Pronounced shadow */
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
       border-color: var(--primary);
     }
 
-    /* Service Icon Animation */
     .service-icon {
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy spring transition */
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     .card:hover .service-icon {
@@ -206,6 +216,7 @@
       border-radius: 0.5rem;
       border: 1px solid var(--gray-200);
       background-color: var(--gray-100);
+      color: var(--dark);
       font-family: inherit;
       font-size: 1rem;
       transition: all 0.2s;
@@ -214,8 +225,41 @@
     .input-field:focus {
       outline: none;
       border-color: var(--primary);
-      background-color: white;
+      background-color: var(--white);
       box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .input-field:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .input-field.error {
+      border-color: var(--error);
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      display: block;
+      animation: slideDown 0.2s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
     }
 
     label {
@@ -257,6 +301,25 @@
       50% { transform: translateY(-20px); }
       100% { transform: translateY(0px); }
     }
+
+    /* Dark Mode Toggle Switch Styles */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      color: var(--dark);
+      transition: all 0.2s;
+    }
+    
+    .theme-toggle:hover {
+      background: var(--gray-100);
+      border-color: var(--primary);
+    }
   </style>
 <script type="importmap">
 {
@@ -264,7 +327,8 @@
     "react/": "https://aistudiocdn.com/react@^19.2.1/",
     "react": "https://aistudiocdn.com/react@^19.2.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "lottie-web": "https://esm.sh/lottie-web@5.12.2"
+    "lottie-web": "https://esm.sh/lottie-web@5.12.2",
+    "@google/genai": "https://esm.sh/@google/genai"
   }
 }
 </script>

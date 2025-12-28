@@ -39,6 +39,7 @@ const translations: Record<Language, Record<string, string>> = {
     brand: "AISOLUTIONS",
     nav_services: "Capabilities",
     nav_audit: "Audit",
+    nav_security: "Security",
     nav_packages: "Portfolio",
     nav_about: "Institutional",
     nav_contact: "Dialogue",
@@ -108,6 +109,10 @@ const translations: Record<Language, Record<string, string>> = {
     audit_title: "Diagnostic Integrity.",
     audit_desc: "Deep-spectrum auditing for institutional intelligence systems.",
     audit_content: "Our diagnostic process is engineered to surface operational friction points and data silos that inhibit growth. We provide a rigorous assessment of current machine learning deployments and legacy architectures to ensure your institutional foundation is ready for the next generation of AI integration.",
+    security_badge: "Strategic Security",
+    security_title: "Impenetrable Defense.",
+    security_desc: "Military-grade neural safeguards for institutional data assets.",
+    security_content: "Our security protocols are built on a foundation of zero-trust architecture and real-time adversarial monitoring. We deploy proprietary encryption layers and neural intrusion detection systems that evolve alongside emerging threats. AISolutions ensures that your most sensitive strategic data remains isolated and protected against both classical and quantum-era cyber risks.",
     faq_title: "Strategic Intelligence FAQ",
     faq_q1: "What is AI Institutional Transformation?",
     faq_a1: "It is the comprehensive integration of machine intelligence into core business workflows, shifting from manual processes to data-driven autonomous systems that scale with enterprise growth.",
@@ -140,6 +145,7 @@ const translations: Record<Language, Record<string, string>> = {
     brand: "إيه آي سوليوشنز",
     nav_services: "القدرات",
     nav_audit: "التدقيق",
+    nav_security: "الأمن",
     nav_packages: "المحفظة",
     nav_about: "المؤسسة",
     nav_contact: "الحوار",
@@ -209,6 +215,10 @@ const translations: Record<Language, Record<string, string>> = {
     audit_title: "نزاهة التشخيص.",
     audit_desc: "تدقيق شامل لأنظمة الذكاء المؤسسي.",
     audit_content: "تم تصميم عملية التشخيص لدينا للكشف عن نقاط الاحتكاك التشغيلي وصوامع البيانات التي تعيق النمو. نحن نقدم تقييماً صارماً لعمليات تعلم الآلة الحالية والمعماريات القديمة لضمان جاهزية مؤسستك للجيل القادم من تكامل الذكاء الاصطناعي.",
+    security_badge: "الأمن الاستراتيجي",
+    security_title: "دفاع لا يمكن اختراقه.",
+    security_desc: "ضمانات عصبية بمستوى عسكري لأصول البيانات المؤسسية.",
+    security_content: "تعتمد بروتوكولات الأمان لدينا على أساس معمارية الثقة الصفرية والمراقبة المستمرة للتهديدات. نحن ننشر طبقات تشفير خاصة وأنظمة كشف التسلل العصبي التي تتطور جنباً إلى جنب مع التهديدات الناشئة. تضمن إيه آي سوليوشنز بقاء بياناتك الاستراتيجية الأكثر حساسية معزولة ومحمية ضد المخاطر السيبرانية الكلاسيكية وفي عصر الكوآنتوم.",
     faq_title: "الأسئلة الاستراتيجية الشائعة",
     faq_q1: "ما هو التحول المؤسسي بالذكاء الاصطناعي؟",
     faq_a1: "هو الدمج الشامل لذكاء الآلة في سير العمل الأساسي للأعمال، والانتقال من العمليات اليدوية إلى الأنظمة الذاتية القائمة على البيانات والتي تتوسع مع نمو المؤسسة.",
@@ -282,6 +292,42 @@ const Icons = {
 };
 
 // --- View Components ---
+
+function SecurityView() {
+  const { t, language, setActivePage, isDarkMode } = useTheme();
+
+  return (
+    <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
+      <div className="container" style={{ maxWidth: '1000px' }}>
+        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', fontSize: '0.7rem' }}>
+          <Icons.ArrowLeft lang={language} /> {t('btn_back')}
+        </button>
+
+        <div style={{ marginBottom: '6rem', textAlign: 'center' }}>
+          <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'center', color: 'var(--primary)' }}>
+            <Icons.Shield />
+          </div>
+          <span className="badge">{t('security_badge')}</span>
+          <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5rem)', marginBottom: '2.5rem' }}>{t('security_title')}</h1>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto 4rem' }}>{t('security_desc')}</p>
+          <div style={{ height: '1px', background: 'var(--gray-200)', width: '100%' }}></div>
+        </div>
+
+        <div className="card" style={{ padding: '5rem', borderLeft: '10px solid var(--primary)', animation: 'popIn 0.6s ease forwards' }}>
+          <p style={{ fontSize: '1.25rem', lineHeight: 2, color: isDarkMode ? 'white' : 'var(--primary)' }}>
+            {t('security_content')}
+          </p>
+        </div>
+
+        <div style={{ marginTop: '6rem', textAlign: 'center' }}>
+          <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 4rem' }}>
+            Initiate Security Protocol
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function AuditView() {
   const { t, language, setActivePage, isDarkMode } = useTheme();
@@ -1163,6 +1209,7 @@ function Header() {
         <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <NavLink onClick={() => handleAnchorNav('capabilities-section')} label={t('nav_services')} tooltip={t('nav_services')} />
           <NavLink onClick={() => handleNav('audit')} label={t('nav_audit')} tooltip={t('nav_audit')} />
+          <NavLink onClick={() => handleNav('security')} label={t('nav_security')} tooltip={t('nav_security')} />
           <NavLink onClick={() => handleNav('about')} label={t('nav_about')} tooltip={t('nav_about')} />
           <div className="tooltip-wrapper">
             <a 
@@ -1323,6 +1370,8 @@ function App() {
           <AboutView />
         ) : activePage === 'audit' ? (
           <AuditView />
+        ) : activePage === 'security' ? (
+          <SecurityView />
         ) : (
           <div className="section"><div className="container"><h1>Under Construction</h1></div></div>
         )}
@@ -1339,6 +1388,7 @@ function App() {
               <h4 style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '2.5rem' }}>PORTFOLIO</h4>
               <div className="footer-links">
                 <a onClick={() => setActivePage('audit')}>Strategic Audit</a>
+                <a onClick={() => setActivePage('security')}>Strategic Security</a>
                 <a onClick={() => setActivePage('about')}>Institutional Profile</a>
                 <a onClick={() => setActivePage('advisory')}>AI Advisory</a>
                 <a onClick={() => setActivePage('calculator')}>Pricing Estimator</a>

@@ -5,6 +5,7 @@ import { GoogleGenAI } from "@google/genai";
 
 // --- Types ---
 type Language = 'en' | 'ar';
+type PageView = 'home' | 'about' | 'audit' | 'security' | 'scalability' | 'compliance' | 'privacy' | 'terms';
 
 // --- Theme & Language Context ---
 const ThemeContext = createContext<{
@@ -12,12 +13,16 @@ const ThemeContext = createContext<{
   toggleDarkMode: () => void;
   language: Language;
   setLanguage: (lang: Language) => void;
+  activePage: PageView;
+  setActivePage: (page: PageView) => void;
   t: (key: string) => string;
 }>({
   isDarkMode: false,
   toggleDarkMode: () => {},
   language: 'en',
   setLanguage: () => {},
+  activePage: 'home',
+  setActivePage: () => {},
   t: (key) => key,
 });
 
@@ -26,735 +31,346 @@ const useTheme = () => useContext(ThemeContext);
 // --- Translations ---
 const translations: Record<Language, Record<string, string>> = {
   en: {
-    brand: "AISolutions",
-    nav_services: "Services",
-    nav_packages: "Packages",
-    nav_about: "About",
-    nav_contact: "Contact",
-    btn_consultation: "Book Consultation",
-    hero_badge: "Next Gen AI",
-    hero_title: "Empowering Businesses with",
-    hero_title_accent: "Intelligent AI Solutions",
-    hero_desc: "Your trusted AI provider. Automate operations, enhance customer experience, and unlock data-driven growth with our cutting-edge technology.",
-    hero_btn_main: "Book a Free Consultation",
-    hero_btn_sec: "Learn More",
-    services_title: "Our Services",
-    services_desc: "Comprehensive AI solutions designed for modern enterprises.",
-    service_1_title: "AI Model Development",
-    service_1_desc: "Custom-built models tailored to your business needs—LLMs, classification models, prediction engines, and more.",
-    service_2_title: "Business Automation",
-    service_2_desc: "Intelligent bots, automated workflows, and smart systems that reduce manual work and increase efficiency.",
-    service_3_title: "Predictive Analytics",
-    service_3_desc: "Data-driven insights to help you make faster decisions—demand forecasting, customer behavior, churn prediction.",
-    service_4_title: "Conversational AI",
-    service_4_desc: "Smart virtual assistants and chatbots that offer real-time support and personalized interactions.",
-    packages_title: "Ready-Made AI Solutions",
-    packages_desc: "Select a package that fits your stage of growth.",
-    pkg_1_name: "Startup AI Package",
-    pkg_1_target: "Small Businesses",
-    pkg_2_name: "Growth AI Package",
-    pkg_2_target: "Scaling Companies",
-    pkg_3_name: "Enterprise AI Suite",
-    pkg_3_target: "Large Organizations",
-    pkg_popular: "Most Popular",
-    pkg_btn: "Choose Plan",
-    about_badge: "About Us",
-    about_title: "We accelerate digital transformation.",
-    about_desc: "We are a Saudi AI provider specialized in building intelligent, easy-to-use solutions. Our mission is to make advanced AI accessible, practical, and impactful for businesses of all sizes.",
-    about_item_1: "Expert engineering team",
-    about_item_2: "Certified AI competencies",
-    about_item_3: "Proven industry use cases",
-    about_item_4: "Strategic partnerships",
-    cases_title: "Case Studies",
-    case_1_title: "Customer Support Chatbot",
-    case_1_res: "Reduced response time by 80%",
-    case_2_title: "Automated Internal Workflow",
-    case_2_res: "Saved 200+ hours monthly",
-    case_3_title: "Predictive Business Model",
-    case_3_res: "Improved demand forecast by 35%",
-    contact_title: "Start Your AI Journey Today",
-    contact_desc: "Fill out the form to receive personalized recommendations and project guidance.",
-    form_name: "Name",
-    form_email: "Email",
-    form_phone: "Phone (Optional)",
-    form_company: "Company",
-    form_desc: "Project Description",
-    form_desc_placeholder: "Briefly describe your business challenge or vision...",
-    form_ai_hint: "Our AI engine will perform a preliminary feasibility analysis of your request instantly.",
-    form_btn: "Book Consultation",
-    success_banner: "Submission Successful",
-    success_title: "Triumph!",
-    success_msg: "Your vision has been captured. Our strategic engineering team is already reviewing your requirements.",
-    success_next_steps: "What happens next? Our team will contact you within 24 hours to schedule your deep-dive consultation.",
-    success_btn: "Submit Another Project",
-    footer_desc: "Empowering businesses with intelligent, scalable, and secure AI technology.",
-    footer_company: "Company",
-    footer_legal: "Legal",
-    footer_privacy: "Privacy Policy",
-    footer_terms: "Terms of Service",
-    footer_copy: "All rights reserved.",
-    status_1: "Parsing project requirements...",
-    status_2: "Evaluating AI feasibility...",
-    status_3: "Consulting knowledge graphs...",
-    status_4: "Generating architectural strategy...",
-    status_5: "Finalizing recommendations...",
-    status_complete: "Analysis complete!",
-    tip_name: "Please enter your full name so we can address you correctly.",
-    tip_email: "We'll use this to send you the project analysis and follow-up details.",
-    tip_phone: "(Optional) A phone number helps our team reach you for a quick 5-minute discovery call.",
-    tip_company: "(Optional) Knowing your company helps us tailor our AI recommendations to your industry.",
-    tip_desc: "The more detail you provide, the more accurate our initial AI feasibility analysis will be."
+    brand: "BUSINESS DEVELOPERS",
+    nav_services: "Capabilities",
+    nav_packages: "Portfolio",
+    nav_about: "Institutional",
+    nav_contact: "Dialogue",
+    btn_consultation: "Inquiry",
+    hero_badge: "Institutional Intelligence",
+    hero_title: "Systemic Engineering for",
+    hero_title_accent: "Global Scale",
+    hero_desc: "Exclusive strategic development through sovereign engineering. We deploy proprietary AI frameworks to automate critical business operations and reclaim operational excellence.",
+    hero_btn_main: "Initiate Dialogue",
+    hero_btn_sec: "The Architecture",
+    services_title: "Core Expertise",
+    services_desc: "A systematic approach to artificial intelligence for the most ambitious global organizations.",
+    service_1_title: "Strategic Architecture",
+    service_1_desc: "Bespoke intelligence models engineered to integrate with high-security institutional data systems.",
+    service_2_title: "Autonomous Logistics",
+    service_2_desc: "Sophisticated decision-making layers that eliminate friction and optimize total production throughput.",
+    service_3_title: "Asset Intelligence",
+    service_3_desc: "High-fidelity predictive analytics for demand forecasting and complex portfolio risk mitigation.",
+    service_4_title: "Experience Nodes",
+    service_4_desc: "Elite conversational frameworks providing hyper-personalized engagement for institutional clients.",
+    packages_title: "Engagement Models",
+    packages_desc: "Structured tiers for organizations prioritizing high-fidelity intelligence deployment.",
+    pkg_1_name: "Innovation Tier",
+    pkg_1_target: "Agile Entities",
+    pkg_2_name: "Strategic Growth",
+    pkg_2_target: "Market Leaders",
+    pkg_3_name: "Sovereign Tier",
+    pkg_3_target: "Global Institutions",
+    pkg_popular: "Institutional Standard",
+    pkg_btn: "Request Access",
+    about_badge: "Institutional Profile",
+    about_title: "Architecting the future.",
+    about_desc: "We are a premier intelligence firm based on precision. Our mission is to transform theoretical AI into practical, sovereign strategic assets.",
+    about_content: "Established as a beacon of high-fidelity engineering, Business Developers represents the intersection of capital strategy and machine intelligence. We operate on a global scale, providing the architectural foundation for the next century of enterprise operations. Our guild consists of senior architects, security specialists, and strategic partners dedicated to data sovereignty.",
+    audit_title: "Feasibility Audit",
+    audit_desc: "The Protocol for Technical Validation",
+    audit_content: "Every engagement begins with a rigorous multi-stage audit. We evaluate existing data infrastructure, computational readiness, and strategic alignment. Our reports provide a clear path from legacy operations to total AI autonomy, backed by deep technical verification.",
+    security_title: "Sovereign Security",
+    security_desc: "Zero-Knowledge & Data Sovereignty",
+    security_content: "We implement sovereign security protocols that ensure your proprietary intelligence remains yours. Our frameworks prioritize localized hosting, encrypted neural pathways, and institutional-grade access control. Security is not a feature; it is our foundation.",
+    scalability_title: "Industrial Scalability",
+    scalability_desc: "High-Load Resilience",
+    scalability_content: "Our systems are built to withstand the rigors of global institutional demand. From petabyte-scale data ingestion to millisecond latency inference, we engineer for resilience. Scaling intelligence means scaling your entire competitive advantage without compromise.",
+    compliance_title: "Institutional Compliance",
+    compliance_desc: "Regulatory & Ethical Alignment",
+    compliance_content: "Business Developers operates within the highest standards of international regulatory frameworks. We ensure all AI deployments are transparent, auditable, and compliant with regional data protection laws and institutional governance standards.",
+    privacy_title: "Privacy Protocol",
+    privacy_desc: "Proprietary Data Protection",
+    privacy_content: "Your data is your most valuable asset. Our Privacy Protocol guarantees that no client information is used for external model training. We deploy air-gapped systems and advanced encryption to maintain the absolute confidentiality of your strategic brief.",
+    terms_title: "Terms of Engagement",
+    terms_desc: "Contractual Standards",
+    terms_content: "Engagement with Business Developers is governed by a strict framework of professional ethics and technical standards. We provide clear deliverables, transparent timelines, and guaranteed uptime protocols for all sovereign AI clusters.",
+    contact_title: "Operational Brief",
+    contact_desc: "Brief our senior architecture team on your strategic objectives to begin the feasibility audit.",
+    form_btn: "Transmit Brief",
+    btn_back: "Return to Headquarters",
+    footer_desc: "Engineering the future of intelligent systems through geometric precision and high-contrast technology.",
+    footer_company: "Institution",
+    footer_legal: "Compliance",
+    footer_copy: "All institutional rights reserved.",
+    status_1: "Analyzing brief parameters...",
+    status_2: "Validating technical feasibility...",
+    status_3: "Referencing global benchmarks...",
+    status_4: "Synthesizing response...",
+    status_5: "Finalizing audit...",
   },
   ar: {
-    brand: "حلول الذكاء الاصطناعي",
-    nav_services: "الخدمات",
-    nav_packages: "الباقات",
-    nav_about: "من نحن",
-    nav_contact: "اتصل بنا",
-    btn_consultation: "احجز استشارة",
-    hero_badge: "الجيل القادم من الذكاء الاصطناعي",
-    hero_title: "تمكين الشركات من خلال",
-    hero_title_accent: "حلول ذكية متطورة",
-    hero_desc: "شريكك الموثوق في تقنيات الذكاء الاصطناعي. أتمتة العمليات، تحسين تجربة العملاء، وتحقيق نمو قائم على البيانات بأحدث التقنيات.",
-    hero_btn_main: "احجز استشارة مجانية",
-    hero_btn_sec: "تعرف علينا",
-    services_title: "خدماتنا",
-    services_desc: "حلول شاملة للذكاء الاصطناعي مصممة للمؤسسات الحديثة.",
-    service_1_title: "تطوير نماذج الذكاء الاصطناعي",
-    service_1_desc: "نماذج مخصصة تلبي احتياجات عملك - LLMs، نماذج التصنيف، محركات التنبؤ، وأكثر.",
-    service_2_title: "أتمتة الأعمال",
-    service_2_desc: "روبوتات ذكية، تدفقات عمل مؤتمتة، وأنظمة ذكية تقلل العمل اليدوي وتزيد الكفاءة.",
-    service_3_title: "التحليلات التنبؤية",
-    service_3_desc: "رؤى قائمة على البيانات لمساعدتك في اتخاذ قرارات أسرع - توقع الطلب، سلوك العملاء، والتنبؤ بالانسحاب.",
-    service_4_title: "الذكاء الاصطناعي المحادثي",
-    service_4_desc: "مساعدين افتراضيين وأنظمة دردشة ذكية توفر دعماً فورياً وتفاعلات شخصية.",
-    packages_title: "حلول جاهزة",
-    packages_desc: "اختر الباقة التي تناسب مرحلة نمو شركتك.",
-    pkg_1_name: "باقة الشركات الناشئة",
-    pkg_1_target: "للشركات الصغيرة",
-    pkg_2_name: "باقة النمو",
-    pkg_2_target: "للشركات المتوسطة",
-    pkg_3_name: "باقة المؤسسات الكبرى",
-    pkg_3_target: "للمنظمات الكبيرة",
-    pkg_popular: "الأكثر رواجاً",
-    pkg_btn: "اختر الباقة",
-    about_badge: "من نحن",
-    about_title: "نسرع وتيرة التحول الرقمي.",
-    about_desc: "نحن مزود سعودي رائد لخدمات الذكاء الاصطناعي، متخصصون في بناء حلول ذكية وسهلة الاستخدام. مهمتنا هي جعل الذكاء الاصطناعي متاحاً وعملياً ومؤثراً.",
-    about_item_1: "فريق هندسي خبير",
-    about_item_2: "كفاءات معتمدة عالمياً",
-    about_item_3: "قصص نجاح مثبتة",
-    about_item_4: "شراكات استراتيجية",
-    cases_title: "دراسات الحالة",
-    case_1_title: "روبوت خدمة العملاء",
-    case_1_res: "تقليل وقت الاستجابة بنسبة 80%",
-    case_2_title: "أتمتة تدفقات العمل الداخلية",
-    case_2_res: "توفير أكثر من 200 ساعة شهرياً",
-    case_3_title: "نموذج الأعمال التنبؤي",
-    case_3_res: "تحسين دقة توقع الطلب بنسبة 35%",
-    contact_title: "ابدأ رحلتك اليوم",
-    contact_desc: "املأ النموذج للحصول على توصيات مخصصة وإرشادات لمشروعك.",
-    form_name: "الاسم",
-    form_email: "البريد الإلكتروني",
-    form_phone: "رقم الهاتف (اختياري)",
-    form_company: "الشركة",
-    form_desc: "وصف المشروع",
-    form_desc_placeholder: "صف بإيجاز تحديات عملك أو رؤيتك للمشروع...",
-    form_ai_hint: "سيقوم محرك الذكاء الاصطناعي لدينا بإجراء تحليل أولي لطلبك فوراً.",
-    form_btn: "احجز استشارة",
-    success_banner: "تم الإرسال بنجاح",
-    success_title: "تم النجاح!",
-    success_msg: "تم استلام رؤيتك بنجاح. يقوم فريقنا الهندسي الاستراتيجي بمراجعة متطلباتك الآن.",
-    success_next_steps: "ما هي الخطوة القادمة؟ سيتواصل معك فريقنا خلال 24 ساعة لترتيب موعد استشارة معمقة.",
-    success_btn: "إرسال طلب آخر",
-    footer_desc: "تمكين الشركات بتقنيات ذكاء اصطناعي ذكية، قابلة للتوسع وآمنة.",
-    footer_company: "الشركة",
-    footer_legal: "القانونية",
-    footer_privacy: "سياسة الخصوصية",
-    footer_terms: "شروط الخدمة",
-    footer_copy: "جميع الحقوق محفوظة.",
-    status_1: "تحليل متطلبات المشروع...",
-    status_2: "تقييم جدوى الذكاء الاصطناعي...",
-    status_3: "استشارة قواعد المعرفة...",
-    status_4: "توليد الاستراتيجية المعمارية...",
-    status_5: "نهائي التوصيات...",
-    status_complete: "اكتمل التحليل!",
-    tip_name: "يرجى إدخال اسمك الكامل لنتمكن من مخاطبتك بشكل صحيح.",
-    tip_email: "سنستخدم هذا لإرسال تحليل المشروع وتفاصيل المتابعة إليك.",
-    tip_phone: "(اختياري) يساعد رقم الهاتف فريقنا في الوصول إليك لإجراء مكالمة استكشافية سريعة لمدة 5 دقائق.",
-    tip_company: "(اختياري) تساعدنا معرفة شركتك في صياغة توصيات الذكاء الاصطناعي بما يناسب قطاع عملك.",
-    tip_desc: "كلما زادت التفاصيل التي تقدمها، كان تحليل الجدوى الأولي للذكاء الاصطناعي أكثر دقة."
+    brand: "بيزنس ديفلوبرز",
+    nav_services: "القدرات",
+    nav_packages: "المحفظة",
+    nav_about: "المؤسسة",
+    nav_contact: "الحوار",
+    btn_consultation: "استفسار",
+    hero_badge: "ذكاء مؤسسي",
+    hero_title: "هندسة منهجية لـ",
+    hero_title_accent: "نطاق عالمي",
+    hero_desc: "تطوير استراتيجي حصري من خلال الهندسة السيادية. نقوم بنشر أطر ذكاء اصطناعي خاصة لأتمتة العمليات التجارية الحيوية واستعادة التميز التشغيلي.",
+    hero_btn_main: "بدء الحوار",
+    hero_btn_sec: "المعمارية",
+    services_title: "الخبرات الجوهرية",
+    services_desc: "نهج منهجي للذكاء الاصطناعي لأكثر المنظمات العالمية طموحاً.",
+    service_1_title: "المعمارية الاستراتيجية",
+    service_1_desc: "نماذج ذكاء مصممة خصيصاً للتكامل مع أنظمة البيانات المؤسسية عالية الأمن.",
+    service_2_title: "اللوجستيات المستقلة",
+    service_2_desc: "طبقات اتخاذ قرار متطورة تقضي على الاحتكاك وتحسن إجمالي إنتاجية العمليات.",
+    service_3_title: "ذكاء الأصول",
+    service_3_desc: "تحليلات تنبؤية عالية الدقة لتوقع الطلب وتخفيف مخاطر المحافظ المعقدة.",
+    service_4_title: "عقد التجربة",
+    service_4_desc: "أطر عمل محادثة نخبوية توفر مشاركة فائقة التخصيص لعملاء المؤسسات.",
+    packages_title: "نماذج المشاركة",
+    packages_desc: "فئات مهيكلة للمنظمات التي تعطي الأولوية لنشر الذكاء عالي الدقة.",
+    pkg_1_name: "فئة الابتكار",
+    pkg_1_target: "للكيانات المرنة",
+    pkg_2_name: "النمو الاستراتيجي",
+    pkg_2_target: "لقادة السوق",
+    pkg_3_name: "الفئة السيادية",
+    pkg_3_target: "للمؤسسات العالمية",
+    pkg_popular: "المعيار المؤسسي",
+    pkg_btn: "طلب الدخول",
+    about_badge: "ملف المؤسسة",
+    about_title: "هندسة المستقبل.",
+    about_desc: "نحن مؤسسة استخبارات تقنية رائدة قائمة على الدقة. مهمتنا هي تحويل الذكاء الاصطناعي النظري إلى أصول استراتيجية سيادية.",
+    about_content: "تأسست بيزنس ديفلوبرز كمنارة للهندسة عالية الدقة، وهي تمثل نقطة التقاء استراتيجية رأس المال وذكاء الآلة. نحن نعمل على نطاق عالمي، ونوفر الأساس المعماري للقرن القادم من العمليات المؤسسية. تضم نقابتنا كبار المهندسين المعماريين والمتخصصين في الأمن والشركاء الاستراتيجيين المخصصين لسيادة البيانات.",
+    audit_title: "تدقيق الجدوى",
+    audit_desc: "بروتوكول التحقق الفني",
+    audit_content: "يبدأ كل تعاون بتدقيق صارم متعدد المراحل. نقوم بتقييم البنية التحتية الحالية للبيانات، والجاهزية الحسابية، والمواءمة الاستراتيجية. توفر تقاريرنا مساراً واضحاً من العمليات التقليدية إلى الاستقلالية الكاملة للذكاء الاصطناعي، مدعومة بتحقق فني عميق.",
+    security_title: "الأمن السيادي",
+    security_desc: "المعرفة الصفرية وسيادة البيانات",
+    security_content: "نحن نطبق بروتوكولات أمنية سيادية تضمن بقاء ذكائك الخاص ملكاً لك. تعطي أطر عملنا الأولوية للاستضافة المحلية، والمسارات العصبية المشفرة، والتحكم في الوصول على مستوى المؤسسات. الأمن ليس ميزة؛ بل هو أساسنا.",
+    scalability_title: "القابلية للتوسع الصناعي",
+    scalability_desc: "المرونة تحت الأحمال العالية",
+    scalability_content: "أنظمتنا مبنية لتتحمل ضغوط الطلب المؤسسي العالمي. من استيعاب البيانات بمقياس بيتابايت إلى الاستدلال بزمن وصول يقاس بالمللي ثانية، نحن نهندس من أجل المرونة. توسيع الذكاء يعني توسيع ميزتك التنافسية بالكامل دون مساومة.",
+    compliance_title: "الامتثال المؤسسي",
+    compliance_desc: "المواءمة التنظيمية والأخلاقية",
+    compliance_content: "تعمل بيزنس ديفلوبرز ضمن أعلى معايير الأطر التنظيمية الدولية. نحن نضمن أن جميع عمليات نشر الذكاء الاصطناعي شفافة وقابلة للتدقيق ومتوافقة مع قوانين حماية البيانات الإقليمية ومعايير الحوكمة المؤسسية.",
+    privacy_title: "بروتوكول الخصوصية",
+    privacy_desc: "حماية البيانات المملوكة",
+    privacy_content: "بياناتك هي أثمن أصولك. يضمن بروتوكول الخصوصية لدينا عدم استخدام أي معلومات للعملاء لتدريب نماذج خارجية. نحن ننشر أنظمة معزولة وتشفيرًا متقدمًا للحفاظ على السرية المطلقة لموجزك الاستراتيجي.",
+    terms_title: "شروط التعاقد",
+    terms_desc: "المعايير التعاقدية",
+    terms_content: "تخضع المشاركة مع بيزنس ديفلوبرز لإطار صارم من الأخلاقيات المهنية والمعايير الفنية. نحن نقدم مخرجات واضحة وجداول زمنية شفافة وبروتوكولات وقت تشغيل مضمونة لجميع مجموعات الذكاء الاصطناعي السيادية.",
+    contact_title: "موجز تشغيلي",
+    contact_desc: "أطلع فريقنا المعماري على أهدافك الاستراتيجية لبدء تدقيق الجدوى.",
+    form_btn: "إرسال الموجز",
+    btn_back: "العودة للمقر الرئيسي",
+    footer_desc: "هندسة مستقبل الأنظمة الذكية من خلال الدقة الهندسية والتكنولوجيا عالية التباين.",
+    footer_company: "المؤسسة",
+    footer_legal: "الامتثال",
+    footer_copy: "جميع الحقوق المؤسسية محفوظة.",
+    status_1: "تحليل معايير الموجز...",
+    status_2: "التحقق من الجدوى الفنية...",
+    status_3: "مراجعة المقاييس العالمية...",
+    status_4: "توليف الرد...",
+    status_5: "نهائي التدقيق...",
   }
 };
 
 // --- Icons ---
 const Icons = {
   Logo: () => (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
-      <path d="M11 21L16 11L21 21" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M13.5 16H18.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx="16" cy="16" r="10" stroke="white" strokeWidth="1" strokeOpacity="0.3"/>
-      <defs>
-        <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#4F46E5"/>
-          <stop offset="1" stopColor="#7C3AED"/>
-        </linearGradient>
-      </defs>
+    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="25" y="45" width="4" height="35" fill="currentColor" />
+      <rect x="35" y="35" width="4" height="45" fill="currentColor" />
+      <rect x="45" y="40" width="4" height="40" fill="currentColor" />
+      <rect x="55" y="30" width="4" height="50" fill="currentColor" />
+      <rect x="65" y="45" width="4" height="35" fill="currentColor" />
+      <circle cx="50" cy="20" r="5" fill="currentColor" />
+      <circle cx="62" cy="15" r="3" fill="currentColor" />
+      <path d="M30 60L40 50L50 55L70 40" stroke="currentColor" strokeWidth="2" />
     </svg>
   ),
-  Brain: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.97-3.284"/><path d="M17.97 14.716A4 4 0 0 1 16 18"/></svg>
-  ),
-  Cpu: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
-  ),
-  LineChart: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-  ),
-  MessageSquare: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-  ),
   Check: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-  ),
-  CheckCircle: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-  ),
-  ChevronRight: ({ language }: { language: Language }) => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: language === 'ar' ? 'rotate(180deg)' : 'none' }}><path d="m9 18 6-6-6-6"/></svg>
-  ),
-  Menu: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-  ),
-  ShieldCheck: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
-  ),
-  AlertCircle: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-  ),
-  Loader: () => (
-    <svg className="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite' }}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
   ),
   Sun: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   ),
   Moon: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
   ),
-  Globe: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+  Loader: () => (
+    <svg className="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
   ),
-  Info: () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+  ArrowLeft: ({ lang }: { lang: string }) => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }}>
+      <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+    </svg>
   )
 };
-
-// --- Helper Components ---
-
-function FieldTooltip({ text }: { text: string }) {
-  const [visible, setVisible] = useState(false);
-  const { language, isDarkMode } = useTheme();
-
-  return (
-    <div 
-      style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
-      onMouseEnter={() => setVisible(true)}
-      onMouseLeave={() => setVisible(false)}
-    >
-      <div style={{ color: 'var(--gray-500)', cursor: 'help', display: 'flex', alignItems: 'center' }}>
-        <Icons.Info />
-      </div>
-      {visible && (
-        <div style={{
-          position: 'absolute',
-          bottom: '100%',
-          left: language === 'ar' ? 'auto' : '50%',
-          right: language === 'ar' ? '50%' : 'auto',
-          transform: language === 'ar' ? 'translateX(50%)' : 'translateX(-50%)',
-          marginBottom: '8px',
-          width: 'max-content',
-          maxWidth: '220px',
-          backgroundColor: isDarkMode ? 'var(--gray-800)' : '#0f172a',
-          color: 'white',
-          padding: '8px 12px',
-          borderRadius: '6px',
-          fontSize: '0.75rem',
-          lineHeight: '1.4',
-          zIndex: 100,
-          boxShadow: 'var(--shadow-lg)',
-          textAlign: 'start'
-        }}>
-          {text}
-          <div style={{
-            position: 'absolute',
-            top: '100%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            borderWidth: '5px',
-            borderStyle: 'solid',
-            borderColor: `${isDarkMode ? 'var(--gray-800)' : '#0f172a'} transparent transparent transparent`
-          }} />
-        </div>
-      )}
-    </div>
-  );
-}
-
-// --- Helper Functions ---
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-async function analyzeProject(description: string, lang: Language, retries = 3): Promise<string> {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const prompt = lang === 'ar' 
-    ? `تصرف كمستشار استراتيجي للذكاء الاصطناعي لشركة "حلول الذكاء الاصطناعي". قدم عميل محتمل وصف المشروع هذا: "${description}". اكتب رداً قصيراً ومهنياً من جملتين يقر باحتياجاتهم ويقترح تقنيتين (مثل RAG أو رؤية الحاسوب). اجعل الرد باللغة العربية.`
-    : `Act as an AI business strategist for "AISolutions". A potential client provided this project description: "${description}". Write a concise, professional 2-sentence response acknowledging their specific need and suggesting 1-2 AI technologies (like RAG, Computer Vision, or LLM fine-tuning) that would solve it. Keep it encouraging and high-level.`;
-
-  for (let i = 0; i < retries; i++) {
-    try {
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: prompt,
-      });
-      return response.text || (lang === 'ar' ? "شكراً لمشاركتنا رؤيتك. فريقنا متحمس لاستكشاف كيف يمكن للذكاء الاصطناعي تطوير أعمالك." : "Thank you for sharing your vision. Our team is excited to explore how advanced AI models can transform your business workflows.");
-    } catch (error) {
-      console.error(`Attempt ${i + 1} failed:`, error);
-      if (i === retries - 1) throw error;
-      await sleep(1000 * Math.pow(2, i));
-    }
-  }
-  return lang === 'ar' ? "يقوم فريقنا بمراجعة متطلبات مشروعك وسنتواصل معك قريباً." : "Our team is reviewing your project requirements and will reach out with a tailored strategy soon.";
-}
 
 // --- Components ---
 
 function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isDarkMode, toggleDarkMode, language, setLanguage, t } = useTheme();
+  const { isDarkMode, toggleDarkMode, language, setLanguage, setActivePage, t } = useTheme();
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNav = (page: PageView, sectionId?: string) => {
+    setActivePage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (page === 'home' && sectionId) {
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        el?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
-    setMobileMenuOpen(false);
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'ar' : 'en');
   };
 
   return (
     <header style={{ 
-      position: 'sticky', 
-      top: 0, 
-      zIndex: 50, 
-      backgroundColor: isDarkMode ? 'rgba(15, 23, 42, 0.9)' : 'rgba(255, 255, 255, 0.9)', 
-      backdropFilter: 'blur(8px)', 
-      borderBottom: '1px solid var(--gray-200)',
-      transition: 'background-color var(--transition-speed)'
+      position: 'sticky', top: 0, zIndex: 50, 
+      backgroundColor: isDarkMode ? 'rgba(0,26,42,0.98)' : 'rgba(252,252,252,0.98)', 
+      borderBottom: '1px solid var(--gray-200)', transition: 'all var(--transition-speed)'
     }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '80px' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '110px' }}>
         <div 
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: '800', fontSize: '1.5rem', cursor: 'pointer' }} 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontWeight: '900', fontSize: '0.9rem', cursor: 'pointer', letterSpacing: '0.3em', color: 'var(--primary)' }} 
+          onClick={() => handleNav('home')}
         >
           <Icons.Logo />
-          <span style={{ color: 'var(--dark)', letterSpacing: '-0.03em' }}>{t('brand')}</span>
+          <span style={{ color: 'var(--dark)' }}>{t('brand')}</span>
         </div>
 
-        <nav style={{ display: window.innerWidth > 768 ? 'flex' : 'none', gap: '2rem', alignItems: 'center' }} className="desktop-nav">
-          <a onClick={() => scrollToSection('services')} style={{ cursor: 'pointer', fontWeight: 500, color: 'var(--dark)' }}>{t('nav_services')}</a>
-          <a onClick={() => scrollToSection('packages')} style={{ cursor: 'pointer', fontWeight: 500, color: 'var(--dark)' }}>{t('nav_packages')}</a>
-          <a onClick={() => scrollToSection('about')} style={{ cursor: 'pointer', fontWeight: 500, color: 'var(--dark)' }}>{t('nav_about')}</a>
+        <nav style={{ display: window.innerWidth > 768 ? 'flex' : 'none', gap: '3.5rem', alignItems: 'center' }}>
+          <a onClick={() => handleNav('home', 'services')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_services')}</a>
+          <a onClick={() => handleNav('home', 'packages')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_packages')}</a>
+          <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_about')}</a>
           
-          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-            <button onClick={toggleLanguage} className="theme-toggle" aria-label="Toggle Language" style={{ width: 'auto', padding: '0 0.75rem', fontSize: '0.8rem', fontWeight: 700 }}>
+          <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.65rem', fontWeight: 900 }}>
               {language === 'en' ? 'AR' : 'EN'}
             </button>
-            <button onClick={toggleDarkMode} className="theme-toggle" aria-label="Toggle Theme">
+            <button onClick={toggleDarkMode} className="theme-toggle">
               {isDarkMode ? <Icons.Sun /> : <Icons.Moon />}
             </button>
           </div>
           
-          <a onClick={() => scrollToSection('contact')} className="btn btn-primary">{t('btn_consultation')}</a>
+          <a onClick={() => handleNav('home', 'contact')} className="btn btn-primary">{t('btn_consultation')}</a>
         </nav>
-
-        <div style={{ display: window.innerWidth <= 768 ? 'flex' : 'none', gap: '1rem', alignItems: 'center' }}>
-           <button onClick={toggleLanguage} className="theme-toggle" aria-label="Toggle Language" style={{ width: 'auto', padding: '0 0.75rem', fontSize: '0.8rem', fontWeight: 700 }}>
-              {language === 'en' ? 'AR' : 'EN'}
-            </button>
-          <button onClick={toggleDarkMode} className="theme-toggle" aria-label="Toggle Theme">
-            {isDarkMode ? <Icons.Sun /> : <Icons.Moon />}
-          </button>
-          <button 
-            style={{ background: 'none', border: 'none', color: 'var(--dark)' }}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <Icons.Menu />
-          </button>
-        </div>
       </div>
-
-      {mobileMenuOpen && (
-        <div style={{ 
-          position: 'absolute', 
-          top: '80px', 
-          left: 0, right: 0, 
-          background: 'var(--white)', 
-          padding: '2rem', 
-          borderBottom: '1px solid var(--gray-200)',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          boxShadow: 'var(--shadow-lg)',
-          transition: 'background-color var(--transition-speed)'
-        }}>
-          <a onClick={() => scrollToSection('services')} style={{ cursor: 'pointer', fontWeight: 500, color: 'var(--dark)' }}>{t('nav_services')}</a>
-          <a onClick={() => scrollToSection('packages')} style={{ cursor: 'pointer', fontWeight: 500, color: 'var(--dark)' }}>{t('nav_packages')}</a>
-          <a onClick={() => scrollToSection('about')} style={{ cursor: 'pointer', fontWeight: 500, color: 'var(--dark)' }}>{t('nav_about')}</a>
-          <a onClick={() => scrollToSection('contact')} className="btn btn-primary" style={{ justifyContent: 'center' }}>{t('btn_consultation')}</a>
-        </div>
-      )}
     </header>
   );
 }
 
-function LottiePlayer({ src, style, speed = 1, loop = true }: { src: string, style?: React.CSSProperties, speed?: number, loop?: boolean }) {
-  const container = useRef<HTMLDivElement>(null);
+function StaticPage({ view }: { view: PageView }) {
+  const { t, setActivePage, language } = useTheme();
+  
+  const contentMap: Record<PageView, { title: string, desc: string, content: string }> = {
+    home: { title: '', desc: '', content: '' },
+    about: { title: t('about_badge'), desc: t('about_title'), content: t('about_content') },
+    audit: { title: t('audit_title'), desc: t('audit_desc'), content: t('audit_content') },
+    security: { title: t('security_title'), desc: t('security_desc'), content: t('security_content') },
+    scalability: { title: t('scalability_title'), desc: t('scalability_desc'), content: t('scalability_content') },
+    compliance: { title: t('compliance_title'), desc: t('compliance_desc'), content: t('compliance_content') },
+    privacy: { title: t('privacy_title'), desc: t('privacy_desc'), content: t('privacy_content') },
+    terms: { title: t('terms_title'), desc: t('terms_desc'), content: t('terms_content') }
+  };
 
-  useEffect(() => {
-    if (!container.current) return;
-    const anim = lottie.loadAnimation({
-      container: container.current,
-      renderer: 'svg',
-      loop: loop,
-      autoplay: true,
-      path: src
-    });
-    anim.setSpeed(speed);
-    return () => anim.destroy();
-  }, [src, speed, loop]);
+  const { title, desc, content } = contentMap[view];
 
-  return <div ref={container} style={style} />;
+  return (
+    <section className="section" style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="container" style={{ maxWidth: '800px' }}>
+        <button 
+          onClick={() => { setActivePage('home'); window.scrollTo(0, 0); }} 
+          className="btn btn-outline" 
+          style={{ marginBottom: '4rem', padding: '0.75rem 1.5rem', display: 'flex', gap: '1rem', border: '1px solid var(--gray-200)' }}
+        >
+          <Icons.ArrowLeft lang={language} /> {t('btn_back')}
+        </button>
+        <span className="badge">{title}</span>
+        <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', marginBottom: '2.5rem', lineHeight: 1.1, color: 'var(--dark)' }}>{desc}</h1>
+        <div style={{ fontSize: '1.25rem', lineHeight: 1.8, color: 'var(--gray-500)', borderLeft: language === 'en' ? '4px solid var(--primary)' : 'none', borderRight: language === 'ar' ? '4px solid var(--primary)' : 'none', padding: '0 2rem' }}>
+          {content}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function Hero() {
-  const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  const scrollToServices = () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-  const { isDarkMode, language, t } = useTheme();
+  const { isDarkMode, t } = useTheme();
+  const container = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!container.current) return;
+    const anim = lottie.loadAnimation({ container: container.current, renderer: 'svg', loop: true, autoplay: true, path: "https://lottie.host/e8c89487-2592-42e8-89c7-50b9222c83c2/5Y6S6C6q6r.json" });
+    return () => anim.destroy();
+  }, []);
 
   return (
-    <section className="section" style={{ padding: '6rem 0', background: isDarkMode ? 'radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.15) 0%, transparent 70%)' : 'radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.05) 0%, transparent 50%)', overflow: 'hidden', position: 'relative' }}>
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0, opacity: isDarkMode ? 0.05 : 0.03, overflow: 'hidden', pointerEvents: 'none' }}>
-         <LottiePlayer 
-            src="https://lottie.host/e8c89487-2592-42e8-89c7-50b9222c83c2/5Y6S6C6q6r.json"
-            style={{ width: '120%', height: '120%', transform: 'translate(-10%, -10%)', filter: 'blur(8px) hue-rotate(45deg)' }}
-            speed={0.2}
-         />
-      </div>
-
+    <section className="section" style={{ padding: '12rem 0', background: isDarkMode ? '#001a2a' : '#fcfcfc', overflow: 'hidden', position: 'relative' }}>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="grid grid-2" style={{ alignItems: 'center', gap: '2rem' }}>
+        <div className="grid grid-2" style={{ alignItems: 'center' }}>
           <div>
             <span className="badge">{t('hero_badge')}</span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', fontWeight: 800, lineHeight: 1.1, color: 'var(--dark)' }}>
+            <h1 style={{ fontSize: 'clamp(4rem, 10vw, 7rem)', marginBottom: '3rem', fontWeight: 900, lineHeight: 0.95, color: 'var(--dark)' }}>
               {t('hero_title')} <br/>
-              <span className="text-gradient">{t('hero_title_accent')}</span>
+              <span style={{ borderBottom: '8px solid var(--primary)' }}>{t('hero_title_accent')}</span>
             </h1>
-            <p style={{ fontSize: '1.125rem', color: 'var(--gray-500)', maxWidth: '600px', margin: '0 0 2.5rem' }}>
+            <p style={{ fontSize: '1.45rem', color: 'var(--gray-500)', maxWidth: '680px', margin: '0 0 5rem', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.5 }}>
               {t('hero_desc')}
             </p>
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <button onClick={scrollToContact} className="btn btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}>
+            <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap' }}>
+              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-primary" style={{ minWidth: '260px', height: '65px' }}>
                 {t('hero_btn_main')}
               </button>
-              <button onClick={scrollToServices} className="btn btn-outline learn-more-btn" style={{ padding: '1rem 2rem', fontSize: '1.125rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                {t('hero_btn_sec')} <Icons.ChevronRight language={language} />
+              <button onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })} className="btn btn-outline" style={{ minWidth: '260px', height: '65px' }}>
+                {t('hero_btn_sec')}
               </button>
             </div>
           </div>
-          
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', animation: 'float 6s ease-in-out infinite' }}>
-            <LottiePlayer 
-              src="https://lottie.host/e8c89487-2592-42e8-89c7-50b9222c83c2/5Y6S6C6q6r.json" 
-              style={{ width: '100%', maxWidth: '500px', height: 'auto', filter: isDarkMode ? 'drop-shadow(0 20px 30px rgba(79, 70, 229, 0.4))' : 'drop-shadow(0 20px 30px rgba(79, 70, 229, 0.15))' }} 
-            />
-          </div>
+          <div ref={container} style={{ width: '100%', maxWidth: '650px', opacity: 0.95, filter: 'contrast(1.1) brightness(0.9)' }} />
         </div>
       </div>
     </section>
-  );
-}
-
-function Services() {
-  const { t } = useTheme();
-  const services = [
-    { icon: <Icons.Brain />, title: t('service_1_title'), desc: t('service_1_desc') },
-    { icon: <Icons.Cpu />, title: t('service_2_title'), desc: t('service_2_desc') },
-    { icon: <Icons.LineChart />, title: t('service_3_title'), desc: t('service_3_desc') },
-    { icon: <Icons.MessageSquare />, title: t('service_4_title'), desc: t('service_4_desc') }
-  ];
-
-  return (
-    <section id="services" className="section bg-light">
-      <div className="container">
-        <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.25rem', marginBottom: '1rem', color: 'var(--dark)' }}>{t('services_title')}</h2>
-          <p style={{ color: 'var(--gray-500)', fontSize: '1.125rem' }}>{t('services_desc')}</p>
-        </div>
-        <div className="grid grid-4">
-          {services.map((s, i) => (
-            <div key={i} className="card">
-              <div className="service-icon" style={{ color: 'var(--primary)', marginBottom: '1.5rem', background: 'rgba(79, 70, 229, 0.1)', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {s.icon}
-              </div>
-              <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', color: 'var(--dark)' }}>{s.title}</h3>
-              <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem' }}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Packages() {
-  const { t } = useTheme();
-  const packages = [
-    { name: t('pkg_1_name'), target: t('pkg_1_target'), features: ['Basic chatbot', 'Data summary tools', 'Monthly insights dashboard'], color: '#4f46e5' },
-    { name: t('pkg_2_name'), target: t('pkg_2_target'), features: ['Advanced conversational agent', 'Automated workflows', 'Custom analytics dashboards'], featured: true, color: '#7c3aed' },
-    { name: t('pkg_3_name'), target: t('pkg_3_target'), features: ['Fully customized AI models', 'System integrations', 'High-security & compliance'], color: '#2563eb' }
-  ];
-
-  return (
-    <section id="packages" className="section">
-      <div className="container">
-        <div className="text-center" style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.25rem', marginBottom: '1rem', color: 'var(--dark)' }}>{t('packages_title')}</h2>
-          <p style={{ color: 'var(--gray-500)', fontSize: '1.125rem' }}>{t('packages_desc')}</p>
-        </div>
-        <div className="grid grid-3">
-          {packages.map((p, i) => (
-            <div key={i} className="card" style={{ 
-              position: 'relative', 
-              borderColor: p.featured ? 'var(--primary)' : 'var(--gray-200)',
-              borderWidth: p.featured ? '2px' : '1px',
-              transform: p.featured ? 'scale(1.05)' : 'none',
-              zIndex: p.featured ? 10 : 1
-            }}>
-              {p.featured && (
-                <div style={{ position: 'absolute', top: '-12px', left: '50%', transform: 'translateX(-50%)', background: 'var(--primary)', color: 'white', padding: '0.25rem 1rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase' }}>{t('pkg_popular')}</div>
-              )}
-              <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--dark)' }}>{p.name}</h3>
-                <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem' }}>{p.target}</p>
-              </div>
-              <ul className="feature-list" style={{ listStyle: 'none', marginBottom: '2rem' }}>
-                {p.features.map((f, fi) => <li key={fi}><Icons.Check />{f}</li>)}
-              </ul>
-              <button className={`btn ${p.featured ? 'btn-primary' : 'btn-outline'}`} style={{ width: '100%' }}>{t('pkg_btn')}</button>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AboutAndCases() {
-  const { isDarkMode, t } = useTheme();
-  return (
-    <div id="about">
-      <section className="section bg-light">
-        <div className="container">
-          <div className="grid grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
-            <div>
-              <span className="badge">{t('about_badge')}</span>
-              <h2 style={{ fontSize: '2.25rem', marginBottom: '1.5rem', color: 'var(--dark)' }}>{t('about_title')}</h2>
-              <p style={{ fontSize: '1.125rem', color: 'var(--gray-500)', marginBottom: '2rem' }}>{t('about_desc')}</p>
-              <div className="grid grid-2" style={{ gap: '1rem' }}>
-                {[t('about_item_1'), t('about_item_2'), t('about_item_3'), t('about_item_4')].map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 500, color: 'var(--dark)' }}>
-                    <div style={{ color: 'var(--primary)' }}><Icons.ShieldCheck /></div>{item}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div style={{ background: 'var(--white)', padding: '2rem', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-lg)', border: '1px solid var(--gray-200)' }}>
-              <h3 style={{ marginBottom: '1.5rem', fontSize: '1.5rem', color: 'var(--dark)' }}>{t('cases_title')}</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                {[
-                  { title: t('case_1_title'), res: t('case_1_res') },
-                  { title: t('case_2_title'), res: t('case_2_res') },
-                  { title: t('case_3_title'), res: t('case_3_res') }
-                ].map((c, i) => (
-                  <div key={i} style={{ paddingBottom: i !== 2 ? '1.5rem' : 0, borderBottom: i !== 2 ? '1px solid var(--gray-100)' : 'none' }}>
-                    <h4 style={{ fontSize: '1.125rem', marginBottom: '0.25rem', color: 'var(--dark)' }}>{c.title}</h4>
-                    <p style={{ color: 'var(--primary)', fontSize: '0.9rem', fontWeight: 500 }}>{c.res}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
   );
 }
 
 function Contact() {
-  const { language, t, isDarkMode } = useTheme();
-  const [formState, setFormState] = useState({ name: '', email: '', phone: '', company: '', description: '' });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const { language, t } = useTheme();
+  const [formState, setFormState] = useState({ name: '', email: '', phone: '', company: '', budget: '', description: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingStatus, setLoadingStatus] = useState(t('status_1'));
-  const [apiError, setApiError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-
-  const statusMessages = [t('status_1'), t('status_2'), t('status_3'), t('status_4'), t('status_5')];
-
-  const validateField = (name: string, value: string): string => {
-    switch (name) {
-      case 'name': return !value.trim() ? (language === 'ar' ? 'الاسم مطلوب' : 'Name is required') : '';
-      case 'email': return !value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? (language === 'ar' ? 'بريد إلكتروني غير صالح' : 'Invalid email') : '';
-      case 'description': return !value.trim() || value.trim().length < 10 ? (language === 'ar' ? 'يرجى تقديم تفاصيل أكثر' : 'Please provide more detail') : '';
-      default: return '';
-    }
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
-    setErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
-
-  const isFormValid = () => !validateField('name', formState.name) && !validateField('email', formState.email) && !validateField('description', formState.description);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isFormValid()) return;
     setIsSubmitting(true);
-    setLoadingProgress(5);
-    const progressInterval = setInterval(() => {
-      setLoadingProgress(prev => {
-        if (prev >= 95) return prev;
-        const step = Math.floor(prev / 20);
-        setLoadingStatus(statusMessages[step] || statusMessages[statusMessages.length - 1]);
-        return prev + 5;
-      });
-    }, 400);
-
-    try {
-      await analyzeProject(formState.description, language);
-      setLoadingProgress(100);
-      setLoadingStatus(t('status_complete'));
-      await sleep(600);
-      setSubmitted(true);
-    } catch (error) {
-      setApiError(language === 'ar' ? "حدث خطأ فني، يرجى المحاولة لاحقاً." : "Technical error, please try again later.");
-    } finally {
-      clearInterval(progressInterval);
-      setIsSubmitting(false);
+    const msgs = [t('status_1'), t('status_2'), t('status_3'), t('status_4'), t('status_5')];
+    for (const m of msgs) {
+      setLoadingStatus(m);
+      await sleep(1000);
     }
+    setSubmitted(true);
+    setIsSubmitting(false);
   };
 
-  const LabelWithTooltip = ({ label, tooltipKey }: { label: string, tooltipKey: string }) => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-      <label style={{ margin: 0 }}>{label}</label>
-      <FieldTooltip text={t(tooltipKey)} />
-    </div>
-  );
-
   return (
-    <section id="contact" className="section">
-      <div className="container" style={{ maxWidth: '800px' }}>
-        <div className="text-center" style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--dark)' }}>{t('contact_title')}</h2>
-          <p style={{ color: 'var(--gray-500)', fontSize: '1.125rem' }}>{t('contact_desc')}</p>
+    <section id="contact" className="section bg-light" style={{ borderTop: '1px solid var(--gray-200)' }}>
+      <div className="container" style={{ maxWidth: '1100px' }}>
+        <div className="text-center" style={{ marginBottom: '6rem' }}>
+          <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem', color: 'var(--dark)' }}>{t('contact_title')}</h2>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.35rem' }}>{t('contact_desc')}</p>
         </div>
         
         {submitted ? (
-          <div className="card text-center success-card" style={{ padding: '4rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', animation: 'popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
-            <div style={{ 
-              backgroundColor: 'rgba(34, 197, 94, 0.1)', 
-              color: '#16a34a', 
-              padding: '0.5rem 1.5rem', 
-              borderRadius: '9999px', 
-              fontSize: '0.875rem', 
-              fontWeight: '700', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '0.5rem',
-              marginBottom: '2rem'
-            }}>
-              <Icons.CheckCircle /> {t('success_banner')}
-            </div>
-            <div style={{ width: '300px', height: '300px', marginBottom: '0.5rem', overflow: 'hidden', animation: 'pulse 3s infinite ease-in-out' }}>
-               <LottiePlayer src="https://lottie.host/f8b44455-6b5c-448a-81f1-3d71241f3e5c/S4h1uP7D1C.json" loop={false} speed={1.2} />
-            </div>
-            
-            <h3 style={{ fontSize: '2.75rem', marginBottom: '1rem' }} className="text-gradient">{t('success_title')}</h3>
-            <p style={{ color: 'var(--gray-500)', fontSize: '1.125rem', fontWeight: 500, maxWidth: '500px', lineHeight: '1.6', marginBottom: '1.5rem' }}>{t('success_msg')}</p>
-            
-            <div style={{
-              backgroundColor: isDarkMode ? 'rgba(79, 70, 229, 0.1)' : '#f5f3ff',
-              borderLeft: language === 'en' ? '4px solid var(--primary)' : 'none',
-              borderRight: language === 'ar' ? '4px solid var(--primary)' : 'none',
-              padding: '1.25rem',
-              borderRadius: '8px',
-              maxWidth: '550px',
-              width: '100%',
-              marginBottom: '2rem',
-              textAlign: language === 'ar' ? 'right' : 'left'
-            }}>
-              <h4 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '0.5rem', color: 'var(--primary)' }}>
-                {language === 'ar' ? 'الخطوات القادمة' : 'Next Steps'}
-              </h4>
-              <p style={{ color: 'var(--dark)', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                {t('success_next_steps')}
-              </p>
-            </div>
-
-            <button className="btn btn-primary" style={{ padding: '1rem 3.5rem', boxShadow: '0 10px 15px -3px rgba(79, 70, 229, 0.4)' }} onClick={() => setSubmitted(false)}>{t('success_btn')}</button>
+          <div className="card text-center success-card" style={{ padding: '8rem 4rem', animation: 'popIn 0.5s ease' }}>
+            <h3 style={{ fontSize: '4rem', marginBottom: '2.5rem' }}>{t('success_title')}</h3>
+            <p style={{ color: 'var(--gray-500)', fontSize: '1.45rem', marginBottom: '5rem', maxWidth: '700px', margin: '0 auto 5rem', lineHeight: 1.7 }}>{t('success_msg')}</p>
+            <button className="btn btn-primary" onClick={() => setSubmitted(false)}>{t('success_btn')}</button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="card" style={{ opacity: isSubmitting ? 0.9 : 1 }}>
-            {apiError && <div className="error-message" style={{ marginBottom: '1.5rem', color: 'var(--error)' }}>{apiError}</div>}
-            <div className="grid grid-2" style={{ marginBottom: '1.5rem' }}>
-              <div>
-                <LabelWithTooltip label={t('form_name')} tooltipKey="tip_name" />
-                <input required disabled={isSubmitting} name="name" className="input-field" type="text" value={formState.name} onChange={handleChange} onBlur={handleBlur} />
-              </div>
-              <div>
-                <LabelWithTooltip label={t('form_email')} tooltipKey="tip_email" />
-                <input required disabled={isSubmitting} name="email" className="input-field" type="email" value={formState.email} onChange={handleChange} onBlur={handleBlur} />
-              </div>
+          <form onSubmit={handleSubmit} className="card" style={{ border: '2px solid var(--gray-200)', padding: '6rem' }}>
+            <div className="grid grid-2" style={{ marginBottom: '4rem' }}>
+              <input required className="input-field" placeholder={t('form_name')} />
+              <input required className="input-field" type="email" placeholder={t('form_email')} />
             </div>
-            <div className="grid grid-2" style={{ marginBottom: '1.5rem' }}>
-              <div>
-                <LabelWithTooltip label={t('form_phone')} tooltipKey="tip_phone" />
-                <input disabled={isSubmitting} name="phone" className="input-field" type="tel" value={formState.phone} onChange={handleChange} />
-              </div>
-              <div>
-                <LabelWithTooltip label={t('form_company')} tooltipKey="tip_company" />
-                <input disabled={isSubmitting} name="company" className="input-field" type="text" value={formState.company} onChange={handleChange} />
-              </div>
-            </div>
-            <div style={{ marginBottom: '2rem' }}>
-              <LabelWithTooltip label={t('form_desc')} tooltipKey="tip_desc" />
-              <textarea required disabled={isSubmitting} name="description" className="input-field" rows={4} placeholder={t('form_desc_placeholder')} value={formState.description} onChange={handleChange} onBlur={handleBlur}></textarea>
-              <p style={{ fontSize: '0.75rem', color: 'var(--gray-500)', marginTop: '0.5rem' }}>{t('form_ai_hint')}</p>
-            </div>
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', fontSize: '1.125rem', minHeight: '56px' }} disabled={isSubmitting}>
-              {isSubmitting ? <><Icons.Loader /> {loadingStatus}</> : t('form_btn')}
+            <textarea required className="input-field" rows={7} placeholder={t('form_desc_placeholder')}></textarea>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '80px', marginTop: '4rem' }} disabled={isSubmitting}>
+              {isSubmitting ? <Icons.Loader /> : t('form_btn')}
             </button>
           </form>
         )}
@@ -764,21 +380,42 @@ function Contact() {
 }
 
 function Footer() {
-  const { t } = useTheme();
+  const { t, setActivePage } = useTheme();
+  
+  const handlePage = (p: PageView) => {
+    setActivePage(p);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer style={{ background: 'var(--dark)', color: 'var(--white)', padding: '4rem 0 2rem' }}>
+    <footer style={{ background: 'var(--secondary)', color: 'white', padding: '10rem 0 5rem' }}>
       <div className="container">
-        <div className="grid grid-4" style={{ marginBottom: '4rem' }}>
+        <div className="grid grid-4" style={{ marginBottom: '10rem' }}>
           <div style={{ gridColumn: 'span 2' }}>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'inherit' }}>
-              <div style={{ width: 24, height: 24, background: 'var(--gradient-primary)', borderRadius: '4px' }}></div>{t('brand')}
+            <h3 style={{ fontSize: '1.35rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', color: 'inherit', letterSpacing: '0.5em' }}>
+              <Icons.Logo /> {t('brand')}
             </h3>
-            <p style={{ color: 'var(--gray-500)', maxWidth: '300px' }}>{t('footer_desc')}</p>
+            <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '450px', fontSize: '1rem', lineHeight: '1.9' }}>{t('footer_desc')}</p>
           </div>
-          <div><h4>{t('footer_company')}</h4><div className="footer-links"><a href="#">{t('nav_about')}</a><a href="#">{t('nav_services')}</a><a href="#">{t('cases_title')}</a></div></div>
-          <div><h4>{t('footer_legal')}</h4><div className="footer-links"><a href="#">{t('footer_privacy')}</a><a href="#">{t('footer_terms')}</a></div></div>
+          <div>
+            <h4 style={{ fontSize: '0.9rem', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>{t('footer_company')}</h4>
+            <div className="footer-links">
+              <a onClick={() => handlePage('about')}>{t('nav_about')}</a>
+              <a onClick={() => handlePage('audit')}>Audit</a>
+              <a onClick={() => handlePage('security')}>Security</a>
+              <a onClick={() => handlePage('scalability')}>Scalability</a>
+            </div>
+          </div>
+          <div>
+            <h4 style={{ fontSize: '0.9rem', letterSpacing: '0.3em', marginBottom: '2.5rem' }}>{t('footer_legal')}</h4>
+            <div className="footer-links">
+              <a onClick={() => handlePage('compliance')}>{t('compliance_title')}</a>
+              <a onClick={() => handlePage('privacy')}>Privacy Protocol</a>
+              <a onClick={() => handlePage('terms')}>Terms of Engagement</a>
+            </div>
+          </div>
         </div>
-        <div style={{ borderTop: '1px solid var(--gray-800)', paddingTop: '2rem', textAlign: 'center', color: 'var(--gray-500)', fontSize: '0.875rem' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '5rem', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', letterSpacing: '0.25em' }}>
           &copy; {new Date().getFullYear()} {t('brand')}. {t('footer_copy')}
         </div>
       </div>
@@ -786,9 +423,12 @@ function Footer() {
   );
 }
 
-function ThemeProvider({ children }: { children?: React.ReactNode }) {
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
   const [language, setLanguage] = useState<Language>(() => (localStorage.getItem('lang') as Language) || 'en');
+  const [activePage, setActivePage] = useState<PageView>('home');
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
@@ -801,27 +441,55 @@ function ThemeProvider({ children }: { children?: React.ReactNode }) {
     localStorage.setItem('lang', language);
   }, [language]);
 
-  const toggleDarkMode = () => setIsDarkMode(prev => !prev);
   const t = (key: string) => translations[language][key] || key;
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode, language, setLanguage, t }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-}
-
-function App() {
-  return (
-    <ThemeProvider>
+    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode: () => setIsDarkMode(!isDarkMode), language, setLanguage, activePage, setActivePage, t }}>
       <Header />
-      <Hero />
-      <Services />
-      <Packages />
-      <AboutAndCases />
-      <Contact />
+      <main>
+        {activePage === 'home' ? (
+          <>
+            <Hero />
+            <section id="services" className="section bg-light" style={{ borderTop: '1px solid var(--gray-200)' }}>
+              <div className="container">
+                <div className="text-center" style={{ marginBottom: '8rem' }}>
+                  <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>{t('services_title')}</h2>
+                  <p style={{ color: 'var(--gray-500)', fontSize: '1.35rem', maxWidth: '800px', margin: '0 auto' }}>{t('services_desc')}</p>
+                </div>
+                <div className="grid grid-4">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="card" style={{ borderTop: '8px solid var(--primary)' }}>
+                      <h3 style={{ marginBottom: '1.75rem', fontSize: '1.25rem' }}>{t(`service_${i}_title`)}</h3>
+                      <p style={{ color: 'var(--gray-500)', fontSize: '1rem' }}>{t(`service_${i}_desc`)}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <section id="packages" className="section">
+              <div className="container">
+                <div className="text-center" style={{ marginBottom: '8rem' }}>
+                  <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>{t('packages_title')}</h2>
+                </div>
+                <div className="grid grid-3">
+                  {[1, 2, 3].map(i => (
+                    <div key={i} className="card" style={{ transform: i === 2 ? 'scale(1.08)' : 'none', border: i === 2 ? '3px solid var(--primary)' : '1px solid var(--gray-200)' }}>
+                      <h3 style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>{t(`pkg_${i}_name`)}</h3>
+                      <p style={{ color: 'var(--primary)', fontWeight: 800, marginBottom: '3rem' }}>{t(`pkg_${i}_target`)}</p>
+                      <button className="btn btn-primary" style={{ width: '100%' }}>{t('pkg_btn')}</button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <Contact />
+          </>
+        ) : (
+          <StaticPage view={activePage} />
+        )}
+      </main>
       <Footer />
-    </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 

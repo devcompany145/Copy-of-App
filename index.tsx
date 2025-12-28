@@ -71,7 +71,7 @@ const translations: Record<Language, Record<string, string>> = {
     calc_design: "Design Fidelity",
     calc_features: "Integrated Capabilities",
     calc_total: "Estimated Strategic Investment",
-    calc_total_desc: "Based on selected architecture and complexity.",
+    calc_total_desc: "Based on selected architecture and complexity factors.",
     calc_disclaimer: "These figures represent institutional benchmarks and are subject to official diagnostic audit.",
     metrics_title: "Institutional Impact",
     metrics_1_val: "85%",
@@ -83,6 +83,12 @@ const translations: Record<Language, Record<string, string>> = {
     profile_badge: "Company Profile 2024",
     profile_vision: "Vision: To lead digital innovation through strategic AI implementation.",
     profile_mission: "Mission: Empowering global businesses to transform through technology.",
+    profile_upload_label: "Upload Institutional Brief",
+    profile_upload_hint: "Supported formats: PDF, DOCX (Max 10MB)",
+    profile_upload_btn: "Transmit Document",
+    profile_upload_success: "Institutional Document Transmitted Successfully",
+    profile_upload_error: "Transmission Error. Invalid File Format.",
+    profile_upload_reset: "Upload New Document",
     about_badge: "Institutional Profile",
     about_title: "Architecting the future.",
     about_desc: "We transform theoretical AI into practical, institutional strategic assets.",
@@ -151,7 +157,7 @@ const translations: Record<Language, Record<string, string>> = {
     calc_design: "دقة التصميم",
     calc_features: "القدرات المتكاملة",
     calc_total: "الاستثمار الاستراتيجي المتوقع",
-    calc_total_desc: "بناءً على المعمارية والتعقيد المختارين.",
+    calc_total_desc: "بناءً على المعمارية وعوامل التعقيد المختارة.",
     calc_disclaimer: "هذه الأرقام تمثل معايير مؤسسية وتخضع لتدقيق تشخيصي رسمي.",
     metrics_title: "الأثر المؤسسي",
     metrics_1_val: "85%",
@@ -163,6 +169,12 @@ const translations: Record<Language, Record<string, string>> = {
     profile_badge: "الملف التعريفي ٢٠٢٤",
     profile_vision: "الرؤية: قيادة الابتكار الرقمي عبر التنفيذ الاستراتيجي للذكاء الاصطناعي.",
     profile_mission: "الرسالة: تمكين الشركات العالمية من التحول عبر التكنولوجيا.",
+    profile_upload_label: "رفع الموجز المؤسسي",
+    profile_upload_hint: "الصيغ المدعومة: PDF, DOCX (بحد أقصى 10 ميجابايت)",
+    profile_upload_btn: "إرسال المستند",
+    profile_upload_success: "تم إرسال المستند المؤسسي بنجاح",
+    profile_upload_error: "خطأ في الإرسال. صيغة الملف غير صالحة.",
+    profile_upload_reset: "رفع مستند جديد",
     about_badge: "ملف المؤسسة",
     about_title: "هندسة المستقبل.",
     about_desc: "نحول الذكاء الاصطناعي النظري إلى أصول استراتيجية مؤسسية عملية.",
@@ -222,6 +234,8 @@ const Icons = {
   Check: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>,
   Loader: () => <svg className="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>,
   Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
+  Upload: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
+  File: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
   Sun: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
   Moon: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
   ChatLauncher: () => <svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
@@ -629,9 +643,10 @@ function PriceCalculatorView() {
 
           <div className="card" style={{ background: 'var(--primary)', color: 'white', border: 'none', padding: '4rem 3rem', textAlign: 'center', height: 'fit-content', position: 'sticky', top: '150px' }}>
             <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.25em', opacity: 0.6, marginBottom: '2rem' }}>{t('calc_total')}</div>
-            <div style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>${calculatePrice().toLocaleString()} <span style={{ fontSize: '1rem', opacity: 0.5 }}>USD</span></div>
-            <p style={{ fontSize: '0.75rem', opacity: 0.6, fontStyle: 'italic', lineHeight: 1.6 }}>{t('calc_disclaimer')}</p>
-            <button onClick={() => setActivePage('advisory')} className="btn btn-outline" style={{ width: '100%', marginTop: '3rem', color: 'white', borderColor: 'white' }}>Connect with Advisory</button>
+            <div style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>${calculatePrice().toLocaleString()} <span style={{ fontSize: '1rem', opacity: 0.5 }}>USD</span></div>
+            <p style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '2rem', fontStyle: 'italic' }}>{t('calc_total_desc')}</p>
+            <p style={{ fontSize: '0.75rem', opacity: 0.6, lineHeight: 1.6, marginBottom: '2.5rem' }}>{t('calc_disclaimer')}</p>
+            <button onClick={() => setActivePage('advisory')} className="btn btn-outline" style={{ width: '100%', color: 'white', borderColor: 'white' }}>Connect with Advisory</button>
           </div>
         </div>
       </div>
@@ -640,8 +655,26 @@ function PriceCalculatorView() {
 }
 
 function CompanyProfileView() {
-  const { t, language, setActivePage } = useTheme();
+  const { t, language, setActivePage, isDarkMode } = useTheme();
   const [downloading, setDownloading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const lottieContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (uploadSuccess && lottieContainerRef.current) {
+      const anim = lottie.loadAnimation({
+        container: lottieContainerRef.current,
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'https://lottie.host/855b46e3-82a1-432a-9f5e-141a02196658/K2Z3JdE07S.json' // Triumphant Checkmark/Success animation
+      });
+      return () => anim.destroy();
+    }
+  }, [uploadSuccess]);
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -657,17 +690,110 @@ function CompanyProfileView() {
     setDownloading(false);
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (validTypes.includes(file.type)) {
+        setSelectedFile(file);
+        setUploadSuccess(false);
+      } else {
+        alert(t('profile_upload_error'));
+        e.target.value = '';
+      }
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) return;
+    setUploading(true);
+    // Simulate API upload
+    await new Promise(r => setTimeout(r, 2000));
+    setUploading(false);
+    setUploadSuccess(true);
+    setSelectedFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
   return (
-    <section className="section">
+    <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6rem' }}>
-          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ fontSize: '0.7rem' }}><Icons.ArrowLeft lang={language} /> {t('btn_back')}</button>
-          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.7rem' }}>{downloading ? <Icons.Loader /> : <Icons.Download />} {t('btn_download_brief')}</button>
+          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ fontSize: '0.7rem' }}>
+            <Icons.ArrowLeft lang={language} /> {t('btn_back')}
+          </button>
+          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.7rem' }}>
+            {downloading ? <Icons.Loader /> : <Icons.Download />} {t('btn_download_brief')}
+          </button>
         </div>
-        <div className="text-center">
+
+        <div className="text-center" style={{ marginBottom: '8rem' }}>
           <span className="badge">{t('profile_badge')}</span>
           <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5rem)', marginBottom: '2.5rem' }}>Strategic Architecture</h1>
           <p style={{ color: 'var(--gray-500)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto' }}>{t('profile_vision')}</p>
+        </div>
+
+        <div className="card" style={{ border: '1px dashed var(--primary)', background: isDarkMode ? 'rgba(0,43,69,0.2)' : 'rgba(0,43,69,0.02)', padding: '5rem 2rem', textAlign: 'center' }}>
+          {!uploadSuccess ? (
+            <>
+              <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'center' }}>
+                <Icons.File />
+              </div>
+              <h3 style={{ marginBottom: '1rem' }}>{t('profile_upload_label')}</h3>
+              <p style={{ color: 'var(--gray-500)', fontSize: '0.85rem', marginBottom: '3rem' }}>{t('profile_upload_hint')}</p>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+                <input 
+                  type="file" 
+                  accept=".pdf,.docx" 
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: 'none' }} 
+                />
+                
+                {!selectedFile ? (
+                  <button 
+                    onClick={() => fileInputRef.current?.click()} 
+                    className="btn btn-outline"
+                    style={{ padding: '1rem 3rem' }}
+                  >
+                    Select Document
+                  </button>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '400px' }}>
+                    <div className="card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid var(--primary)', background: 'var(--white)' }}>
+                      <Icons.File />
+                      <span style={{ fontSize: '0.8rem', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {selectedFile.name}
+                      </span>
+                    </div>
+                    <button 
+                      onClick={handleUpload} 
+                      disabled={uploading}
+                      className="btn btn-primary"
+                      style={{ width: '100%' }}
+                    >
+                      {uploading ? <Icons.Loader /> : <Icons.Upload />} {t('profile_upload_btn')}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <div style={{ animation: 'popIn 0.5s ease forwards' }}>
+              <div ref={lottieContainerRef} style={{ width: '200px', height: '200px', margin: '0 auto 1rem' }}></div>
+              <h2 style={{ color: 'var(--primary)', marginBottom: '2rem' }}>{t('profile_upload_success')}</h2>
+              <button 
+                onClick={() => {
+                  setUploadSuccess(false);
+                  setSelectedFile(null);
+                }} 
+                className="btn btn-outline"
+              >
+                {t('profile_upload_reset')}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -881,6 +1007,7 @@ const DESIGN = [
 ];
 const FEATURES = [
   { id: 'analytics', label_en: 'Advanced Analytics', label_ar: 'تحليلات متقدمة', price: 4000 },
+  { id: 'predictive_intel', label_en: 'Predictive Intelligence', label_ar: 'ذكاء تنبؤي', price: 8000 },
   { id: 'security', label_en: 'Enhanced Security', label_ar: 'أمن معزز', price: 6000 },
   { id: 'automation', label_en: 'Process Automation', label_ar: 'أتمتة العمليات', price: 7500 },
   { id: 'custom_api', label_en: 'Custom API Layer', label_ar: 'طبقة API مخصصة', price: 5000 }

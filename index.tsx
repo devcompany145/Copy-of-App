@@ -927,6 +927,20 @@ function AboutUsSection({ id }: { id?: string }) {
   );
 }
 
+function NavLink({ onClick, label, tooltip }: { onClick: () => void; label: string; tooltip: string }) {
+  return (
+    <div className="tooltip-wrapper">
+      <a 
+        onClick={onClick} 
+        style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}
+      >
+        {label}
+      </a>
+      <span className="nav-tooltip">{tooltip}</span>
+    </div>
+  );
+}
+
 function Header() {
   const { isDarkMode, toggleDarkMode, language, setLanguage, activePage, setActivePage, t } = useTheme();
   
@@ -959,11 +973,20 @@ function Header() {
           <Icons.Logo /> <span>{t('brand')}</span>
         </div>
         <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <a onClick={() => handleAnchorNav('capabilities-section')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_services')}</a>
-          <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_about')}</a>
-          <a onClick={() => handleNav('advisory')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--primary)', borderBottom: '2px solid' }}>{t('nav_advisory')}</a>
-          <a onClick={() => handleNav('calculator')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_calculator')}</a>
-          <a onClick={() => handleNav('profile')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_profile')}</a>
+          <NavLink onClick={() => handleAnchorNav('capabilities-section')} label={t('nav_services')} tooltip={t('nav_services')} />
+          <NavLink onClick={() => handleNav('about')} label={t('nav_about')} tooltip={t('nav_about')} />
+          <div className="tooltip-wrapper">
+            <a 
+              onClick={() => handleNav('advisory')} 
+              style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--primary)', borderBottom: '2px solid' }}
+            >
+              {t('nav_advisory')}
+            </a>
+            <span className="nav-tooltip">{t('nav_advisory')}</span>
+          </div>
+          <NavLink onClick={() => handleNav('calculator')} label={t('nav_calculator')} tooltip={t('nav_calculator')} />
+          <NavLink onClick={() => handleNav('profile')} label={t('nav_profile')} tooltip={t('nav_profile')} />
+          
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.6rem' }}>{language.toUpperCase()}</button>
             <button onClick={toggleDarkMode} className="theme-toggle">{isDarkMode ? <Icons.Sun /> : <Icons.Moon />}</button>

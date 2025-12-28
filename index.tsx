@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { createRoot } from 'react-dom/client';
 import lottie from 'lottie-web';
@@ -43,22 +44,35 @@ const translations: Record<Language, Record<string, string>> = {
     nav_contact: "Dialogue",
     nav_profile: "The Brief",
     nav_calculator: "Estimator",
-    nav_advisory: "Advisory",
+    nav_advisory: "AI Advisory",
     btn_consultation: "Inquiry",
     btn_download_brief: "Download Brief",
     hero_badge: "Institutional Intelligence",
-    hero_title: "Systemic Engineering for",
+    hero_title: "Strategic Engineering for",
     hero_title_accent: "Global Scale",
-    hero_desc: "Exclusive strategic development through high-fidelity engineering. We deploy proprietary AI frameworks to automate critical business operations and reclaim operational excellence.",
-    hero_btn_main: "Initiate Dialogue",
+    hero_desc: "Exclusive strategic development through high-fidelity engineering. We deploy proprietary AI frameworks to help businesses navigate digital transformation and achieve operational excellence.",
+    hero_btn_main: "Start AI Advisory",
     hero_btn_sec: "The Architecture",
-    chat_title: "Strategic AI Advisory",
-    chat_desc: "Direct neural connection to our senior digital transformation strategist.",
-    chat_placeholder: "Brief your objectives or ask about transformation ROI...",
-    chat_intro: "Welcome. I am your Strategic Intelligence Architect. How can I help you architect your institutional transformation today?",
-    chat_system_instruction: "You are an elite Senior Digital Transformation Consultant at 'Business Developers'. Your expertise lies in helping institutional leaders determine where and how to deploy AI to automate critical business operations and reclaim operational excellence. You analyze project feasibility, ROI, and technical readiness. Be professional, highly strategic, and concise. Your goal is to guide them toward understanding the value of a diagnostic audit.",
+    chat_title: "AI Strategic Advisory",
+    chat_desc: "Decision support for AI transformation and digital roadmap planning.",
+    chat_placeholder: "Describe your business challenge or ask about AI ROI...",
+    chat_intro: "Welcome. I am your Strategic Intelligence Partner. How can I help you architect your institutional AI transformation today?",
+    chat_system_instruction: "You are an elite Senior Digital Transformation Consultant at 'Business Developers'. Your mission is to help business leaders decide IF, WHERE, and HOW to implement AI. Focus on ROI, operational efficiency, and long-term scalability. Encourage users to think about their data readiness and specific pain points. Be professional, concise, and strategically minded.",
+    laila_name: "Laila",
+    laila_subtitle: "CONCIERGE AI",
+    laila_intro: "Hello! I am Laila, your digital assistant at Business Developers. How can I assist you today?",
+    laila_q1: "What is AI Transformation?",
+    laila_q2: "How to start a project?",
+    laila_q3: "Speak with a guide",
+    laila_placeholder: "Write your message here...",
     calc_title: "Development Estimator",
+    calc_desc: "Simulate institutional development costs based on project parameters.",
+    calc_platform: "Platform Architecture",
+    calc_type: "Operational Complexity",
+    calc_design: "Design Fidelity",
+    calc_features: "Integrated Capabilities",
     calc_total: "Estimated Strategic Investment",
+    calc_disclaimer: "These figures represent institutional benchmarks and are subject to official diagnostic audit.",
     metrics_title: "Institutional Impact",
     metrics_1_val: "85%",
     metrics_1_label: "Success Rate",
@@ -67,12 +81,12 @@ const translations: Record<Language, Record<string, string>> = {
     metrics_3_val: "60%",
     metrics_3_label: "Cost Efficiency",
     profile_badge: "Company Profile 2024",
-    profile_vision: "Vision: To be the global leader in driving digital innovation and transformation.",
-    profile_mission: "Mission: Empowering innovators to transform ideas into reality.",
+    profile_vision: "Vision: To lead digital innovation through strategic AI implementation.",
+    profile_mission: "Mission: Empowering global businesses to transform through technology.",
     about_badge: "Institutional Profile",
     about_title: "Architecting the future.",
-    about_desc: "We are a premier intelligence firm based on precision. Our mission is to transform theoretical AI into practical, institutional strategic assets.",
-    about_content: "Established as a beacon of high-fidelity engineering, Business Developers represents the intersection of capital strategy and machine intelligence.",
+    about_desc: "We transform theoretical AI into practical, institutional strategic assets.",
+    about_content: "Business Developers represents the intersection of capital strategy and machine intelligence, providing the foundation for modern enterprise operations.",
     contact_title: "Operational Brief",
     form_btn: "Transmit Brief",
     btn_back: "Return to Headquarters",
@@ -82,47 +96,6 @@ const translations: Record<Language, Record<string, string>> = {
     success_title: "Confirmed",
     success_msg: "Brief received.",
     success_btn: "New Dialogue",
-    services_title: "Core Capabilities",
-    service_1_title: "Neural Automation",
-    service_1_desc: "Architecting high-latency systems for global operation scale.",
-    service_2_title: "Strategic AI Audit",
-    service_2_desc: "Deep-dive diagnostic of institutional technical readiness.",
-    service_3_title: "Private Frameworks",
-    service_3_desc: "Proprietary intelligence layers for sensitive operation data.",
-    service_4_title: "Capital Integration",
-    service_4_desc: "Aligning digital transformation with institutional fiscal goals.",
-    methodology_title: "The BD Method",
-    methodology_desc: "A rigid 4-step framework for systemic deployment.",
-    method_1_title: "Diagnostic",
-    method_1_desc: "Initial audit of operational bottlenecks and AI viability.",
-    method_2_title: "Architecture",
-    method_2_desc: "Systemic design of the neural transformation roadmap.",
-    method_3_title: "Deployment",
-    method_3_desc: "Phase-based integration of institutional AI frameworks.",
-    method_4_title: "Optimization",
-    method_4_desc: "Continuous calibration for maximum operational ROI.",
-    test_1_quote: "The transformation of our core operations was handled with surgical precision.",
-    test_1_author: "Global Logistics Director",
-    test_2_quote: "Unmatched technical fidelity and strategic insight in AI deployment.",
-    test_2_author: "CTO, Fortune 500 Infrastructure",
-    audit_title: "Diagnostic Audit",
-    audit_desc: "Mapping institutional data structures.",
-    audit_content: "Our systematic audit identifies bottlenecks in your current data flows and designs the neural bridge to your future autonomous state.",
-    security_title: "Institutional Security",
-    security_desc: "Hardened intelligence protocols.",
-    security_content: "We engineer private models that reside exclusively within your controlled perimeter, ensuring total strategic autonomy.",
-    scalability_title: "Industrial Scaling",
-    scalability_desc: "Ready for global throughput.",
-    scalability_content: "Our architectures are built for high-concurrency environments, capable of scaling across multiple global regions without friction.",
-    compliance_title: "Regulatory Compliance",
-    compliance_desc: "Navigating international standards.",
-    compliance_content: "We ensure all AI deployments adhere to institutional laws and international data governance standards, mitigating risk at scale.",
-    privacy_title: "Privacy Protocol",
-    privacy_desc: "Zero-leakage data engineering.",
-    privacy_content: "Institutional intelligence is only valuable if it is private. Our protocols ensure no data ever leaves your secure environment.",
-    terms_title: "Terms of Engagement",
-    terms_desc: "Legal and Operational framework.",
-    terms_content: "Standard institutional engagement terms focused on transparency, deliverables, and long-term systemic reliability."
   },
   ar: {
     brand: "بيزنس ديفلوبرز",
@@ -132,22 +105,35 @@ const translations: Record<Language, Record<string, string>> = {
     nav_contact: "الحوار",
     nav_profile: "ملف الشركة",
     nav_calculator: "حاسبة الأسعار",
-    nav_advisory: "استشارات AI",
+    nav_advisory: "استشارات الذكاء الاصطناعي",
     btn_consultation: "استفسار",
     btn_download_brief: "تحميل الملف",
     hero_badge: "ذكاء مؤسسي",
-    hero_title: "هندسة منهجية لـ",
+    hero_title: "هندسة استراتيجية لـ",
     hero_title_accent: "نطاق عالمي",
-    hero_desc: "تطوير استراتيجي حصري من خلال الهندسة المتقدمة. نقوم بنشر أطر ذكاء اصطناعي خاصة لأتمتة العمليات التجارية الحيوية واستعادة التميز التشغيلي.",
-    hero_btn_main: "بدء الحوار",
+    hero_desc: "تطوير استراتيجي حصري من خلال الهندسة المتقدمة. نقوم بنشر أطر ذكاء اصطناعي خاصة لمساعدة الشركات في التنقل عبر التحول الرقمي وتحقيق التميز التشغيلي.",
+    hero_btn_main: "بدء استشارة AI",
     hero_btn_sec: "المعمارية",
     chat_title: "استشارات AI الاستراتيجية",
-    chat_desc: "اتصال مباشر مع خبيرنا الاستراتيجي للتحول الرقمي.",
-    chat_placeholder: "لخص أهدافك أو اسأل عن عائد التحول الرقمي...",
-    chat_intro: "مرحباً بكم. أنا خبير الذكاء الاستراتيجي الخاص بكم. كيف يمكنني مساعدتكم في هندسة التحول المؤسسي الخاص بكم اليوم؟",
-    chat_system_instruction: "أنت مستشار أول للتحول الرقمي في شركة 'Business Developers'. تكمن خبرتك في مساعدة قادة المؤسسات في تحديد أين وكيف يتم نشر الذكاء الاصطناعي لأتمتة العمليات التجارية الحيوية واستعادة التميز التشغيلي. أنت تحلل جدوى المشروع والعائد على الاستثمار والجاهزية التقنية. كن مهنياً، استراتيجياً للغاية، ومختصراً. هدفك هو توجيههم نحو فهم قيمة التدقيق التشخيصي.",
+    chat_desc: "دعم اتخاذ القرار لتحول الذكاء الاصطناعي وتخطيط خارطة الطريق الرقمية.",
+    chat_placeholder: "لخص تحديات أعمالك أو اسأل عن عائد استثمار AI...",
+    chat_intro: "مرحباً بكم. أنا شريككم للذكاء الاستراتيجي. كيف يمكنني مساعدتكم في هندسة تحول الذكاء الاصطناعي المؤسسي الخاص بكم اليوم؟",
+    chat_system_instruction: "أنت مستشار أول للتحول الرقمي في 'بيزنس ديفلوبرز'. مهمتك هي مساعدة قادة الأعمال في اتخاذ القرار بشأن متى وأين وكيف يتم تنفيذ الذكاء الاصطناعي. ركز على العائد على الاستثمار، الكفاءة التشغيلية، والتوسع طويل الأمد. شجع المستخدمين على التفكير في جاهزية بياناتهم ونقاط الألم المحددة لديهم. كن مهنياً، مختصراً، وذا عقلية استراتيجية.",
+    laila_name: "ليلى",
+    laila_subtitle: "المساعد الرقمي",
+    laila_intro: "مرحباً! أنا ليلى، مساعدتك الرقمية في حي مطوري الأعمال. كيف يمكنني مساعدتك اليوم؟",
+    laila_q1: "ما هو التحول الرقمي؟",
+    laila_q2: "كيف أبدأ مشروعي؟",
+    laila_q3: "تحدث مع خبير",
+    laila_placeholder: "اكتب رسالتك هنا...",
     calc_title: "مقدر التطوير",
+    calc_desc: "محاكاة تكاليف التطوير المؤسسي بناءً على معايير المشروع.",
+    calc_platform: "معمارية المنصة",
+    calc_type: "التعقيد التشغيلي",
+    calc_design: "دقة التصميم",
+    calc_features: "القدرات المتكاملة",
     calc_total: "الاستثمار الاستراتيجي المتوقع",
+    calc_disclaimer: "هذه الأرقام تمثل معايير مؤسسية وتخضع لتدقيق تشخيصي رسمي.",
     metrics_title: "الأثر المؤسسي",
     metrics_1_val: "85%",
     metrics_1_label: "نسبة نجاح المشاريع",
@@ -155,13 +141,13 @@ const translations: Record<Language, Record<string, string>> = {
     metrics_2_label: "سرعة الوصول للسوق",
     metrics_3_val: "60%",
     metrics_3_label: "توفير التكاليف",
-    profile_badge: "الملف التعريفي للشركة ٢٠٢٤",
-    profile_vision: "الرؤية: أن نصبح المنصة العالمية الرائدة في قيادة الابتكار الرقمي.",
-    profile_mission: "الرسالة: مساعدة المبتكرين في تحويل أفكارهم إلى واقع.",
+    profile_badge: "الملف التعريفي ٢٠٢٤",
+    profile_vision: "الرؤية: قيادة الابتكار الرقمي عبر التنفيذ الاستراتيجي للذكاء الاصطناعي.",
+    profile_mission: "الرسالة: تمكين الشركات العالمية من التحول عبر التكنولوجيا.",
     about_badge: "ملف المؤسسة",
     about_title: "هندسة المستقبل.",
-    about_desc: "نحن مؤسسة استخبارات تقنية رائدة قائمة على الدقة. مهمتنا هي تحويل الذكاء الاصطناعي النظري إلى أصول استراتيجية مؤسسية.",
-    about_content: "تأسست بيزنس ديفلوبرز كمنارة للهندسة عالية الدقة، وهي تمثل نقطة التقاء استراتيجية رأس المال وذكاء الآلة.",
+    about_desc: "نحول الذكاء الاصطناعي النظري إلى أصول استراتيجية مؤسسية عملية.",
+    about_content: "تمثل 'بيزنس ديفلوبرز' نقطة التقاء استراتيجية رأس المال وذكاء الآلة، مما يوفر الأساس لعمليات المؤسسات الحديثة.",
     contact_title: "موجز تشغيلي",
     form_btn: "إرسال الموجز",
     btn_back: "العودة للمقر الرئيسي",
@@ -171,47 +157,6 @@ const translations: Record<Language, Record<string, string>> = {
     success_title: "تم التأكيد",
     success_msg: "تم استلام الموجز.",
     success_btn: "حوار جديد",
-    services_title: "القدرات الجوهرية",
-    service_1_title: "الأتمتة العصبية",
-    service_1_desc: "هندسة أنظمة ذات نطاق عالمي للعمليات الضخمة.",
-    service_2_title: "تدقيق AI الاستراتيجي",
-    service_2_desc: "تشخيص عميق لمدى الجاهزية التقنية للمؤسسة.",
-    service_3_title: "أطر عمل خاصة",
-    service_3_desc: "طبقات ذكاء خاصة لبيانات العمليات الحساسة.",
-    service_4_title: "تكامل رأس المال",
-    service_4_desc: "محاذاة التحول الرقمي مع الأهداف المالية للمؤسسة.",
-    methodology_title: "منهجية BD",
-    methodology_desc: "إطار عمل صارم من ٤ خطوات للنشر المنهجي.",
-    method_1_title: "التشخيص",
-    method_1_desc: "تدقيق أولي للاختناقات التشغيلية وجدوى الذكاء الاصطناعي.",
-    method_2_title: "المعمارية",
-    method_2_desc: "التصميم المنهجي لخارطة طريق التحول العصبي.",
-    method_3_title: "النشر",
-    method_3_desc: "دمج تدريجي لأطر الذكاء الاصطناعي المؤسسي.",
-    method_4_title: "التحسين",
-    method_4_desc: "معايرة مستمرة لتحقيق أقصى عائد تشغيلي.",
-    test_1_quote: "تم التعامل مع تحول عملياتنا الأساسية بدقة جراحية.",
-    test_1_author: "مدير اللوجستيات العالمي",
-    test_2_quote: "دقة تقنية ورؤية استراتيجية لا تضاهى في نشر الذكاء الاصطناعي.",
-    test_2_author: "المدير التقني، Fortune 500 Infrastructure",
-    audit_title: "تدقيق تشخيصي",
-    audit_desc: "رسم خرائط هياكل البيانات المؤسسية.",
-    audit_content: "يحدد تدقيقنا المنهجي الاختناقات في تدفقات بياناتك الحالية ويصمم الجسر العصبي لحالتك الذاتية المستقبلية.",
-    security_title: "أمن مؤسسي",
-    security_desc: "بروتوكولات استخبارات معززة.",
-    security_content: "نحن نهندس نماذج خاصة تقع حصرياً داخل محيطك الخاضع للسيطرة، مما يضمن استقلالية استراتيجية كاملة.",
-    scalability_title: "توسع صناعي",
-    scalability_desc: "جاهز للإنتاجية العالمية.",
-    scalability_content: "تم بناء معماريتنا لبيئات التزامن العالي، وهي قادرة على التوسع عبر مناطق عالمية متعددة دون احتكاك.",
-    compliance_title: "الامتثال التنظيمي",
-    compliance_desc: "التنقل في المعايير الدولية.",
-    compliance_content: "نحن نضمن التزام جميع عمليات نشر الذكاء الاصطناعي بالقوانين المحلية ومعايير حوكمة البيانات الدولية، مما يقلل المخاطر على نطاق واسع.",
-    privacy_title: "بروتوكول الخصوصية",
-    privacy_desc: "هندسة بيانات خالية من التسريب.",
-    privacy_content: "الذكاء المؤسسي لا يكون قيماً إلا إذا كان خاصاً. تضمن بروتوكولاتنا عدم خروج أي بيانات من بيئتك الآمنة أبداً.",
-    terms_title: "شروط التعاقد",
-    terms_desc: "الإطار القانوني والتشغيلي.",
-    terms_content: "شروط تعاقد مؤسسية قياسية تركز على الشفافية والمخرجات والموثوقية المنهجية طويلة الأمد."
   }
 };
 
@@ -230,32 +175,175 @@ const Icons = {
     </svg>
   ),
   Send: () => (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
   ),
-  Advisory: () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-  ),
-  Check: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>,
   ArrowLeft: ({ lang }: { lang: string }) => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }}>
       <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
     </svg>
   ),
+  Check: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>,
   Loader: () => <svg className="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>,
+  Download: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>,
   Sun: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
   Moon: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>,
-  Brief: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>,
-  Download: () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-  ),
-  MethodStep: ({ num }: { num: number }) => (
-    <div style={{ width: '40px', height: '40px', border: '1px solid currentColor', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 900 }}>
-      {num}
-    </div>
-  ),
+  ChatLauncher: () => <svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+  ChevronDown: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>,
+  X: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
 };
 
-// --- Advisory Chat View ---
+// --- Floating Assistant (Laila) ---
+
+function FloatingChat() {
+  const { t, language, isDarkMode } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: 'model', text: t('laila_intro') }
+  ]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
+    }
+  }, [messages, loading, isOpen]);
+
+  const handleSend = async (text?: string) => {
+    const userMsg = text || input.trim();
+    if (!userMsg || loading) return;
+
+    setInput('');
+    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+    setLoading(true);
+
+    try {
+      // Create a new instance right before calling
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: [...messages, { role: 'user', text: userMsg }].map(m => ({
+          role: m.role,
+          parts: [{ text: m.text }]
+        })),
+        config: {
+          systemInstruction: `You are Laila, the Digital Concierge for 'Business Developers'. You help businesses explore AI transformation and digital solutions. Be friendly, professional, and efficient. Use institutional language. Language: ${language}.`,
+          temperature: 0.7,
+        }
+      });
+      setMessages(prev => [...prev, { role: 'model', text: response.text || "Communication timeout." }]);
+    } catch (error) {
+      setMessages(prev => [...prev, { role: 'model', text: "Link error. Please try again." }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) {
+    return (
+      <button 
+        onClick={() => setIsOpen(true)}
+        className="floating-launcher"
+        style={{
+          position: 'fixed', bottom: '30px', [language === 'ar' ? 'left' : 'right']: '30px',
+          width: '64px', height: '64px', borderRadius: '50%', backgroundColor: '#007bff',
+          display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+          boxShadow: '0 8px 24px rgba(0,123,255,0.4)', zIndex: 9999, border: 'none', transition: 'all 0.3s ease'
+        }}
+      >
+        <Icons.ChatLauncher />
+      </button>
+    );
+  }
+
+  return (
+    <div 
+      className="floating-chat-modal"
+      style={{
+        position: 'fixed', bottom: '30px', [language === 'ar' ? 'left' : 'right']: '30px',
+        width: '400px', maxWidth: '90vw', height: '600px', maxHeight: '80vh',
+        backgroundColor: isDarkMode ? '#1a1a1a' : '#ffffff',
+        borderRadius: '24px', overflow: 'hidden', display: 'flex', flexDirection: 'column',
+        boxShadow: '0 12px 48px rgba(0,0,0,0.2)', zIndex: 9999,
+        border: isDarkMode ? '1px solid #333' : '1px solid #eee'
+      }}
+    >
+      <div style={{ backgroundColor: '#1a1a1a', padding: '1.5rem', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+           <button onClick={() => setIsOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}><Icons.X /></button>
+           <div style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>
+             <h4 style={{ margin: 0, fontSize: '1rem', color: 'white' }}>{t('laila_name')}</h4>
+             <span style={{ fontSize: '0.65rem', color: '#007bff', fontWeight: 900, letterSpacing: '0.1em' }}>{t('laila_subtitle')}</span>
+           </div>
+        </div>
+        <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: '#007bff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Icons.ChatLauncher />
+        </div>
+      </div>
+
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', background: isDarkMode ? '#1a1a1a' : '#f8f9fa' }}>
+        {messages.map((m, i) => (
+          <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start', marginBottom: '1rem' }}>
+            <div style={{ 
+              maxWidth: '85%', padding: '1rem 1.25rem', borderRadius: '18px',
+              background: m.role === 'user' ? '#ffffff' : '#002b45',
+              color: m.role === 'user' ? '#1a1a1a' : '#ffffff',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+              fontSize: '0.9rem', lineHeight: 1.5,
+              border: m.role === 'user' ? '1px solid #eee' : 'none'
+            }}>
+              {m.text}
+            </div>
+          </div>
+        ))}
+        {loading && (
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <div style={{ padding: '0.75rem 1.25rem', borderRadius: '18px', background: '#002b45', color: 'white' }}>
+              <Icons.Loader />
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div style={{ padding: '1rem', background: isDarkMode ? '#1a1a1a' : '#ffffff', borderTop: isDarkMode ? '1px solid #333' : '1px solid #eee' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+          {[t('laila_q1'), t('laila_q2'), t('laila_q3')].map((q, idx) => (
+            <button key={idx} onClick={() => handleSend(q)} style={{ 
+              padding: '0.5rem 1rem', borderRadius: '12px', background: '#f0f2f5', 
+              border: 'none', fontSize: '0.75rem', cursor: 'pointer', color: '#65676b'
+            }}>
+              {q}
+            </button>
+          ))}
+        </div>
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', backgroundColor: '#f0f2f5', borderRadius: '12px', padding: '0.5rem' }}>
+          <input 
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+            placeholder={t('laila_placeholder')}
+            style={{ 
+              flex: 1, background: 'transparent', border: 'none', padding: '0.5rem',
+              outline: 'none', fontSize: '0.9rem', color: '#1a1a1a'
+            }}
+          />
+          <button 
+            onClick={() => handleSend()}
+            style={{ 
+              width: '40px', height: '40px', borderRadius: '8px', backgroundColor: '#007bff',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer'
+            }}
+          >
+            <Icons.Send />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- Views ---
 
 function AdvisoryChatView() {
   const { t, language, setActivePage, isDarkMode } = useTheme();
@@ -280,6 +368,7 @@ function AdvisoryChatView() {
     setLoading(true);
 
     try {
+      // Create a new instance right before calling
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -292,101 +381,146 @@ function AdvisoryChatView() {
           temperature: 0.7,
         }
       });
-
-      const modelText = response.text || "I am currently calibrating. Please re-transmit your query.";
-      setMessages(prev => [...prev, { role: 'model', text: modelText }]);
+      setMessages(prev => [...prev, { role: 'model', text: response.text || "Communication timeout." }]);
     } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { role: 'model', text: "Error: Neural link interrupted. Check connection parameters." }]);
+      setMessages(prev => [...prev, { role: 'model', text: "Error: Neural link interrupted." }]);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section className="section" style={{ height: 'calc(100vh - 110px)', display: 'flex', flexDirection: 'column', background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
-      <div className="container" style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '1000px', height: '100%' }}>
+    <section className="section" style={{ height: 'calc(100vh - 110px)', background: isDarkMode ? 'var(--secondary)' : 'var(--white)', display: 'flex', flexDirection: 'column' }}>
+      <div className="container" style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '1000px' }}>
         <div style={{ marginBottom: '2rem' }}>
-          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ padding: '0.5rem 1rem', border: '1px solid var(--gray-200)', fontSize: '0.6rem' }}>
+          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.65rem' }}>
             <Icons.ArrowLeft lang={language} /> {t('btn_back')}
           </button>
           <div style={{ marginTop: '2rem' }}>
             <span className="badge">{t('nav_advisory')}</span>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>{t('chat_title')}</h1>
+            <h1 style={{ fontSize: '2.5rem' }}>{t('chat_title')}</h1>
             <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem' }}>{t('chat_desc')}</p>
           </div>
         </div>
 
-        <div 
-          ref={scrollRef}
-          style={{ 
-            flex: 1, 
-            overflowY: 'auto', 
-            border: '1px solid var(--gray-200)', 
-            padding: '2rem', 
-            background: isDarkMode ? 'rgba(0,0,0,0.1)' : 'var(--white)',
-            marginBottom: '2rem'
-          }}
-        >
+        <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', border: '1px solid var(--gray-200)', padding: '2rem', marginBottom: '2rem', background: isDarkMode ? 'rgba(0,0,0,0.2)' : 'var(--white)' }}>
           {messages.map((m, i) => (
-            <div key={i} style={{ 
-              display: 'flex', 
-              justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start',
-              marginBottom: '1.5rem'
-            }}>
+            <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start', marginBottom: '1.5rem' }}>
               <div style={{ 
-                maxWidth: '80%', 
-                padding: '1.5rem', 
-                background: m.role === 'user' ? 'var(--gray-100)' : 'var(--primary)',
-                color: m.role === 'user' ? 'var(--dark)' : 'white',
-                border: '1px solid var(--gray-200)',
-                fontSize: '0.95rem',
-                lineHeight: 1.6,
-                position: 'relative'
+                maxWidth: '80%', padding: '1.5rem', background: m.role === 'user' ? 'var(--gray-100)' : 'var(--primary)', 
+                color: m.role === 'user' ? 'var(--dark)' : 'white', border: '1px solid var(--gray-200)', fontSize: '0.95rem', lineHeight: 1.6 
               }}>
                 {m.text}
-                <div style={{ 
-                  position: 'absolute', 
-                  bottom: -10, 
-                  [m.role === 'user' ? 'right' : 'left']: 10,
-                  fontSize: '0.6rem',
-                  opacity: 0.3,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em'
-                }}>
-                  {m.role === 'user' ? 'Institutional' : 'AI Architect'}
+                <div style={{ marginTop: '0.5rem', fontSize: '0.6rem', opacity: 0.4, textTransform: 'uppercase' }}>
+                  {m.role === 'user' ? 'Institutional' : 'AI Strategist'}
                 </div>
               </div>
             </div>
           ))}
-          {loading && (
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              <div style={{ padding: '1rem', background: 'var(--primary)', color: 'white', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <Icons.Loader /> <span style={{ fontSize: '0.7rem', textTransform: 'uppercase' }}>Processing Brief...</span>
-              </div>
-            </div>
-          )}
+          {loading && <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', padding: '1rem', background: 'var(--primary)', color: 'white', width: 'fit-content' }}><Icons.Loader /> <span style={{ fontSize: '0.7rem' }}>Analysing...</span></div>}
         </div>
 
         <form onSubmit={handleSend} style={{ display: 'flex', gap: '1rem', paddingBottom: '2rem' }}>
-          <input 
-            className="input-field" 
-            placeholder={t('chat_placeholder')}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={loading}
-            style={{ flex: 1, border: '2px solid var(--gray-200)' }}
-          />
-          <button type="submit" className="btn btn-primary" style={{ padding: '0 2rem' }} disabled={loading}>
-            <Icons.Send />
-          </button>
+          <input className="input-field" placeholder={t('chat_placeholder')} value={input} onChange={e => setInput(e.target.value)} disabled={loading} style={{ flex: 1 }} />
+          <button type="submit" className="btn btn-primary" style={{ padding: '0 2rem' }} disabled={loading}><Icons.Send /></button>
         </form>
       </div>
     </section>
   );
 }
 
-// --- Company Profile View ---
+function PriceCalculatorView() {
+  const { t, language, setActivePage, isDarkMode } = useTheme();
+  const [platform, setPlatform] = useState(PLATFORMS[0].id);
+  const [complexity, setComplexity] = useState(COMPLEXITY[0].id);
+  const [design, setDesign] = useState(DESIGN[0].id);
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
+
+  // Fixed the missing FEATURES calculation error and improved logic
+  const calculatePrice = () => {
+    const pPrice = PLATFORMS.find(p => p.id === platform)?.price || 0;
+    const dPrice = DESIGN.find(d => d.id === design)?.price || 0;
+    const fPrice = FEATURES.filter(f => selectedFeatures.includes(f.id)).reduce((acc, f) => acc + f.price, 0);
+    const multiplier = COMPLEXITY.find(c => c.id === complexity)?.multiplier || 1;
+    return Math.round((pPrice + dPrice + fPrice) * multiplier);
+  };
+
+  return (
+    <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
+      <div className="container" style={{ maxWidth: '1000px' }}>
+        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', padding: '0.75rem 1.5rem', display: 'flex', gap: '1rem' }}>
+          <Icons.ArrowLeft lang={language} /> {t('btn_back')}
+        </button>
+
+        <div className="text-center" style={{ marginBottom: '6rem' }}>
+          <span className="badge">{t('nav_calculator')}</span>
+          <h1 style={{ fontSize: '3.5rem', marginBottom: '2rem' }}>{t('calc_title')}</h1>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.2rem' }}>{t('calc_desc')}</p>
+        </div>
+
+        <div className="grid grid-2" style={{ gap: '4rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+            <div>
+              <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_platform')}</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {PLATFORMS.map(p => (
+                  <button key={p.id} onClick={() => setPlatform(p.id)} className="card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: platform === p.id ? 'var(--primary)' : 'var(--gray-200)', background: platform === p.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}>
+                    <span>{language === 'en' ? p.label_en : p.label_ar}</span>
+                    {platform === p.id && <Icons.Check />}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_type')}</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {COMPLEXITY.map(c => (
+                  <button key={c.id} onClick={() => setComplexity(c.id)} className="card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: complexity === c.id ? 'var(--primary)' : 'var(--gray-200)', background: complexity === c.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}>
+                    <span>{language === 'en' ? c.label_en : c.label_ar}</span>
+                    {complexity === c.id && <Icons.Check />}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {/* Added Design Selection */}
+            <div>
+              <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_design')}</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {DESIGN.map(d => (
+                  <button key={d.id} onClick={() => setDesign(d.id)} className="card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: design === d.id ? 'var(--primary)' : 'var(--gray-200)', background: design === d.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}>
+                    <span>{language === 'en' ? d.label_en : d.label_ar}</span>
+                    {design === d.id && <Icons.Check />}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {/* Added Features Multi-Selection */}
+            <div>
+              <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_features')}</label>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                {FEATURES.map(f => (
+                  <button key={f.id} onClick={() => {
+                    setSelectedFeatures(prev => prev.includes(f.id) ? prev.filter(id => id !== f.id) : [...prev, f.id]);
+                  }} className="card" style={{ padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderColor: selectedFeatures.includes(f.id) ? 'var(--primary)' : 'var(--gray-200)', background: selectedFeatures.includes(f.id) ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer', fontSize: '0.8rem' }}>
+                    <span style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>{language === 'en' ? f.label_en : f.label_ar}</span>
+                    {selectedFeatures.includes(f.id) && <Icons.Check />}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="card" style={{ background: 'var(--primary)', color: 'white', border: 'none', padding: '4rem 3rem', textAlign: 'center', height: 'fit-content', position: 'sticky', top: '150px' }}>
+            <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.25em', opacity: 0.6, marginBottom: '2rem' }}>{t('calc_total')}</div>
+            <div style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '1.5rem' }}>${calculatePrice().toLocaleString()} <span style={{ fontSize: '1rem', opacity: 0.5 }}>USD</span></div>
+            <p style={{ fontSize: '0.75rem', opacity: 0.6, fontStyle: 'italic', lineHeight: 1.6 }}>{t('calc_disclaimer')}</p>
+            <button onClick={() => setActivePage('advisory')} className="btn btn-outline" style={{ width: '100%', marginTop: '3rem', color: 'white', borderColor: 'white' }}>Connect with Advisory</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function CompanyProfileView() {
   const { t, language, setActivePage } = useTheme();
@@ -394,141 +528,75 @@ function CompanyProfileView() {
 
   const handleDownload = async () => {
     setDownloading(true);
-    await new Promise(r => setTimeout(r, 2000));
-    
-    const briefContent = `
-Institutional Brief: Business Developers (2024)
----------------------------------------------
-Vision: ${t('profile_vision')}
-Mission: ${t('profile_mission')}
-Impact Metrics:
-- Success Rate: 85%
-- Faster Market Access: 75%
-- Cost Efficiency: 60%
-    `.trim();
-
-    const blob = new Blob([briefContent], { type: 'text/plain' });
+    await new Promise(r => setTimeout(r, 1500));
+    const brief = `Institutional Brief 2024\n\nVision: ${t('profile_vision')}\nMission: ${t('profile_mission')}`;
+    const blob = new Blob([brief], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Business_Developers_Brief_${language.toUpperCase()}.txt`;
+    link.download = `Institutional_Brief_${language.toUpperCase()}.txt`;
     link.click();
     URL.revokeObjectURL(url);
     setDownloading(false);
   };
 
   return (
-    <section className="section" style={{ background: 'var(--white)' }}>
+    <section className="section">
       <div className="container" style={{ maxWidth: '1000px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6rem' }}>
-          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ display: 'flex', gap: '0.75rem', border: '1px solid var(--gray-200)', fontSize: '0.7rem' }}>
-            <Icons.ArrowLeft lang={language} /> {t('btn_back')}
-          </button>
-          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.7rem', display: 'flex', gap: '0.75rem' }}>
-            {downloading ? <Icons.Loader /> : <Icons.Download />} {t('btn_download_brief')}
-          </button>
+          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ fontSize: '0.7rem' }}><Icons.ArrowLeft lang={language} /> {t('btn_back')}</button>
+          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.7rem' }}>{downloading ? <Icons.Loader /> : <Icons.Download />} {t('btn_download_brief')}</button>
         </div>
-
-        <div className="text-center" style={{ marginBottom: '8rem' }}>
+        <div className="text-center">
           <span className="badge">{t('profile_badge')}</span>
-          <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5rem)', lineHeight: 1, marginBottom: '2.5rem' }}>The Institutional Architecture</h1>
-          <p style={{ color: 'var(--gray-500)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>{t('profile_vision')}</p>
-        </div>
-
-        <div style={{ backgroundColor: 'var(--light)', padding: '6rem', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '4rem' }}>{t('metrics_title')}</h2>
-          <div className="grid grid-3">
-             <div>
-               <div style={{ fontSize: '4rem', fontWeight: 900, color: 'var(--primary)' }}>{t('metrics_1_val')}</div>
-               <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', opacity: 0.6 }}>{t('metrics_1_label')}</div>
-             </div>
-             <div>
-               <div style={{ fontSize: '4rem', fontWeight: 900, color: 'var(--primary)' }}>{t('metrics_2_val')}</div>
-               <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', opacity: 0.6 }}>{t('metrics_2_label')}</div>
-             </div>
-             <div>
-               <div style={{ fontSize: '4rem', fontWeight: 900, color: 'var(--primary)' }}>{t('metrics_3_val')}</div>
-               <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', opacity: 0.6 }}>{t('metrics_3_label')}</div>
-             </div>
-          </div>
+          <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5rem)', marginBottom: '2.5rem' }}>Strategic Architecture</h1>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto' }}>{t('profile_vision')}</p>
         </div>
       </div>
     </section>
   );
 }
 
-// --- Header ---
+// --- Main Components ---
 
 function Header() {
   const { isDarkMode, toggleDarkMode, language, setLanguage, setActivePage, t } = useTheme();
-
-  const handleNav = (page: PageView, sectionId?: string) => {
-    setActivePage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (page === 'home' && sectionId) {
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        el?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  };
-
+  const handleNav = (p: PageView) => { setActivePage(p); window.scrollTo(0, 0); };
   return (
-    <header style={{ 
-      position: 'sticky', top: 0, zIndex: 100, 
-      backgroundColor: isDarkMode ? 'rgba(0,26,42,0.98)' : 'rgba(252,252,252,0.98)', 
-      borderBottom: '1px solid var(--gray-200)', transition: 'all var(--transition-speed)'
-    }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '110px' }}>
-        <div 
-          style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontWeight: '900', fontSize: '0.9rem', cursor: 'pointer', letterSpacing: '0.3em', color: 'var(--primary)' }} 
-          onClick={() => handleNav('home')}
-        >
-          <Icons.Logo />
-          <span style={{ color: 'var(--dark)' }}>{t('brand')}</span>
+    <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: isDarkMode ? '#001a2a' : '#fcfcfc', borderBottom: '1px solid var(--gray-200)', height: '110px', display: 'flex', alignItems: 'center' }}>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', fontWeight: 900, cursor: 'pointer', color: 'var(--primary)' }} onClick={() => handleNav('home')}>
+          <Icons.Logo /> <span>{t('brand')}</span>
         </div>
-
-        <nav style={{ display: window.innerWidth > 768 ? 'flex' : 'none', gap: '2rem', alignItems: 'center' }}>
-          <a onClick={() => handleNav('home', 'services')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_services')}</a>
-          <a onClick={() => handleNav('advisory')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--primary)', borderBottom: '2px solid' }}>{t('nav_advisory')}</a>
-          <a onClick={() => handleNav('calculator')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_calculator')}</a>
-          <a onClick={() => handleNav('profile')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_profile')}</a>
-          <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, color: 'var(--dark)', fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '0.15em' }}>{t('nav_about')}</a>
-          
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.55rem', fontWeight: 900 }}>
-              {language === 'en' ? 'AR' : 'EN'}
-            </button>
-            <button onClick={toggleDarkMode} className="theme-toggle">
-              {isDarkMode ? <Icons.Sun /> : <Icons.Moon />}
-            </button>
+        <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <a onClick={() => handleNav('advisory')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--primary)', borderBottom: '2px solid' }}>{t('nav_advisory')}</a>
+          <a onClick={() => handleNav('calculator')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_calculator')}</a>
+          <a onClick={() => handleNav('profile')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_profile')}</a>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.6rem' }}>{language.toUpperCase()}</button>
+            <button onClick={toggleDarkMode} className="theme-toggle">{isDarkMode ? <Icons.Sun /> : <Icons.Moon />}</button>
           </div>
-          
-          <a onClick={() => handleNav('home', 'contact')} className="btn btn-primary" style={{ padding: '0.6rem 1rem', fontSize: '0.6rem' }}>{t('btn_consultation')}</a>
+          <a onClick={() => handleNav('home')} className="btn btn-primary" style={{ padding: '0.6rem 1rem', fontSize: '0.65rem' }}>{t('btn_consultation')}</a>
         </nav>
       </div>
     </header>
   );
 }
 
-// --- Components ---
-
 function Hero() {
   const { t, setActivePage } = useTheme();
   return (
     <section className="section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
       <div className="container">
-        <div style={{ maxWidth: '800px' }}>
+        <div style={{ maxWidth: '850px' }}>
           <span className="badge">{t('hero_badge')}</span>
-          <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)', lineHeight: 0.95, marginBottom: '2.5rem', fontWeight: 900 }}>
+          <h1 style={{ fontSize: 'clamp(3.5rem, 8vw, 6rem)', lineHeight: 0.95, marginBottom: '2.5rem', fontWeight: 900 }}>
             {t('hero_title')} <span style={{ color: 'var(--primary)' }}>{t('hero_title_accent')}</span>
           </h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--gray-500)', marginBottom: '3.5rem', lineHeight: 1.6, maxWidth: '650px' }}>
-            {t('hero_desc')}
-          </p>
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <button onClick={() => setActivePage('advisory')} className="btn btn-primary" style={{ padding: '1.25rem 2.5rem' }}>{t('hero_btn_main')}</button>
-            <button onClick={() => setActivePage('profile')} className="btn btn-outline" style={{ padding: '1.25rem 2.5rem' }}>{t('hero_btn_sec')}</button>
+          <p style={{ fontSize: '1.3rem', color: 'var(--gray-500)', marginBottom: '4rem', lineHeight: 1.6, maxWidth: '700px' }}>{t('hero_desc')}</p>
+          <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+            <button onClick={() => setActivePage('advisory')} className="btn btn-primary" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_main')}</button>
+            <button onClick={() => setActivePage('profile')} className="btn btn-outline" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_sec')}</button>
           </div>
         </div>
       </div>
@@ -536,7 +604,29 @@ function Hero() {
   );
 }
 
-// --- Main App ---
+function Metrics() {
+  const { t } = useTheme();
+  const metrics = [
+    { val: t('metrics_1_val'), label: t('metrics_1_label') },
+    { val: "4.2PB", label: "Neural Throughput" },
+    { val: t('metrics_3_val'), label: t('metrics_3_label') },
+    { val: "0", label: "Breach Incidents" }
+  ];
+  return (
+    <section style={{ background: 'var(--primary)', color: 'white', padding: '6rem 0' }}>
+      <div className="container">
+        <div className="grid grid-4">
+          {metrics.map((m, i) => (
+            <div key={i} style={{ textAlign: 'center', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none' }}>
+              <div style={{ fontSize: '4.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>{m.val}</div>
+              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.6 }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -564,193 +654,85 @@ function App() {
           <>
             <Hero />
             <Metrics />
-            <Methodology />
-            <section id="services" className="section bg-light">
+            <section className="section bg-light">
               <div className="container">
                 <div className="text-center" style={{ marginBottom: '8rem' }}>
-                  <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>{t('services_title')}</h2>
-                  <p style={{ color: 'var(--gray-500)', fontSize: '1.35rem', maxWidth: '800px', margin: '0 auto' }}>Strategic capabilities for the institution.</p>
+                  <h2 style={{ fontSize: '3.5rem' }}>Core Strategic Services</h2>
                 </div>
                 <div className="grid grid-4">
                   {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="card" style={{ borderTop: '10px solid var(--primary)', padding: '3rem' }}>
-                      <h3 style={{ marginBottom: '1.5rem', fontSize: '1.2rem', fontWeight: 800 }}>{t(`service_${i}_title`)}</h3>
-                      <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.7 }}>{t(`service_${i}_desc`)}</p>
+                    <div key={i} className="card" style={{ borderTop: '10px solid var(--primary)' }}>
+                      <h3 style={{ marginBottom: '1.5rem', fontSize: '1.3rem' }}>Capability {i}</h3>
+                      <p style={{ color: 'var(--gray-500)', fontSize: '0.9rem', lineHeight: 1.7 }}>Comprehensive institutional development tailored to your enterprise scaling needs.</p>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
-            <Testimonials />
-            <Contact />
           </>
         ) : activePage === 'profile' ? (
           <CompanyProfileView />
+        ) : activePage === 'calculator' ? (
+          <PriceCalculatorView />
         ) : activePage === 'advisory' ? (
           <AdvisoryChatView />
-        ) : activePage === 'calculator' ? (
-          <StaticPage view={activePage} /> // Calculator view logic would normally be separate but kept as static for minimal diff
         ) : (
-          <StaticPage view={activePage} />
+          <div className="section"><div className="container"><h1>Under Construction</h1></div></div>
         )}
       </main>
-      <Footer />
+      <FloatingChat />
+      <footer style={{ background: 'var(--secondary)', color: 'white', padding: '10rem 0 5rem' }}>
+        <div className="container">
+          <div className="grid grid-4" style={{ marginBottom: '6rem' }}>
+            <div style={{ gridColumn: 'span 2' }}>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem', color: 'inherit' }}><Icons.Logo /> {t('brand')}</h3>
+              <p style={{ color: 'rgba(255,255,255,0.4)', maxWidth: '400px', fontSize: '0.95rem' }}>Engineering the future of intelligent systems through geometric precision.</p>
+            </div>
+            <div>
+              <h4 style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '2.5rem' }}>PORTFOLIO</h4>
+              <div className="footer-links">
+                <a onClick={() => setActivePage('advisory')}>AI Advisory</a>
+                <a onClick={() => setActivePage('calculator')}>Pricing Estimator</a>
+                <a onClick={() => setActivePage('profile')}>Institutional Brief</a>
+              </div>
+            </div>
+            <div>
+              <h4 style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '2.5rem' }}>COMPLIANCE</h4>
+              <div className="footer-links">
+                <a href="#">Security Protocol</a>
+                <a href="#">Privacy Framework</a>
+                <a href="#">Terms of Engagement</a>
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem' }}>&copy; 2024 {t('brand')}. All institutional rights reserved.</div>
+        </div>
+      </footer>
     </ThemeContext.Provider>
   );
 }
 
-// --- Placeholder Components ---
-function StaticPage({ view }: { view: PageView }) {
-  const { t, setActivePage, language } = useTheme();
-  return (
-    <section className="section">
-      <div className="container" style={{ maxWidth: '800px' }}>
-        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '2rem' }}>
-          <Icons.ArrowLeft lang={language} /> {t('btn_back')}
-        </button>
-        <h1 style={{ fontSize: '3rem', marginBottom: '2rem' }}>{view.toUpperCase()}</h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--gray-500)' }}>Strategic documentation under classification. This portal will provide technical specifications for our {view} protocols.</p>
-      </div>
-    </section>
-  );
-}
-
-function Metrics() {
-  const { t } = useTheme();
-  const metrics = [
-    { val: t('metrics_1_val'), label: t('metrics_1_label') },
-    { val: "4.2PB", label: "Neural Throughput" },
-    { val: t('metrics_3_val'), label: t('metrics_3_label') },
-    { val: "0", label: "Security Breaches" }
-  ];
-  return (
-    <section style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '6rem 0' }}>
-      <div className="container">
-        <div className="grid grid-4">
-          {metrics.map((m, i) => (
-            <div key={i} style={{ textAlign: 'center', borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none' }}>
-              <div style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '0.5rem' }}>{m.val}</div>
-              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.2em', opacity: 0.7 }}>{m.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Methodology() {
-  const { t } = useTheme();
-  return (
-    <section className="section">
-      <div className="container">
-        <div className="text-center" style={{ marginBottom: '8rem' }}>
-          <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>{t('methodology_title')}</h2>
-          <p style={{ color: 'var(--gray-500)', fontSize: '1.35rem' }}>{t('methodology_desc')}</p>
-        </div>
-        <div className="grid grid-4">
-          {[1, 2, 3, 4].map(i => (
-            <div key={i} className="card" style={{ padding: '3rem' }}>
-              <div style={{ color: 'var(--primary)', marginBottom: '2rem' }}><Icons.MethodStep num={i} /></div>
-              <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>{t(`method_${i}_title`)}</h3>
-              <p style={{ color: 'var(--gray-500)', fontSize: '0.85rem' }}>{t(`method_${i}_desc`)}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  const { t } = useTheme();
-  return (
-    <section className="section bg-light" style={{ borderTop: '1px solid var(--gray-200)' }}>
-      <div className="container">
-        <div className="grid grid-2" style={{ gap: '6rem' }}>
-          {[1, 2].map(i => (
-            <div key={i} style={{ borderLeft: '4px solid var(--primary)', paddingLeft: '3rem' }}>
-              <p style={{ fontSize: '2rem', fontWeight: 300, color: 'var(--dark)', marginBottom: '3rem', fontStyle: 'italic' }}>
-                "{t(`test_${i}_quote`)}"
-              </p>
-              <div style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase' }}>{t(`test_${i}_author`)}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Contact() {
-  const { t } = useTheme();
-  const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = (e: any) => { e.preventDefault(); setSubmitted(true); };
-
-  return (
-    <section id="contact" className="section" style={{ borderTop: '1px solid var(--gray-200)' }}>
-      <div className="container" style={{ maxWidth: '900px' }}>
-        <div className="text-center" style={{ marginBottom: '6rem' }}>
-          <h2 style={{ fontSize: '3.5rem', marginBottom: '2.5rem' }}>{t('contact_title')}</h2>
-          <p style={{ color: 'var(--gray-500)', fontSize: '1.35rem' }}>Initiate the feasibility audit.</p>
-        </div>
-        {submitted ? (
-          <div className="card text-center" style={{ padding: '6rem' }}>
-            <h2>{t('success_title')}</h2>
-            <p>{t('success_msg')}</p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="card" style={{ padding: '4rem' }}>
-            <div className="grid grid-2" style={{ marginBottom: '2rem' }}>
-              <input className="input-field" placeholder="Full Name" required />
-              <input className="input-field" placeholder="Corporate Email" type="email" required />
-            </div>
-            <textarea className="input-field" rows={5} placeholder="Strategic Objective" style={{ marginBottom: '2rem' }} required></textarea>
-            <button className="btn btn-primary" style={{ width: '100%' }}>{t('form_btn')}</button>
-          </form>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function Footer() {
-  const { t, setActivePage } = useTheme();
-  return (
-    <footer style={{ background: 'var(--secondary)', color: 'white', padding: '10rem 0 5rem' }}>
-      <div className="container">
-        <div className="grid grid-4" style={{ marginBottom: '6rem' }}>
-          <div style={{ gridColumn: 'span 2' }}>
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem', color: 'inherit' }}>
-              <Icons.Logo /> {t('brand')}
-            </h3>
-            <p style={{ color: 'rgba(255,255,255,0.4)', maxWidth: '400px', fontSize: '0.9rem' }}>{t('footer_desc')}</p>
-          </div>
-          <div>
-            <h4 style={{ fontSize: '0.7rem', letterSpacing: '0.3em', marginBottom: '2rem', opacity: 0.6 }}>INSTITUTION</h4>
-            <div className="footer-links">
-              <a onClick={() => setActivePage('profile')}>The Brief</a>
-              <a onClick={() => setActivePage('advisory')}>Advisory</a>
-              <a onClick={() => setActivePage('about')}>About</a>
-            </div>
-          </div>
-          <div>
-            <h4 style={{ fontSize: '0.7rem', letterSpacing: '0.3em', marginBottom: '2rem', opacity: 0.6 }}>LEGAL</h4>
-            <div className="footer-links">
-              <a onClick={() => setActivePage('terms')}>Terms</a>
-              <a onClick={() => setActivePage('privacy')}>Privacy</a>
-            </div>
-          </div>
-        </div>
-        <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem' }}>
-          &copy; {new Date().getFullYear()} {t('brand')}. {t('footer_copy')}
-        </div>
-      </div>
-    </footer>
-  );
-}
-
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const PLATFORMS = [
+  { id: 'ios', label_en: 'iOS Architecture', label_ar: 'معمارية iOS', price: 15000 },
+  { id: 'android', label_en: 'Android Architecture', label_ar: 'معمارية Android', price: 15000 },
+  { id: 'both', label_en: 'Unified Platform (Cross)', label_ar: 'منصة موحدة', price: 28000 }
+];
+const COMPLEXITY = [
+  { id: 'mvp', label_en: 'Institutional MVP', label_ar: 'الحد الأدنى للمنتج', multiplier: 1.0 },
+  { id: 'standard', label_en: 'Operational Standard', label_ar: 'المعيار التشغيلي', multiplier: 1.8 },
+  { id: 'complex', label_en: 'Enterprise Integrated', label_ar: 'المؤسسة المتكاملة', multiplier: 3.5 }
+];
+const DESIGN = [
+  { id: 'basic', label_en: 'Systemic (Standard)', label_ar: 'منهجي (قياسي)', price: 5000 },
+  { id: 'premium', label_en: 'Institutional (High-Fid)', label_ar: 'مؤسسي (عالي الدقة)', price: 12000 }
+];
+// Added missing FEATURES constant for the price calculator
+const FEATURES = [
+  { id: 'analytics', label_en: 'Advanced Analytics', label_ar: 'تحليلات متقدمة', price: 4000 },
+  { id: 'security', label_en: 'Enhanced Security', label_ar: 'أمن معزز', price: 6000 },
+  { id: 'automation', label_en: 'Process Automation', label_ar: 'أتمتة العمليات', price: 7500 },
+  { id: 'custom_api', label_en: 'Custom API Layer', label_ar: 'طبقة API مخصصة', price: 5000 }
+];
 
 const root = createRoot(document.getElementById('root')!);
 root.render(<App />);

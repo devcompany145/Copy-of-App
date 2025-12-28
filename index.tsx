@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { createRoot } from 'react-dom/client';
 import lottie from 'lottie-web';
@@ -58,9 +57,9 @@ const translations: Record<Language, Record<string, string>> = {
     chat_placeholder: "Describe your business challenge or ask about AI ROI...",
     chat_intro: "Welcome. I am your Strategic Intelligence Partner. How can I help you architect your institutional AI transformation today?",
     chat_system_instruction: "You are an elite Senior Digital Transformation Consultant at 'Business Developers'. Your mission is to help business leaders decide IF, WHERE, and HOW to implement AI. Focus on ROI, operational efficiency, and long-term scalability. Encourage users to think about their data readiness and specific pain points. Be professional, concise, and strategically minded.",
-    laila_name: "Laila",
-    laila_subtitle: "CONCIERGE AI",
-    laila_intro: "Hello! I am Laila, your digital assistant at Business Developers. How can I assist you today?",
+    laila_name: "Business Developer",
+    laila_subtitle: "STRATEGIC AI",
+    laila_intro: "Greetings. I am the Business Developer assistant. How can I facilitate your institutional growth today?",
     laila_q1: "What is AI Transformation?",
     laila_q2: "How to start a project?",
     laila_q3: "Speak with a guide",
@@ -72,6 +71,7 @@ const translations: Record<Language, Record<string, string>> = {
     calc_design: "Design Fidelity",
     calc_features: "Integrated Capabilities",
     calc_total: "Estimated Strategic Investment",
+    calc_total_desc: "Based on selected architecture and complexity.",
     calc_disclaimer: "These figures represent institutional benchmarks and are subject to official diagnostic audit.",
     metrics_title: "Institutional Impact",
     metrics_1_val: "85%",
@@ -87,6 +87,24 @@ const translations: Record<Language, Record<string, string>> = {
     about_title: "Architecting the future.",
     about_desc: "We transform theoretical AI into practical, institutional strategic assets.",
     about_content: "Business Developers represents the intersection of capital strategy and machine intelligence, providing the foundation for modern enterprise operations.",
+    faq_title: "Strategic Intelligence FAQ",
+    faq_q1: "What is AI Institutional Transformation?",
+    faq_a1: "It is the comprehensive integration of machine intelligence into core business workflows, shifting from manual processes to data-driven autonomous systems that scale with enterprise growth.",
+    faq_q2: "How long does a strategic audit take?",
+    faq_a2: "A standard diagnostic audit takes 2 to 4 weeks, depending on the operational complexity and data accessibility of the institution.",
+    faq_q3: "What security protocols do you use?",
+    faq_a3: "We employ military-grade encryption, zero-trust architecture, and strict compliance with international data privacy standards like GDPR and ISO 27001.",
+    faq_q4: "Can AI integrate with legacy systems?",
+    faq_a4: "Yes. Our frameworks are engineered to act as an intelligence layer above legacy infrastructure, facilitating seamless data flow without requiring a total system overhaul.",
+    faq_q5: "What is the expected ROI of AI?",
+    faq_a5: "While metrics vary, institutions typically see a 30-50% increase in operational throughput and a significant reduction in human-error costs within the first 12 months.",
+    home_about_section_title: "The Institutional Foundation",
+    home_about_history_title: "Our History",
+    home_about_history_desc: "Established with the vision to bridge the gap between theoretical machine learning and enterprise-grade operational reality. We have grown from a niche consultancy into a global leader in strategic AI engineering.",
+    home_about_mission_title: "Our Mission",
+    home_about_mission_desc: "To architect the intelligent infrastructures of the future, enabling global organizations to leverage data as a primary strategic asset for sustainable growth.",
+    home_about_values_title: "Core Values",
+    home_about_values_desc: "Precision in execution, ethical transparency in AI development, and absolute integrity in institutional data management.",
     contact_title: "Operational Brief",
     form_btn: "Transmit Brief",
     btn_back: "Return to Headquarters",
@@ -119,9 +137,9 @@ const translations: Record<Language, Record<string, string>> = {
     chat_placeholder: "لخص تحديات أعمالك أو اسأل عن عائد استثمار AI...",
     chat_intro: "مرحباً بكم. أنا شريككم للذكاء الاستراتيجي. كيف يمكنني مساعدتكم في هندسة تحول الذكاء الاصطناعي المؤسسي الخاص بكم اليوم؟",
     chat_system_instruction: "أنت مستشار أول للتحول الرقمي في 'بيزنس ديفلوبرز'. مهمتك هي مساعدة قادة الأعمال في اتخاذ القرار بشأن متى وأين وكيف يتم تنفيذ الذكاء الاصطناعي. ركز على العائد على الاستثمار، الكفاءة التشغيلية، والتوسع طويل الأمد. شجع المستخدمين على التفكير في جاهزية بياناتهم ونقاط الألم المحددة لديهم. كن مهنياً، مختصراً، وذا عقلية استراتيجية.",
-    laila_name: "ليلى",
-    laila_subtitle: "المساعد الرقمي",
-    laila_intro: "مرحباً! أنا ليلى، مساعدتك الرقمية في حي مطوري الأعمال. كيف يمكنني مساعدتك اليوم؟",
+    laila_name: "مطور الاعمال",
+    laila_subtitle: "المساعد الاستراتيجي",
+    laila_intro: "مرحباً! أنا مطور الاعمال، مساعدك الرقمي في حي مطوري الأعمال. كيف يمكنني مساعدتك اليوم؟",
     laila_q1: "ما هو التحول الرقمي؟",
     laila_q2: "كيف أبدأ مشروعي؟",
     laila_q3: "تحدث مع خبير",
@@ -133,6 +151,7 @@ const translations: Record<Language, Record<string, string>> = {
     calc_design: "دقة التصميم",
     calc_features: "القدرات المتكاملة",
     calc_total: "الاستثمار الاستراتيجي المتوقع",
+    calc_total_desc: "بناءً على المعمارية والتعقيد المختارين.",
     calc_disclaimer: "هذه الأرقام تمثل معايير مؤسسية وتخضع لتدقيق تشخيصي رسمي.",
     metrics_title: "الأثر المؤسسي",
     metrics_1_val: "85%",
@@ -148,6 +167,24 @@ const translations: Record<Language, Record<string, string>> = {
     about_title: "هندسة المستقبل.",
     about_desc: "نحول الذكاء الاصطناعي النظري إلى أصول استراتيجية مؤسسية عملية.",
     about_content: "تمثل 'بيزنس ديفلوبرز' نقطة التقاء استراتيجية رأس المال وذكاء الآلة، مما يوفر الأساس لعمليات المؤسسات الحديثة.",
+    faq_title: "الأسئلة الاستراتيجية الشائعة",
+    faq_q1: "ما هو التحول المؤسسي بالذكاء الاصطناعي؟",
+    faq_a1: "هو الدمج الشامل لذكاء الآلة في سير العمل الأساسي للأعمال، والانتقال من العمليات اليدوية إلى الأنظمة الذاتية القائمة على البيانات والتي تتوسع مع نمو المؤسسة.",
+    faq_q2: "كم يستغرق التدقيق الاستراتيجي؟",
+    faq_a2: "يستغرق التدقيق التشخيصي القياسي من أسبوعين إلى 4 أسابيع، اعتماداً على التعقيد التشغيلي وإمكانية الوصول إلى البيانات في المؤسسة.",
+    faq_q3: "ما هي بروتوكولات الأمان التي تستخدمونها؟",
+    faq_a3: "نحن نستخدم تشفيراً بمستوى عسكري، ومعمارية 'الثقة الصفرية'، والالتزام الصارم بمعايير خصوصية البيانات الدولية مثل GDPR و ISO 27001.",
+    faq_q4: "هل يمكن للذكاء الاصطناعي التكامل مع الأنظمة القديمة؟",
+    faq_a4: "نعم. تم تصميم أطرنا لتعمل كطبقة ذكاء فوق البنية التحتية القديمة، مما يسهل تدفق البيانات بسلاسة دون الحاجة إلى إصلاح شامل للنظام.",
+    faq_q5: "ما هو العائد المتوقع على الاستثمار من الذكاء الاصطناعي؟",
+    faq_a5: "بينما تختلف المقاييس، ترى المؤسسات عادةً زيادة بنسبة 30-50% في الإنتاجية التشغيلية وانخفاضاً كبيراً في تكاليف الأخطاء البشرية خلال الـ 12 شهراً الأولى.",
+    home_about_section_title: "الأساس المؤسسي",
+    home_about_history_title: "تاريخنا",
+    home_about_history_desc: "تأسسنا برؤية لسد الفجوة بين تعلم الآلة النظري والواقع التشغيلي للمؤسسات. لقد تطورنا من استشارة متخصصة إلى رائد عالمي في هندسة الذكاء الاصطناعي الاستراتيجي.",
+    home_about_mission_title: "مهمتنا",
+    home_about_mission_desc: "هندسة البنى التحتية الذكية للمستقبل، وتمكين المنظمات العالمية من الاستفادة من البيانات كأصل استراتيجي أساسي للنمو المستدام.",
+    home_about_values_title: "قيمنا الأساسية",
+    home_about_values_desc: "الدقة في التنفيذ، والشفافية الأخلاقية في تطوير الذكاء الاصطناعي، والنزاهة المطلقة في إدارة البيانات المؤسسية.",
     contact_title: "موجز تشغيلي",
     form_btn: "إرسال الموجز",
     btn_back: "العودة للمقر الرئيسي",
@@ -190,9 +227,94 @@ const Icons = {
   ChatLauncher: () => <svg width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
   ChevronDown: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"/></svg>,
   X: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
+  History: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>,
+  Target: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
+  Shield: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
 };
 
-// --- Floating Assistant (Laila) ---
+// --- Components ---
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { isDarkMode } = useTheme();
+
+  return (
+    <div style={{ borderBottom: `1px solid var(--gray-200)`, overflow: 'hidden' }}>
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '2rem 1rem', background: 'transparent', border: 'none', cursor: 'pointer',
+          textAlign: 'inherit', color: 'inherit'
+        }}
+      >
+        <span style={{ fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase' }}>{question}</span>
+        <div style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }}>
+          <Icons.ChevronDown />
+        </div>
+      </button>
+      <div style={{ 
+        maxHeight: isOpen ? '500px' : '0', overflow: 'hidden', transition: 'all 0.4s ease',
+        opacity: isOpen ? 1 : 0
+      }}>
+        <p style={{ padding: '0 1rem 2rem', color: 'var(--gray-500)', fontSize: '1rem', lineHeight: 1.8 }}>
+          {answer}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// --- Views ---
+
+function AboutView() {
+  const { t, language, setActivePage, isDarkMode } = useTheme();
+
+  return (
+    <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
+      <div className="container" style={{ maxWidth: '1000px' }}>
+        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', fontSize: '0.7rem' }}>
+          <Icons.ArrowLeft lang={language} /> {t('btn_back')}
+        </button>
+
+        <div style={{ marginBottom: '8rem' }}>
+          <span className="badge">{t('about_badge')}</span>
+          <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5rem)', marginBottom: '2.5rem' }}>{t('about_title')}</h1>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.4rem', maxWidth: '800px', marginBottom: '4rem' }}>{t('about_desc')}</p>
+          <div style={{ height: '1px', background: 'var(--gray-200)', width: '100%' }}></div>
+        </div>
+
+        <div className="grid grid-2" style={{ gap: '6rem', marginBottom: '10rem' }}>
+          <div>
+            <h3 style={{ marginBottom: '2rem' }}>Institutional Foundation</h3>
+            <p style={{ lineHeight: 2, color: 'var(--gray-500)' }}>{t('about_content')}</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div className="card" style={{ padding: '2.5rem', background: 'var(--primary)', color: 'white' }}>
+              <h4 style={{ color: 'white', marginBottom: '1rem' }}>Vision</h4>
+              <p style={{ fontSize: '0.9rem', opacity: 0.8 }}>{t('profile_vision')}</p>
+            </div>
+            <div className="card" style={{ padding: '2.5rem', border: '2px solid var(--primary)' }}>
+              <h4 style={{ marginBottom: '1rem' }}>Mission</h4>
+              <p style={{ fontSize: '0.9rem', color: 'var(--gray-500)' }}>{t('profile_mission')}</p>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ marginBottom: '8rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center' }}>{t('faq_title')}</h2>
+          <div style={{ borderTop: `1px solid var(--gray-200)` }}>
+            <FAQItem question={t('faq_q1')} answer={t('faq_a1')} />
+            <FAQItem question={t('faq_q2')} answer={t('faq_a2')} />
+            <FAQItem question={t('faq_q3')} answer={t('faq_a3')} />
+            <FAQItem question={t('faq_q4')} answer={t('faq_a4')} />
+            <FAQItem question={t('faq_q5')} answer={t('faq_a5')} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function FloatingChat() {
   const { t, language, isDarkMode } = useTheme();
@@ -219,7 +341,6 @@ function FloatingChat() {
     setLoading(true);
 
     try {
-      // Create a new instance right before calling
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -228,7 +349,7 @@ function FloatingChat() {
           parts: [{ text: m.text }]
         })),
         config: {
-          systemInstruction: `You are Laila, the Digital Concierge for 'Business Developers'. You help businesses explore AI transformation and digital solutions. Be friendly, professional, and efficient. Use institutional language. Language: ${language}.`,
+          systemInstruction: `You are the 'Business Developer' Assistant (مطور الاعمال) for 'Business Developers'. You help businesses explore AI transformation and digital solutions. Be friendly, professional, and strategic. Your goal is to guide clients toward high-value digital services. Language: ${language}.`,
           temperature: 0.7,
         }
       });
@@ -368,7 +489,6 @@ function AdvisoryChatView() {
     setLoading(true);
 
     try {
-      // Create a new instance right before calling
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -436,7 +556,6 @@ function PriceCalculatorView() {
   const [design, setDesign] = useState(DESIGN[0].id);
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
 
-  // Fixed the missing FEATURES calculation error and improved logic
   const calculatePrice = () => {
     const pPrice = PLATFORMS.find(p => p.id === platform)?.price || 0;
     const dPrice = DESIGN.find(d => d.id === design)?.price || 0;
@@ -482,7 +601,6 @@ function PriceCalculatorView() {
                 ))}
               </div>
             </div>
-            {/* Added Design Selection */}
             <div>
               <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_design')}</label>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -494,7 +612,6 @@ function PriceCalculatorView() {
                 ))}
               </div>
             </div>
-            {/* Added Features Multi-Selection */}
             <div>
               <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_features')}</label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -559,6 +676,37 @@ function CompanyProfileView() {
 
 // --- Main Components ---
 
+function AboutUsSection() {
+  const { t } = useTheme();
+  return (
+    <section className="section bg-light">
+      <div className="container">
+        <div className="text-center" style={{ marginBottom: '6rem' }}>
+          <span className="badge">{t('home_about_section_title')}</span>
+          <h2 style={{ fontSize: '3.5rem' }}>{t('about_title')}</h2>
+        </div>
+        <div className="grid grid-3">
+          <div className="card" style={{ borderTop: '8px solid var(--primary)', padding: '2.5rem' }}>
+            <div style={{ marginBottom: '2rem' }}><Icons.History /></div>
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>{t('home_about_history_title')}</h3>
+            <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem', lineHeight: 1.7 }}>{t('home_about_history_desc')}</p>
+          </div>
+          <div className="card" style={{ borderTop: '8px solid var(--primary)', padding: '2.5rem' }}>
+            <div style={{ marginBottom: '2rem' }}><Icons.Target /></div>
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>{t('home_about_mission_title')}</h3>
+            <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem', lineHeight: 1.7 }}>{t('home_about_mission_desc')}</p>
+          </div>
+          <div className="card" style={{ borderTop: '8px solid var(--primary)', padding: '2.5rem' }}>
+            <div style={{ marginBottom: '2rem' }}><Icons.Shield /></div>
+            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>{t('home_about_values_title')}</h3>
+            <p style={{ color: 'var(--gray-500)', fontSize: '0.95rem', lineHeight: 1.7 }}>{t('home_about_values_desc')}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Header() {
   const { isDarkMode, toggleDarkMode, language, setLanguage, setActivePage, t } = useTheme();
   const handleNav = (p: PageView) => { setActivePage(p); window.scrollTo(0, 0); };
@@ -569,6 +717,7 @@ function Header() {
           <Icons.Logo /> <span>{t('brand')}</span>
         </div>
         <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_about')}</a>
           <a onClick={() => handleNav('advisory')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--primary)', borderBottom: '2px solid' }}>{t('nav_advisory')}</a>
           <a onClick={() => handleNav('calculator')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_calculator')}</a>
           <a onClick={() => handleNav('profile')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_profile')}</a>
@@ -654,7 +803,8 @@ function App() {
           <>
             <Hero />
             <Metrics />
-            <section className="section bg-light">
+            <AboutUsSection />
+            <section className="section">
               <div className="container">
                 <div className="text-center" style={{ marginBottom: '8rem' }}>
                   <h2 style={{ fontSize: '3.5rem' }}>Core Strategic Services</h2>
@@ -676,6 +826,8 @@ function App() {
           <PriceCalculatorView />
         ) : activePage === 'advisory' ? (
           <AdvisoryChatView />
+        ) : activePage === 'about' ? (
+          <AboutView />
         ) : (
           <div className="section"><div className="container"><h1>Under Construction</h1></div></div>
         )}
@@ -691,6 +843,7 @@ function App() {
             <div>
               <h4 style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '2.5rem' }}>PORTFOLIO</h4>
               <div className="footer-links">
+                <a onClick={() => setActivePage('about')}>Institutional Profile</a>
                 <a onClick={() => setActivePage('advisory')}>AI Advisory</a>
                 <a onClick={() => setActivePage('calculator')}>Pricing Estimator</a>
                 <a onClick={() => setActivePage('profile')}>Institutional Brief</a>
@@ -726,7 +879,6 @@ const DESIGN = [
   { id: 'basic', label_en: 'Systemic (Standard)', label_ar: 'منهجي (قياسي)', price: 5000 },
   { id: 'premium', label_en: 'Institutional (High-Fid)', label_ar: 'مؤسسي (عالي الدقة)', price: 12000 }
 ];
-// Added missing FEATURES constant for the price calculator
 const FEATURES = [
   { id: 'analytics', label_en: 'Advanced Analytics', label_ar: 'تحليلات متقدمة', price: 4000 },
   { id: 'security', label_en: 'Enhanced Security', label_ar: 'أمن معزز', price: 6000 },

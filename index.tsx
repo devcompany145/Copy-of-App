@@ -89,6 +89,14 @@ const translations: Record<Language, Record<string, string>> = {
     profile_upload_success: "Institutional Document Transmitted Successfully",
     profile_upload_error: "Transmission Error. Invalid File Format.",
     profile_upload_reset: "Upload New Document",
+    inquiry_title: "Inquire about Capabilities",
+    inquiry_name_placeholder: "Institutional Contact Name",
+    inquiry_email_placeholder: "Professional Email Address",
+    inquiry_service_placeholder: "Select Strategic Capability",
+    inquiry_message_placeholder: "Describe your operational requirements...",
+    inquiry_btn: "Transmit Inquiry",
+    inquiry_success: "Inquiry Transmitted Successfully",
+    inquiry_reset: "New Inquiry",
     about_badge: "Institutional Profile",
     about_title: "Architecting the future.",
     about_desc: "We transform theoretical AI into practical, institutional strategic assets.",
@@ -175,6 +183,14 @@ const translations: Record<Language, Record<string, string>> = {
     profile_upload_success: "تم إرسال المستند المؤسسي بنجاح",
     profile_upload_error: "خطأ في الإرسال. صيغة الملف غير صالحة.",
     profile_upload_reset: "رفع مستند جديد",
+    inquiry_title: "الاستفسار عن القدرات",
+    inquiry_name_placeholder: "اسم جهة الاتصال المؤسسية",
+    inquiry_email_placeholder: "البريد الإلكتروني المهني",
+    inquiry_service_placeholder: "اختر القدرة الاستراتيجية",
+    inquiry_message_placeholder: "صف متطلباتك التشغيلية...",
+    inquiry_btn: "إرسال الاستفسار",
+    inquiry_success: "تم إرسال الاستفسار بنجاح",
+    inquiry_reset: "استفسار جديد",
     about_badge: "ملف المؤسسة",
     about_title: "هندسة المستقبل.",
     about_desc: "نحول الذكاء الاصطناعي النظري إلى أصول استراتيجية مؤسسية عملية.",
@@ -275,6 +291,86 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
           {answer}
         </p>
       </div>
+    </div>
+  );
+}
+
+function ServiceInquiryForm() {
+  const { t, language } = useTheme();
+  const [formData, setFormData] = useState({ name: '', email: '', service: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) return;
+    setStatus('loading');
+    await new Promise(r => setTimeout(r, 2000));
+    setStatus('success');
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="card" style={{ maxWidth: '800px', margin: '4rem auto 0', textAlign: 'center', border: '2px solid var(--primary)', animation: 'popIn 0.5s ease forwards' }}>
+        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem' }}>
+          <Icons.Check />
+        </div>
+        <h2 style={{ color: 'var(--primary)', marginBottom: '1.5rem' }}>{t('inquiry_success')}</h2>
+        <button onClick={() => { setStatus('idle'); setFormData({ name: '', email: '', service: '', message: '' }); }} className="btn btn-outline">
+          {t('inquiry_reset')}
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="card" style={{ maxWidth: '800px', margin: '4rem auto 0', borderTop: '8px solid var(--primary)' }}>
+      <h3 style={{ fontSize: '2rem', marginBottom: '2.5rem', textAlign: 'center' }}>{t('inquiry_title')}</h3>
+      <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
+        <div className="grid grid-2" style={{ gap: '1.5rem' }}>
+          <input 
+            className="input-field" 
+            placeholder={t('inquiry_name_placeholder')} 
+            value={formData.name} 
+            onChange={e => setFormData({ ...formData, name: e.target.value })} 
+            required
+            disabled={status === 'loading'}
+          />
+          <input 
+            type="email" 
+            className="input-field" 
+            placeholder={t('inquiry_email_placeholder')} 
+            value={formData.email} 
+            onChange={e => setFormData({ ...formData, email: e.target.value })} 
+            required
+            disabled={status === 'loading'}
+          />
+        </div>
+        <select 
+          className="input-field" 
+          style={{ appearance: 'none' }}
+          value={formData.service} 
+          onChange={e => setFormData({ ...formData, service: e.target.value })}
+          disabled={status === 'loading'}
+        >
+          <option value="">{t('inquiry_service_placeholder')}</option>
+          <option value="transformation">Institutional Transformation</option>
+          <option value="neural">Neural Architecture</option>
+          <option value="security">Strategic Security</option>
+          <option value="automation">Process Automation</option>
+        </select>
+        <textarea 
+          className="input-field" 
+          rows={5} 
+          placeholder={t('inquiry_message_placeholder')} 
+          value={formData.message} 
+          onChange={e => setFormData({ ...formData, message: e.target.value })}
+          required
+          disabled={status === 'loading'}
+        />
+        <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1.5rem' }} disabled={status === 'loading'}>
+          {status === 'loading' ? <Icons.Loader /> : t('inquiry_btn')}
+        </button>
+      </form>
     </div>
   );
 }
@@ -943,6 +1039,7 @@ function App() {
                     </div>
                   ))}
                 </div>
+                <ServiceInquiryForm />
               </div>
             </section>
           </>

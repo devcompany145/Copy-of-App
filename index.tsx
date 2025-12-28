@@ -47,8 +47,8 @@ const translations: Record<Language, Record<string, string>> = {
     btn_consultation: "Inquiry",
     btn_download_brief: "Download Brief",
     hero_badge: "Institutional Intelligence",
-    hero_title: "Strategic Engineering for",
-    hero_title_accent: "Global Scale",
+    hero_title: "Empowering Businesses with",
+    hero_title_accent: "Intelligent Systems",
     hero_desc: "Exclusive strategic development through high-fidelity engineering. We deploy proprietary AI frameworks to help businesses navigate digital transformation and achieve operational excellence.",
     hero_btn_main: "Start AI Advisory",
     hero_btn_sec: "The Architecture",
@@ -141,8 +141,8 @@ const translations: Record<Language, Record<string, string>> = {
     btn_consultation: "استفسار",
     btn_download_brief: "تحميل الملف",
     hero_badge: "ذكاء مؤسسي",
-    hero_title: "هندسة استراتيجية لـ",
-    hero_title_accent: "نطاق عالمي",
+    hero_title: "تمكين الشركات من خلال",
+    hero_title_accent: "أنظمة ذكية",
     hero_desc: "تطوير استراتيجي حصري من خلال الهندسة المتقدمة. نقوم بنشر أطر ذكاء اصطناعي خاصة لمساعدة الشركات في التنقل عبر التحول الرقمي وتحقيق التميز التشغيلي.",
     hero_btn_main: "بدء استشارة AI",
     hero_btn_sec: "المعمارية",
@@ -766,7 +766,7 @@ function CompanyProfileView() {
         renderer: 'svg',
         loop: false,
         autoplay: true,
-        path: 'https://lottie.host/855b46e3-82a1-432a-9f5e-141a02196658/K2Z3JdE07S.json' // Triumphant Checkmark/Success animation
+        path: 'https://lottie.host/855b46e3-82a1-432a-9f5e-141a02196658/K2Z3JdE07S.json'
       });
       return () => anim.destroy();
     }
@@ -803,7 +803,6 @@ function CompanyProfileView() {
   const handleUpload = async () => {
     if (!selectedFile) return;
     setUploading(true);
-    // Simulate API upload
     await new Promise(r => setTimeout(r, 2000));
     setUploading(false);
     setUploadSuccess(true);
@@ -876,9 +875,8 @@ function CompanyProfileView() {
               </div>
             </>
           ) : (
-            <div style={{ animation: 'popIn 0.5s ease forwards' }}>
-              <div ref={lottieContainerRef} style={{ width: '200px', height: '200px', margin: '0 auto 1rem' }}></div>
-              <h2 style={{ color: 'var(--primary)', marginBottom: '2rem' }}>{t('profile_upload_success')}</h2>
+            <div style={{ animation: 'popIn 0.5s ease forwards' }} role="status" aria-live="polite">
+              <div ref={lottieContainerRef} style={{ width: '240px', height: '240px', margin: '0 auto 2rem' }} aria-label="Upload successful"></div>
               <button 
                 onClick={() => {
                   setUploadSuccess(false);
@@ -898,10 +896,10 @@ function CompanyProfileView() {
 
 // --- Main Components ---
 
-function AboutUsSection() {
+function AboutUsSection({ id }: { id?: string }) {
   const { t } = useTheme();
   return (
-    <section className="section bg-light">
+    <section className="section bg-light" id={id}>
       <div className="container">
         <div className="text-center" style={{ marginBottom: '6rem' }}>
           <span className="badge">{t('home_about_section_title')}</span>
@@ -930,8 +928,30 @@ function AboutUsSection() {
 }
 
 function Header() {
-  const { isDarkMode, toggleDarkMode, language, setLanguage, setActivePage, t } = useTheme();
-  const handleNav = (p: PageView) => { setActivePage(p); window.scrollTo(0, 0); };
+  const { isDarkMode, toggleDarkMode, language, setLanguage, activePage, setActivePage, t } = useTheme();
+  
+  const handleNav = (p: PageView) => { 
+    setActivePage(p); 
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  };
+
+  const handleAnchorNav = (id: string) => {
+    if (activePage !== 'home') {
+      setActivePage('home');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: isDarkMode ? '#001a2a' : '#fcfcfc', borderBottom: '1px solid var(--gray-200)', height: '110px', display: 'flex', alignItems: 'center' }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
@@ -939,6 +959,7 @@ function Header() {
           <Icons.Logo /> <span>{t('brand')}</span>
         </div>
         <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <a onClick={() => handleAnchorNav('capabilities-section')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_services')}</a>
           <a onClick={() => handleNav('about')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_about')}</a>
           <a onClick={() => handleNav('advisory')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--primary)', borderBottom: '2px solid' }}>{t('nav_advisory')}</a>
           <a onClick={() => handleNav('calculator')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}>{t('nav_calculator')}</a>
@@ -947,7 +968,13 @@ function Header() {
             <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.6rem' }}>{language.toUpperCase()}</button>
             <button onClick={toggleDarkMode} className="theme-toggle">{isDarkMode ? <Icons.Sun /> : <Icons.Moon />}</button>
           </div>
-          <a onClick={() => handleNav('home')} className="btn btn-primary" style={{ padding: '0.6rem 1rem', fontSize: '0.65rem' }}>{t('btn_consultation')}</a>
+          <a onClick={() => handleNav('advisory')} className="btn btn-prominent" style={{ 
+            padding: '0.75rem 1.75rem', 
+            fontSize: '0.7rem',
+            fontWeight: '800'
+          }}>
+            {t('hero_btn_main')}
+          </a>
         </nav>
       </div>
     </header>
@@ -966,7 +993,7 @@ function Hero() {
           </h1>
           <p style={{ fontSize: '1.3rem', color: 'var(--gray-500)', marginBottom: '4rem', lineHeight: 1.6, maxWidth: '700px' }}>{t('hero_desc')}</p>
           <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-            <button onClick={() => setActivePage('advisory')} className="btn btn-primary" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_main')}</button>
+            <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_main')}</button>
             <button onClick={() => setActivePage('profile')} className="btn btn-outline" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_sec')}</button>
           </div>
         </div>
@@ -1025,8 +1052,8 @@ function App() {
           <>
             <Hero />
             <Metrics />
-            <AboutUsSection />
-            <section className="section">
+            <AboutUsSection id="institutional-summary" />
+            <section className="section" id="capabilities-section">
               <div className="container">
                 <div className="text-center" style={{ marginBottom: '8rem' }}>
                   <h2 style={{ fontSize: '3.5rem' }}>Core Strategic Services</h2>

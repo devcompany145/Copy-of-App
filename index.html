@@ -9,13 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #002b45; /* Brand Midnight Navy from Image */
+      --primary: #002b45; /* Brand Midnight Navy */
       --secondary: #001a2a; /* Deeper Navy */
-      --accent: #002b45; /* Unified with brand color */
+      --accent: #0062ff; /* Vibrant Royal Blue for high prominence */
       --error: #af1d1d;
       --dark: #002b45;
       --light: #f4f4f4;
-      --white: #fcfcfc; /* Brand Alabaster Background from Image */
+      --white: #fcfcfc; /* Brand Alabaster Background */
       --gray-100: #f8fafc;
       --gray-200: #e2e8f0;
       --gray-500: #64748b;
@@ -26,6 +26,7 @@
       --shadow-xl: 0 20px 25px -5px rgb(0 43 69 / 0.15);
       --radius: 0rem;
       --transition-speed: 0.3s;
+      scroll-behavior: smooth;
     }
 
     body.dark-mode {
@@ -66,17 +67,27 @@
       border-radius: 0;
       border: none;
       gap: 0.5rem;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 0.15em;
       font-size: 0.75rem;
     }
 
-    .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn:hover { transform: translateY(-2px); }
     .btn-primary { background: var(--primary); color: white; border: 1px solid var(--primary); }
     .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
     .btn-outline:hover { background: var(--primary); color: white; }
+
+    .btn-prominent {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+      color: white !important;
+      box-shadow: 0 4px 15px rgba(0, 98, 255, 0.3);
+    }
+    .btn-prominent:hover {
+      box-shadow: 0 8px 25px rgba(0, 98, 255, 0.45);
+      filter: brightness(1.1);
+    }
 
     .grid { display: grid; gap: 3.5rem; }
     .grid-2 { grid-template-columns: 1fr; }
@@ -128,10 +139,6 @@
       text-transform: uppercase;
       letter-spacing: 0.25em;
     }
-
-    .feature-list li { display: flex; align-items: center; margin-bottom: 1rem; color: var(--gray-500); font-size: 0.9rem; }
-    [dir="rtl"] .feature-list li svg { margin-left: 0.75rem; margin-right: 0; }
-    [dir="ltr"] .feature-list li svg { margin-right: 0.75rem; margin-left: 0; }
 
     .theme-toggle {
       display: flex; align-items: center; justify-content: center;

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { createRoot } from 'react-dom/client';
 import lottie from 'lottie-web';
@@ -5,7 +6,7 @@ import { GoogleGenAI } from "@google/genai";
 
 // --- Types ---
 type Language = 'en' | 'ar';
-type PageView = 'home' | 'about' | 'audit' | 'security' | 'scalability' | 'compliance' | 'privacy' | 'terms' | 'profile' | 'calculator' | 'advisory';
+type PageView = 'home' | 'about' | 'audit' | 'security' | 'scalability' | 'compliance' | 'privacy' | 'terms' | 'profile' | 'calculator' | 'advisory' | 'certifications';
 
 interface Message {
   role: 'user' | 'model';
@@ -48,6 +49,7 @@ const translations: Record<Language, Record<string, string>> = {
     nav_profile: "The Brief",
     nav_calculator: "Estimator",
     nav_advisory: "AI Advisory",
+    nav_certifications: "Accreditations",
     btn_consultation: "Inquiry",
     btn_download_brief: "Download Brief",
     hero_badge: "Institutional Intelligence",
@@ -116,6 +118,14 @@ const translations: Record<Language, Record<string, string>> = {
     security_title: "Impenetrable Defense.",
     security_desc: "Military-grade neural safeguards for institutional data assets.",
     security_content: "Our security protocols are built on a foundation of zero-trust architecture and real-time adversarial monitoring. We deploy proprietary encryption layers and neural intrusion detection systems that evolve alongside emerging threats. AISolutions ensures that your most sensitive strategic data remains isolated and protected against both classical and quantum-era cyber risks.",
+    cert_badge: "Institutional Verification",
+    cert_title: "Official Accreditations",
+    cert_desc: "Our strategic framework is officially certified by the Saudi Data & AI Authority (SDAIA).",
+    cert_sdaia_title: "SDAIA Verified Provider",
+    cert_sdaia_subtitle: "Official AI Service Provider Accreditation",
+    cert_issue_date: "Issue Date",
+    cert_expiry_date: "Expiry Date",
+    cert_status_active: "Active Status",
     faq_title: "Strategic Intelligence FAQ",
     faq_q1: "What is AI Institutional Transformation?",
     faq_a1: "It is the comprehensive integration of machine intelligence into core business workflows, shifting from manual processes to data-driven autonomous systems that scale with enterprise growth.",
@@ -155,6 +165,7 @@ const translations: Record<Language, Record<string, string>> = {
     nav_profile: "ملف الشركة",
     nav_calculator: "حاسبة الأسعار",
     nav_advisory: "استشارات الذكاء الاصطناعي",
+    nav_certifications: "الاعتمادات",
     btn_consultation: "استفسار",
     btn_download_brief: "تحميل الملف",
     hero_badge: "ذكاء مؤسسي",
@@ -168,7 +179,7 @@ const translations: Record<Language, Record<string, string>> = {
     chat_desc: "دعم اتخاذ القرار لتحول الذكاء الاصطناعي وتخطيط خارطة الطريق الرقمية.",
     chat_placeholder: "لخص تحديات أعمالك أو اسأل عن عائد استثمار AI...",
     chat_intro: "مرحباً بكم. أنا شريككم للذكاء الاستراتيجي من إيه آي سوليوشنز. كيف يمكنني مساعدتكم في هندسة تحول الذكاء الاصطناعي المؤسسي الخاص بكم اليوم؟",
-    chat_system_instruction: "أنت مستشار أول للتحول الرقمي في 'إيه آي سوليوشنز'. مهمتك هي مساعدة قادة الأعمال في اتخاذ القرار بشأن متى وأين وكيف يتم تنفيذ الذكاء الاصطناعي. ركز على العائد على الاستثمار، الكفاءة التشغيلية، والتوسع طويل الأمد. شجع المستخدمين على التفكير في جاهزية بياناتهم ونقاط الألم المحددة لديهم. كن مهنياً، مختصراً، وذا عقلية استراتيجية.",
+    chat_system_instruction: "أنت مستشار أول للتحول الرقمي في 'إيه آي سوليوشنز'. مهمتك هي مساعدة قادة الأعمال في اتخاذ القرار بشأن متى وأين وكيف يتم تنفيذ الذكاء الاصطناعي. ركز على العائد على الاستثمار، الكفاءة التشغيلي، والتوسع طويل الأمد. شجع المستخدمين على التفكير في جاهزية بياناتهم ونقاط الألم المحددة لديهم. كن مهنياً، مختصراً، وذا عقلية استراتيجية.",
     laila_name: "مساعد إيه آي سوليوشنز",
     laila_subtitle: "المساعد الاستراتيجي",
     laila_intro: "مرحباً! أنا مساعدك الرقمي من إيه آي سوليوشنز. كيف يمكنني مساعدتك اليوم؟",
@@ -218,11 +229,19 @@ const translations: Record<Language, Record<string, string>> = {
     audit_badge: "التدقيق الاستراتيجي",
     audit_title: "نزاهة التشخيص.",
     audit_desc: "تدقيق شامل لأنظمة الذكاء المؤسسي.",
-    audit_content: "تم تصميم عملية التشخيص لدينا للكشف عن نقاط الاحتكاال التشغيلي وصوامع البيانات التي تعيق النمو. نحن نقدم تقييماً صارماً لعمليات تعلم الآلة الحالية والمعماريات القديمة لضمان جاهزية مؤسستك للجيل القادم من تكامل الذكاء الاصطناعي.",
+    audit_content: "تم تصميم عملية التدقيق لدينا للكشف عن نقاط الاحتكاال التشغيلي وصوامع البيانات التي تعيق النمو. نحن نقدم تقييماً صارماً لعمليات تعلم الآلة الحالية والمعماريات القديمة لضمان جاهزية مؤسستك للجيل القادم من تكامل الذكاء الاصطناعي.",
     security_badge: "الأمن الاستراتيجي",
     security_title: "دفاع لا يمكن اختراقه.",
     security_desc: "ضمانات عصبية بمستوى عسكري لأصول البيانات المؤسسية.",
     security_content: "تعتمد بروتوكولات الأمان لدينا على أساس معمارية الثقة الصفرية والمراقبة المستمرة للتهديدات. نحن ننشر طبقات تشفير خاصة وأنظمة كشف التسلل العصبي التي تتطور جنباً إلى جنب مع التهديدات الناشئة. تضمن إيه آي سوليوشنز بقاء بياناتك الاستراتيجية الأكثر حساسية معزولة ومحمية ضد المخاطر السيبرانية الكلاسيكية وفي عصر الكوآنتوم.",
+    cert_badge: "التوثيق المؤسسي",
+    cert_title: "الاعتمادات الرسمية",
+    cert_desc: "إطارنا الاستراتيجي معتمد رسمياً من قبل الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا).",
+    cert_sdaia_title: "مقدم خدمات معتمد من سدايا",
+    cert_sdaia_subtitle: "شهادة اعتماد مقدم خدمات الذكاء الاصطناعي الرسمية",
+    cert_issue_date: "تاريخ الإصدار",
+    cert_expiry_date: "تاريخ الانتهاء",
+    cert_status_active: "حالة الاعتماد: سارٍ",
     faq_title: "الأسئلة الاستراتيجية الشائعة",
     faq_q1: "ما هو التحول المؤسسي بالذكاء الاصطناعي؟",
     faq_a1: "هو الدمج الشامل لذكاء الآلة في سير العمل الأساسي للأعمال، والانتقال من العمليات اليدوية إلى الأنظمة الذاتية القائمة على البيانات والتي تتوسع مع نمو المؤسسة.",
@@ -292,10 +311,83 @@ const Icons = {
   Lightbulb: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><path d="M9 21h6"/><path d="M9 18h6"/><path d="M10 15c-3.33 0-5-1.67-5-5 0-3.87 3.13-7 7-7s7 3.13 7 7c0 3.33-1.67 5-5 5"/><path d="M12 21v1"/></svg>,
   Cpu: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>,
   Network: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>,
-  Activity: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+  Activity: () => <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+  Award: () => (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+    </svg>
+  ),
+  ExternalLink: () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
 };
 
 // --- View Components ---
+
+function CertificationsView() {
+  const { t, language, setActivePage, isDarkMode } = useTheme();
+
+  return (
+    <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
+      <div className="container" style={{ maxWidth: '1000px' }}>
+        <button 
+          onClick={() => setActivePage('home')} 
+          className="btn btn-outline" 
+          style={{ marginBottom: '4rem', fontSize: '0.7rem' }}
+          aria-label={t('btn_back')}
+        >
+          <Icons.ArrowLeft lang={language} /> {t('btn_back')}
+        </button>
+
+        <div style={{ marginBottom: '6rem', textAlign: 'center' }}>
+          <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'center', color: 'var(--primary)' }}>
+            <Icons.Award />
+          </div>
+          <span className="badge">{t('cert_badge')}</span>
+          <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5rem)', marginBottom: '2.5rem' }}>{t('cert_title')}</h1>
+          <p style={{ color: 'var(--gray-500)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto 4rem' }}>{t('cert_desc')}</p>
+          <div style={{ height: '1px', background: 'var(--gray-200)', width: '100%' }}></div>
+        </div>
+
+        {/* Verified Accreditation Document Display - IMAGE ONLY AS REQUESTED */}
+        <div style={{ display: 'flex', justifyContent: 'center', animation: 'popIn 0.8s ease forwards' }}>
+          <div 
+            style={{ 
+              background: '#fff',
+              padding: '1rem',
+              boxShadow: 'var(--shadow-xl)',
+              maxWidth: '800px',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+             <img 
+               src="https://raw.githubusercontent.com/AnasAhmad-AIS/Assets/main/sdaia_cert.jpg" 
+               alt="SDAIA Accreditation Official Document" 
+               style={{ 
+                 width: '100%', 
+                 height: 'auto', 
+                 display: 'block'
+               }}
+               onError={(e) => {
+                 const target = e.target as HTMLImageElement;
+                 target.style.display = 'none';
+                 const parent = target.parentElement;
+                 if (parent) parent.innerHTML = '<div style="padding: 10rem; text-align: center; color: var(--gray-500);">Verification Required: Official Document Link Error.</div>';
+               }}
+             />
+          </div>
+        </div>
+
+        <div style={{ marginTop: '6rem', textAlign: 'center' }}>
+          <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 4rem' }} aria-label="Request Technical Accreditation Documentation">
+            Verify Registration
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function SecurityView() {
   const { t, language, setActivePage, isDarkMode } = useTheme();
@@ -571,6 +663,7 @@ function ServiceInquiryForm() {
     setStatus('loading');
     
     try {
+      // Re-initialize for each request to ensure up-to-date API Key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -709,13 +802,19 @@ function FloatingChat() {
     setLoading(true);
 
     try {
+      // Re-initialize for each request to ensure up-to-date API Key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: [...messages, { role: 'user', text: userMsg }].map(m => ({
+      // Filter out model turns from the start of contents to satisfy Gemini API requirements
+      const apiContents = [...messages, { role: 'user', text: userMsg }]
+        .filter((m, i) => !(i === 0 && m.role === 'model'))
+        .map(m => ({
           role: m.role,
           parts: [{ text: m.text }]
-        })),
+        }));
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: apiContents,
         config: {
           systemInstruction: `You are the AISolutions Assistant for 'AISolutions'. You help businesses explore AI transformation and digital solutions. Be friendly, professional, and strategic. Your goal is to guide clients toward high-value digital services. Language: ${language}.`,
           temperature: 0.7,
@@ -862,13 +961,19 @@ function AdvisoryChatView() {
     setLoading(true);
 
     try {
+      // Re-initialize for each request to ensure up-to-date API Key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: [...messages, { role: 'user', text: userMsg }].map(m => ({
+      // Filter out model turns from the start of contents to satisfy Gemini API requirements
+      const apiContents = [...messages, { role: 'user', text: userMsg }]
+        .filter((m, i) => !(i === 0 && m.role === 'model'))
+        .map(m => ({
           role: m.role,
           parts: [{ text: m.text }]
-        })),
+        }));
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: apiContents,
         config: {
           systemInstruction: t('chat_system_instruction'),
           temperature: 0.7,
@@ -1292,6 +1397,7 @@ function Header() {
           <NavLink onClick={() => handleNav('audit')} label={t('nav_audit')} tooltip={t('nav_audit')} ariaLabel="View Strategic Audit Services" />
           <NavLink onClick={() => handleNav('security')} label={t('nav_security')} tooltip={t('nav_security')} ariaLabel="View Strategic Security Services" />
           <NavLink onClick={() => handleNav('about')} label={t('nav_about')} tooltip={t('nav_about')} ariaLabel="View Institutional Profile" />
+          <NavLink onClick={() => handleNav('certifications')} label={t('nav_certifications')} tooltip={t('nav_certifications')} ariaLabel="View Institutional Accreditations" />
           <div className="tooltip-wrapper">
             <a 
               onClick={() => handleNav('advisory')} 
@@ -1331,7 +1437,11 @@ function Header() {
             style={{ 
               padding: '0.8rem 2.2rem', 
               fontSize: '0.75rem',
-              fontWeight: '900'
+              fontWeight: '900',
+              background: 'linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%)',
+              boxShadow: '0 4px 15px rgba(0, 98, 255, 0.4)',
+              color: 'white',
+              border: 'none'
             }}
             aria-label="Start interactive Strategic AI Advisory session"
           >
@@ -1508,6 +1618,7 @@ function App() {
   useEffect(() => {
     const generateHeroVisual = async () => {
       try {
+        // Re-initialize for each request to ensure up-to-date API Key usage
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         const response = await ai.models.generateContent({
           model: 'gemini-2.5-flash-image',
@@ -1582,6 +1693,8 @@ function App() {
           <AuditView />
         ) : activePage === 'security' ? (
           <SecurityView />
+        ) : activePage === 'certifications' ? (
+          <CertificationsView />
         ) : (
           <div className="section"><div className="container"><h1>Under Construction</h1></div></div>
         )}
@@ -1600,6 +1713,7 @@ function App() {
                 <a onClick={() => setActivePage('audit')} aria-label="Navigate to Strategic Audit services page">Strategic Audit</a>
                 <a onClick={() => setActivePage('security')} aria-label="Navigate to Strategic Security services page">Strategic Security</a>
                 <a onClick={() => setActivePage('about')} aria-label="Navigate to Institutional Profile page">Institutional Profile</a>
+                <a onClick={() => setActivePage('certifications')} aria-label="Navigate to Institutional Accreditations page">Accreditations</a>
                 <a onClick={() => setActivePage('advisory')} aria-label="Start interactive AI Advisory dialogue">AI Advisory</a>
                 <a onClick={() => setActivePage('calculator')} aria-label="Use the Pricing Estimator tool">Pricing Estimator</a>
                 <a onClick={() => setActivePage('profile')} aria-label="View the Institutional Brief document portal">Institutional Brief</a>

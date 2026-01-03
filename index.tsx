@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
 import { createRoot } from 'react-dom/client';
 import lottie from 'lottie-web';
@@ -39,7 +38,7 @@ const useTheme = () => useContext(ThemeContext);
 // --- Translations ---
 const translations: Record<Language, Record<string, string>> = {
   en: {
-    brand: "AISOLUTIONS",
+    brand: "Business Developers AI",
     nav_services: "Capabilities",
     nav_audit: "Audit",
     nav_security: "Security",
@@ -63,10 +62,10 @@ const translations: Record<Language, Record<string, string>> = {
     chat_desc: "Decision support for AI transformation and digital roadmap planning.",
     chat_placeholder: "Describe your business challenge or ask about AI ROI...",
     chat_intro: "Welcome. I am your Strategic Intelligence Partner. How can I help you architect your institutional AI transformation today?",
-    chat_system_instruction: "You are an elite Senior Digital Transformation Consultant at 'AISolutions'. Your mission is to help business leaders decide IF, WHERE, and HOW to implement AI. Focus on ROI, operational efficiency, and long-term scalability. Encourage users to think about their data readiness and specific pain points. Be professional, concise, and strategically minded.",
-    laila_name: "AISolutions Assistant",
+    chat_system_instruction: "You are an elite Senior Digital Transformation Consultant at 'Business Developers AI'. Your mission is to help business leaders decide IF, WHERE, and HOW to implement AI. Focus on ROI, operational efficiency, and long-term scalability. Encourage users to think about their data readiness and specific pain points. Be professional, concise, and strategically minded.",
+    laila_name: "Business Developers AI Assistant",
     laila_subtitle: "STRATEGIC AI",
-    laila_intro: "Greetings. I am your AISolutions digital advisor. How can I facilitate your institutional growth today?",
+    laila_intro: "Greetings. I am your Business Developers AI digital advisor. How can I facilitate your institutional growth today?",
     laila_q1: "What is AI Transformation?",
     laila_q2: "How to start a project?",
     laila_q3: "Speak with a guide",
@@ -109,7 +108,7 @@ const translations: Record<Language, Record<string, string>> = {
     about_badge: "Institutional Profile",
     about_title: "Architecting the future.",
     about_desc: "We transform theoretical AI into practical, institutional strategic assets.",
-    about_content: "AISolutions represents the intersection of capital strategy and machine intelligence, providing the foundation for modern enterprise operations.",
+    about_content: "Business Developers AI represents the intersection of capital strategy and machine intelligence, providing the foundation for modern enterprise operations.",
     audit_badge: "Strategic Audit",
     audit_title: "Diagnostic Integrity.",
     audit_desc: "Deep-spectrum auditing for institutional intelligence systems.",
@@ -155,7 +154,7 @@ const translations: Record<Language, Record<string, string>> = {
     success_btn: "New Dialogue",
   },
   ar: {
-    brand: "إيه آي سوليوشنز",
+    brand: "بيزنس ديفلوبرز AI",
     nav_services: "القدرات",
     nav_audit: "التدقيق",
     nav_security: "الأمن",
@@ -178,11 +177,11 @@ const translations: Record<Language, Record<string, string>> = {
     chat_title: "استشارات AI الاستراتيجية",
     chat_desc: "دعم اتخاذ القرار لتحول الذكاء الاصطناعي وتخطيط خارطة الطريق الرقمية.",
     chat_placeholder: "لخص تحديات أعمالك أو اسأل عن عائد استثمار AI...",
-    chat_intro: "مرحباً بكم. أنا شريككم للذكاء الاستراتيجي من إيه آي سوليوشنز. كيف يمكنني مساعدتكم في هندسة تحول الذكاء الاصطناعي المؤسسي الخاص بكم اليوم؟",
-    chat_system_instruction: "أنت مستشار أول للتحول الرقمي في 'إيه آي سوليوشنز'. مهمتك هي مساعدة قادة الأعمال في اتخاذ القرار بشأن متى وأين وكيف يتم تنفيذ الذكاء الاصطناعي. ركز على العائد على الاستثمار، الكفاءة التشغيلي، والتوسع طويل الأمد. شجع المستخدمين على التفكير في جاهزية بياناتهم ونقاط الألم المحددة لديهم. كن مهنياً، مختصراً، وذا عقلية استراتيجية.",
-    laila_name: "مساعد إيه آي سوليوشنز",
+    chat_intro: "مرحباً بكم. أنا شريككم للذكاء الاستراتيجي من بيزنس ديفلوبرز AI. كيف يمكنني مساعدتكم في هندسة تحول الذكاء الاصطناعي المؤسسي الخاص بكم اليوم؟",
+    chat_system_instruction: "أنت مستشار أول للتحول الرقمي في 'بيزنس ديفلوبرز AI'. مهمتك هي مساعدة قادة الأعمال في اتخاذ القرار بشأن متى وأين وكيف يتم تنفيذ الذكاء الاصطناعي. ركز على العائد على الاستثمار، الكفاءة التشغيلية، والتوسع طويل الأمد. شجع المستخدمين على التفكير في جاهزية بياناتهم ونقاط الألم المحددة لديهم. كن مهنياً، مختصراً، وذا عقلية استراتيجية.",
+    laila_name: "مساعد بيزنس ديفلوبرز AI",
     laila_subtitle: "المساعد الاستراتيجي",
-    laila_intro: "مرحباً! أنا مساعدك الرقمي من إيه آي سوليوشنز. كيف يمكنني مساعدتك اليوم؟",
+    laila_intro: "مرحباً! أنا مساعدك الرقمي من بيزنس ديفلوبرز AI. كيف يمكنني مساعدتك اليوم؟",
     laila_q1: "ما هو التحول الرقمي؟",
     laila_q2: "كيف أبدأ مشروعي؟",
     laila_q3: "تحدث مع خبير",
@@ -225,7 +224,7 @@ const translations: Record<Language, Record<string, string>> = {
     about_badge: "ملف المؤسسة",
     about_title: "هندسة المستقبل.",
     about_desc: "نحول الذكاء الاصطناعي النظري إلى أصول استراتيجية مؤسسية عملية.",
-    about_content: "تمثل 'إيه آي سوليوشنز' نقطة التقاء استراتيجية رأس المال وذكاء الآلة، مما يوفر الأساس لعمليات المؤسسات الحديثة.",
+    about_content: "تمثل 'بيزنس ديفلوبرز AI' نقطة التقاء استراتيجية رأس المال وذكاء الآلة، مما يوفر الأساس لعمليات المؤسسات الحديثة.",
     audit_badge: "التدقيق الاستراتيجي",
     audit_title: "نزاهة التشخيص.",
     audit_desc: "تدقيق شامل لأنظمة الذكاء المؤسسي.",
@@ -526,7 +525,7 @@ function HistorySection() {
           <div>
             <h4 style={{ marginBottom: '0.5rem' }}>Incubation</h4>
             <p style={{ color: 'var(--gray-500)', lineHeight: 1.8 }}>
-              AISolutions was conceived in Zurich as a boutique data strategy firm focusing on high-frequency trading and predictive risk modeling.
+              Business Developers AI was conceived with the vision of providing high-fidelity digital infrastructure.
             </p>
           </div>
         </div>
@@ -535,7 +534,7 @@ function HistorySection() {
           <div>
             <h4 style={{ marginBottom: '0.5rem' }}>Neural Expansion</h4>
             <p style={{ color: 'var(--gray-500)', lineHeight: 1.8 }}>
-              We pivoted toward full-spectrum machine intelligence, building proprietary large-scale neural frameworks for institutional supply chain optimization.
+              We pivoted toward full-spectrum machine intelligence, building proprietary large-scale neural frameworks.
             </p>
           </div>
         </div>
@@ -544,7 +543,7 @@ function HistorySection() {
           <div>
             <h4 style={{ marginBottom: '0.5rem' }}>Global Leadership</h4>
             <p style={{ color: 'var(--gray-500)', lineHeight: 1.8 }}>
-              Today, we operate as a leading institutional advisor, managing digital transformation for Fortune 500 enterprises across three continents.
+              Today, we operate as a leading institutional advisor, managing digital transformation for global enterprises.
             </p>
           </div>
         </div>
@@ -663,7 +662,6 @@ function ServiceInquiryForm() {
     setStatus('loading');
     
     try {
-      // Re-initialize for each request to ensure up-to-date API Key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -802,9 +800,7 @@ function FloatingChat() {
     setLoading(true);
 
     try {
-      // Re-initialize for each request to ensure up-to-date API Key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      // Filter out model turns from the start of contents to satisfy Gemini API requirements
       const apiContents = [...messages, { role: 'user', text: userMsg }]
         .filter((m, i) => !(i === 0 && m.role === 'model'))
         .map(m => ({
@@ -816,7 +812,7 @@ function FloatingChat() {
         model: 'gemini-3-flash-preview',
         contents: apiContents,
         config: {
-          systemInstruction: `You are the AISolutions Assistant for 'AISolutions'. You help businesses explore AI transformation and digital solutions. Be friendly, professional, and strategic. Your goal is to guide clients toward high-value digital services. Language: ${language}.`,
+          systemInstruction: `You are the Business Developers AI Assistant for 'Business Developers AI'. You help businesses explore AI transformation and digital solutions. Be friendly, professional, and strategic. Your goal is to guide clients toward high-value digital services. Language: ${language}.`,
           temperature: 0.7,
         }
       });
@@ -961,9 +957,7 @@ function AdvisoryChatView() {
     setLoading(true);
 
     try {
-      // Re-initialize for each request to ensure up-to-date API Key usage
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      // Filter out model turns from the start of contents to satisfy Gemini API requirements
       const apiContents = [...messages, { role: 'user', text: userMsg }]
         .filter((m, i) => !(i === 0 && m.role === 'model'))
         .map(m => ({
@@ -1618,7 +1612,6 @@ function App() {
   useEffect(() => {
     const generateHeroVisual = async () => {
       try {
-        // Re-initialize for each request to ensure up-to-date API Key usage
         const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
         const response = await ai.models.generateContent({
           model: 'gemini-2.5-flash-image',

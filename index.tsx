@@ -21,6 +21,7 @@ const ThemeContext = createContext<{
   activePage: PageView;
   setActivePage: (page: PageView) => void;
   t: (key: string) => string;
+  heroImage: string | null;
 }>({
   isDarkMode: false,
   toggleDarkMode: () => {},
@@ -29,6 +30,7 @@ const ThemeContext = createContext<{
   activePage: 'home',
   setActivePage: () => {},
   t: (key) => key,
+  heroImage: null,
 });
 
 const useTheme = () => useContext(ThemeContext);
@@ -51,6 +53,7 @@ const translations: Record<Language, Record<string, string>> = {
     hero_badge: "Institutional Intelligence",
     hero_title: "Empowering Businesses with",
     hero_title_accent: "Intelligent Systems",
+    hero_subtitle: "The benchmark in proprietary machine intelligence and high-fidelity strategic engineering.",
     hero_desc: "Exclusive strategic development through high-fidelity engineering. We deploy proprietary AI frameworks to help businesses navigate digital transformation and achieve operational excellence.",
     hero_btn_main: "Start AI Advisory",
     hero_btn_sec: "The Architecture",
@@ -157,6 +160,7 @@ const translations: Record<Language, Record<string, string>> = {
     hero_badge: "ذكاء مؤسسي",
     hero_title: "تمكين الشركات من خلال",
     hero_title_accent: "أنظمة ذكية",
+    hero_subtitle: "المعيار في ذكاء الآلة الخاص والهندسة الاستراتيجية عالية الدقة.",
     hero_desc: "تطوير استراتيجي حصري من خلال الهندسة المتقدمة. نقوم بنشر أطر ذكاء اصطناعي خاصة لمساعدة الشركات في التنقل عبر التحول الرقمي وتحقيق التميز التشغيلي.",
     hero_btn_main: "بدء استشارة AI",
     hero_btn_sec: "المعمارية",
@@ -214,7 +218,7 @@ const translations: Record<Language, Record<string, string>> = {
     audit_badge: "التدقيق الاستراتيجي",
     audit_title: "نزاهة التشخيص.",
     audit_desc: "تدقيق شامل لأنظمة الذكاء المؤسسي.",
-    audit_content: "تم تصميم عملية التشخيص لدينا للكشف عن نقاط الاحتكاك التشغيلي وصوامع البيانات التي تعيق النمو. نحن نقدم تقييماً صارماً لعمليات تعلم الآلة الحالية والمعماريات القديمة لضمان جاهزية مؤسستك للجيل القادم من تكامل الذكاء الاصطناعي.",
+    audit_content: "تم تصميم عملية التشخيص لدينا للكشف عن نقاط الاحتكاال التشغيلي وصوامع البيانات التي تعيق النمو. نحن نقدم تقييماً صارماً لعمليات تعلم الآلة الحالية والمعماريات القديمة لضمان جاهزية مؤسستك للجيل القادم من تكامل الذكاء الاصطناعي.",
     security_badge: "الأمن الاستراتيجي",
     security_title: "دفاع لا يمكن اختراقه.",
     security_desc: "ضمانات عصبية بمستوى عسكري لأصول البيانات المؤسسية.",
@@ -299,7 +303,12 @@ function SecurityView() {
   return (
     <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
-        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', fontSize: '0.7rem' }}>
+        <button 
+          onClick={() => setActivePage('home')} 
+          className="btn btn-outline" 
+          style={{ marginBottom: '4rem', fontSize: '0.7rem' }}
+          aria-label={t('btn_back')}
+        >
           <Icons.ArrowLeft lang={language} /> {t('btn_back')}
         </button>
 
@@ -320,7 +329,7 @@ function SecurityView() {
         </div>
 
         <div style={{ marginTop: '6rem', textAlign: 'center' }}>
-          <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 4rem' }}>
+          <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 4rem' }} aria-label="Initiate Security Protocol Advisory">
             Initiate Security Protocol
           </button>
         </div>
@@ -335,7 +344,12 @@ function AuditView() {
   return (
     <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
-        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', fontSize: '0.7rem' }}>
+        <button 
+          onClick={() => setActivePage('home')} 
+          className="btn btn-outline" 
+          style={{ marginBottom: '4rem', fontSize: '0.7rem' }}
+          aria-label={t('btn_back')}
+        >
           <Icons.ArrowLeft lang={language} /> {t('btn_back')}
         </button>
 
@@ -356,7 +370,7 @@ function AuditView() {
         </div>
 
         <div style={{ marginTop: '6rem', textAlign: 'center' }}>
-          <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 4rem' }}>
+          <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 4rem' }} aria-label="Book AI Strategic Diagnostic Review">
             Book Diagnostic Review
           </button>
         </div>
@@ -371,7 +385,12 @@ function AboutView() {
   return (
     <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
-        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', fontSize: '0.7rem' }}>
+        <button 
+          onClick={() => setActivePage('home')} 
+          className="btn btn-outline" 
+          style={{ marginBottom: '4rem', fontSize: '0.7rem' }}
+          aria-label={t('btn_back')}
+        >
           <Icons.ArrowLeft lang={language} /> {t('btn_back')}
         </button>
 
@@ -506,6 +525,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
           padding: '2rem 1rem', background: 'transparent', border: 'none', cursor: 'pointer',
           textAlign: 'inherit', color: 'inherit'
         }}
+        aria-expanded={isOpen}
       >
         <span style={{ fontSize: '1.1rem', fontWeight: 700, textTransform: 'uppercase' }}>{question}</span>
         <div style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }}>
@@ -596,10 +616,10 @@ function ServiceInquiryForm() {
         </div>
 
         <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button onClick={copyToClipboard} className="btn btn-outline" style={{ minWidth: '280px' }}>
+          <button onClick={copyToClipboard} className="btn btn-outline" style={{ minWidth: '280px' }} aria-label="Copy assessment text to clipboard">
             {copyFeedback ? <Icons.Check /> : <Icons.Copy />} {copyFeedback ? t('inquiry_copy_success') : t('inquiry_copy_btn')}
           </button>
-          <button onClick={() => { setStatus('idle'); setFormData({ name: '', email: '', service: '', message: '' }); }} className="btn btn-primary">
+          <button onClick={() => { setStatus('idle'); setFormData({ name: '', email: '', service: '', message: '' }); }} className="btn btn-primary" aria-label="Start a new business inquiry dialogue">
             {t('inquiry_reset')}
           </button>
         </div>
@@ -619,6 +639,7 @@ function ServiceInquiryForm() {
             onChange={e => setFormData({ ...formData, name: e.target.value })} 
             required
             disabled={status === 'loading'}
+            aria-label="Your name or organization contact name"
           />
           <input 
             type="email" 
@@ -628,6 +649,7 @@ function ServiceInquiryForm() {
             onChange={e => setFormData({ ...formData, email: e.target.value })} 
             required
             disabled={status === 'loading'}
+            aria-label="Professional email address"
           />
         </div>
         <select 
@@ -636,6 +658,7 @@ function ServiceInquiryForm() {
           value={formData.service} 
           onChange={e => setFormData({ ...formData, service: e.target.value })}
           disabled={status === 'loading'}
+          aria-label="Select the strategic capability you are inquiring about"
         >
           <option value="">{t('inquiry_service_placeholder')}</option>
           <option value="transformation">Institutional Transformation</option>
@@ -651,6 +674,7 @@ function ServiceInquiryForm() {
           onChange={e => setFormData({ ...formData, message: e.target.value })}
           required
           disabled={status === 'loading'}
+          aria-label="Detailed operational requirements"
         />
         <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1.5rem' }} disabled={status === 'loading'}>
           {status === 'loading' ? <Icons.Loader /> : t('inquiry_btn')}
@@ -716,6 +740,7 @@ function FloatingChat() {
           display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
           boxShadow: '0 8px 24px rgba(0,123,255,0.4)', zIndex: 9999, border: 'none', transition: 'all 0.3s ease'
         }}
+        aria-label="Open strategic AI assistant chat"
       >
         <Icons.ChatLauncher />
       </button>
@@ -733,10 +758,12 @@ function FloatingChat() {
         boxShadow: '0 12px 48px rgba(0,0,0,0.2)', zIndex: 9999,
         border: isDarkMode ? '1px solid #333' : '1px solid #eee'
       }}
+      role="dialog"
+      aria-label="AI Assistant Conversation Window"
     >
       <div style={{ backgroundColor: '#1a1a1a', padding: '1.5rem', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-           <button onClick={() => setIsOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}><Icons.X /></button>
+           <button onClick={() => setIsOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }} aria-label="Close assistant chat"><Icons.X /></button>
            <div style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>
              <h4 style={{ margin: 0, fontSize: '1rem', color: 'white' }}>{t('laila_name')}</h4>
              <span style={{ fontSize: '0.65rem', color: '#007bff', fontWeight: 900, letterSpacing: '0.1em' }}>{t('laila_subtitle')}</span>
@@ -792,6 +819,7 @@ function FloatingChat() {
               flex: 1, background: 'transparent', border: 'none', padding: '0.5rem',
               outline: 'none', fontSize: '0.9rem', color: '#1a1a1a'
             }}
+            aria-label="Assistant message input"
           />
           <button 
             onClick={() => handleSend()}
@@ -799,6 +827,7 @@ function FloatingChat() {
               width: '40px', height: '40px', borderRadius: '8px', backgroundColor: '#007bff',
               display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer'
             }}
+            aria-label="Send message"
           >
             <Icons.Send />
           </button>
@@ -857,7 +886,12 @@ function AdvisoryChatView() {
     <section className="section" style={{ height: 'calc(100vh - 110px)', background: isDarkMode ? 'var(--secondary)' : 'var(--white)', display: 'flex', flexDirection: 'column' }}>
       <div className="container" style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '1000px' }}>
         <div style={{ marginBottom: '2rem' }}>
-          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ padding: '0.5rem 1rem', fontSize: '0.65rem' }}>
+          <button 
+            onClick={() => setActivePage('home')} 
+            className="btn btn-outline" 
+            style={{ padding: '0.5rem 1rem', fontSize: '0.65rem' }}
+            aria-label={t('btn_back')}
+          >
             <Icons.ArrowLeft lang={language} /> {t('btn_back')}
           </button>
           <div style={{ marginTop: '2rem' }}>
@@ -867,7 +901,7 @@ function AdvisoryChatView() {
           </div>
         </div>
 
-        <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', border: '1px solid var(--gray-200)', padding: '2rem', marginBottom: '2rem', background: isDarkMode ? 'rgba(0,0,0,0.2)' : 'var(--white)' }}>
+        <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', border: '1px solid var(--gray-200)', padding: '2rem', marginBottom: '2rem', background: isDarkMode ? 'rgba(0,0,0,0.2)' : 'var(--white)' }} role="log" aria-live="polite">
           {messages.map((m, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start', marginBottom: '1.5rem' }}>
               <div style={{ 
@@ -885,8 +919,8 @@ function AdvisoryChatView() {
         </div>
 
         <form onSubmit={handleSend} style={{ display: 'flex', gap: '1rem', paddingBottom: '2rem' }}>
-          <input className="input-field" placeholder={t('chat_placeholder')} value={input} onChange={e => setInput(e.target.value)} disabled={loading} style={{ flex: 1 }} />
-          <button type="submit" className="btn btn-primary" style={{ padding: '0 2rem' }} disabled={loading}><Icons.Send /></button>
+          <input className="input-field" placeholder={t('chat_placeholder')} value={input} onChange={e => setInput(e.target.value)} disabled={loading} style={{ flex: 1 }} aria-label="Advisor query input" />
+          <button type="submit" className="btn btn-primary" style={{ padding: '0 2rem' }} disabled={loading} aria-label="Submit query"><Icons.Send /></button>
         </form>
       </div>
     </section>
@@ -911,7 +945,12 @@ function PriceCalculatorView() {
   return (
     <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
-        <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ marginBottom: '4rem', padding: '0.75rem 1.5rem', display: 'flex', gap: '1rem' }}>
+        <button 
+          onClick={() => setActivePage('home')} 
+          className="btn btn-outline" 
+          style={{ marginBottom: '4rem', padding: '0.75rem 1.5rem', display: 'flex', gap: '1rem' }}
+          aria-label={t('btn_back')}
+        >
           <Icons.ArrowLeft lang={language} /> {t('btn_back')}
         </button>
 
@@ -925,9 +964,16 @@ function PriceCalculatorView() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
             <div>
               <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_platform')}</label>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} role="radiogroup" aria-label={t('calc_platform')}>
                 {PLATFORMS.map(p => (
-                  <button key={p.id} onClick={() => setPlatform(p.id)} className="card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: platform === p.id ? 'var(--primary)' : 'var(--gray-200)', background: platform === p.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}>
+                  <button 
+                    key={p.id} 
+                    onClick={() => setPlatform(p.id)} 
+                    className="card" 
+                    style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: platform === p.id ? 'var(--primary)' : 'var(--gray-200)', background: platform === p.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}
+                    aria-checked={platform === p.id}
+                    role="radio"
+                  >
                     <span>{language === 'en' ? p.label_en : p.label_ar}</span>
                     {platform === p.id && <Icons.Check />}
                   </button>
@@ -936,9 +982,16 @@ function PriceCalculatorView() {
             </div>
             <div>
               <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_type')}</label>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} role="radiogroup" aria-label={t('calc_type')}>
                 {COMPLEXITY.map(c => (
-                  <button key={c.id} onClick={() => setComplexity(c.id)} className="card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: complexity === c.id ? 'var(--primary)' : 'var(--gray-200)', background: complexity === c.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}>
+                  <button 
+                    key={c.id} 
+                    onClick={() => setComplexity(c.id)} 
+                    className="card" 
+                    style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: complexity === c.id ? 'var(--primary)' : 'var(--gray-200)', background: complexity === c.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}
+                    aria-checked={complexity === c.id}
+                    role="radio"
+                  >
                     <span>{language === 'en' ? c.label_en : c.label_ar}</span>
                     {complexity === c.id && <Icons.Check />}
                   </button>
@@ -947,9 +1000,16 @@ function PriceCalculatorView() {
             </div>
             <div>
               <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_design')}</label>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} role="radiogroup" aria-label={t('calc_design')}>
                 {DESIGN.map(d => (
-                  <button key={d.id} onClick={() => setDesign(d.id)} className="card" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: design === d.id ? 'var(--primary)' : 'var(--gray-200)', background: design === d.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}>
+                  <button 
+                    key={d.id} 
+                    onClick={() => setDesign(d.id)} 
+                    className="card" 
+                    style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', borderColor: design === d.id ? 'var(--primary)' : 'var(--gray-200)', background: design === d.id ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer' }}
+                    aria-checked={design === d.id}
+                    role="radio"
+                  >
                     <span>{language === 'en' ? d.label_en : d.label_ar}</span>
                     {design === d.id && <Icons.Check />}
                   </button>
@@ -958,11 +1018,17 @@ function PriceCalculatorView() {
             </div>
             <div>
               <label style={{ fontSize: '0.7rem', fontWeight: 900, textTransform: 'uppercase', marginBottom: '1.5rem', display: 'block' }}>{t('calc_features')}</label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }} role="group" aria-label={t('calc_features')}>
                 {FEATURES.map(f => (
-                  <button key={f.id} onClick={() => {
-                    setSelectedFeatures(prev => prev.includes(f.id) ? prev.filter(id => id !== f.id) : [...prev, f.id]);
-                  }} className="card" style={{ padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderColor: selectedFeatures.includes(f.id) ? 'var(--primary)' : 'var(--gray-200)', background: selectedFeatures.includes(f.id) ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer', fontSize: '0.8rem' }}>
+                  <button 
+                    key={f.id} 
+                    onClick={() => {
+                      setSelectedFeatures(prev => prev.includes(f.id) ? prev.filter(id => id !== f.id) : [...prev, f.id]);
+                    }} 
+                    className="card" 
+                    style={{ padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderColor: selectedFeatures.includes(f.id) ? 'var(--primary)' : 'var(--gray-200)', background: selectedFeatures.includes(f.id) ? 'rgba(0,43,69,0.05)' : 'transparent', cursor: 'pointer', fontSize: '0.8rem' }}
+                    aria-pressed={selectedFeatures.includes(f.id)}
+                  >
                     <span style={{ textAlign: language === 'ar' ? 'right' : 'left' }}>{language === 'en' ? f.label_en : f.label_ar}</span>
                     {selectedFeatures.includes(f.id) && <Icons.Check />}
                   </button>
@@ -976,7 +1042,7 @@ function PriceCalculatorView() {
             <div style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '0.5rem' }}>${calculatePrice().toLocaleString()} <span style={{ fontSize: '1rem', opacity: 0.5 }}>USD</span></div>
             <p style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '2rem', fontStyle: 'italic' }}>{t('calc_total_desc')}</p>
             <p style={{ fontSize: '0.75rem', opacity: 0.6, lineHeight: 1.6, marginBottom: '2.5rem' }}>{t('calc_disclaimer')}</p>
-            <button onClick={() => setActivePage('advisory')} className="btn btn-outline" style={{ width: '100%', color: 'white', borderColor: 'white' }}>Connect with Advisory</button>
+            <button onClick={() => setActivePage('advisory')} className="btn btn-outline" style={{ width: '100%', color: 'white', borderColor: 'white' }} aria-label="Connect with AI Advisory to finalize investment roadmap">Connect with Advisory</button>
           </div>
         </div>
       </div>
@@ -1048,10 +1114,10 @@ function CompanyProfileView() {
     <section className="section" style={{ background: isDarkMode ? 'var(--secondary)' : 'var(--white)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6rem' }}>
-          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ fontSize: '0.7rem' }}>
+          <button onClick={() => setActivePage('home')} className="btn btn-outline" style={{ fontSize: '0.7rem' }} aria-label={t('btn_back')}>
             <Icons.ArrowLeft lang={language} /> {t('btn_back')}
           </button>
-          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.7rem' }}>
+          <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '0.7rem' }} aria-label="Download Institutional Brief as text file">
             {downloading ? <Icons.Loader /> : <Icons.Download />} {t('btn_download_brief')}
           </button>
         </div>
@@ -1078,6 +1144,7 @@ function CompanyProfileView() {
                   ref={fileInputRef}
                   onChange={handleFileChange}
                   style={{ display: 'none' }} 
+                  aria-label="Upload document file"
                 />
                 
                 {!selectedFile ? (
@@ -1085,6 +1152,7 @@ function CompanyProfileView() {
                     onClick={() => fileInputRef.current?.click()} 
                     className="btn btn-outline"
                     style={{ padding: '1rem 3rem' }}
+                    aria-label="Open file picker to select institutional brief"
                   >
                     Select Document
                   </button>
@@ -1101,6 +1169,7 @@ function CompanyProfileView() {
                       disabled={uploading}
                       className="btn btn-primary"
                       style={{ width: '100%' }}
+                      aria-label="Submit selected document for transmission"
                     >
                       {uploading ? <Icons.Loader /> : <Icons.Upload />} {t('profile_upload_btn')}
                     </button>
@@ -1117,6 +1186,7 @@ function CompanyProfileView() {
                   setSelectedFile(null);
                 }} 
                 className="btn btn-outline"
+                aria-label="Reset uploader to transmit another document"
               >
                 {t('profile_upload_reset')}
               </button>
@@ -1161,16 +1231,20 @@ function AboutUsSection({ id }: { id?: string }) {
   );
 }
 
-function NavLink({ onClick, label, tooltip }: { onClick: () => void; label: string; tooltip: string }) {
+function NavLink({ onClick, label, tooltip, ariaLabel }: { onClick: () => void; label: string; tooltip: string; ariaLabel: string }) {
   return (
     <div className="tooltip-wrapper">
       <a 
         onClick={onClick} 
         style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase' }}
+        aria-label={ariaLabel}
+        role="link"
+        tabIndex={0}
+        onKeyPress={(e) => { if (e.key === 'Enter') onClick(); }}
       >
         {label}
       </a>
-      <span className="nav-tooltip">{tooltip}</span>
+      <span className="nav-tooltip" aria-hidden="true">{tooltip}</span>
     </div>
   );
 }
@@ -1201,37 +1275,66 @@ function Header() {
   };
 
   return (
-    <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: isDarkMode ? '#001a2a' : '#fcfcfc', borderBottom: '1px solid var(--gray-200)', height: '110px', display: 'flex', alignItems: 'center' }}>
+    <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: isDarkMode ? 'rgba(0, 26, 42, 0.95)' : 'rgba(252, 252, 252, 0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--gray-200)', height: '110px', display: 'flex', alignItems: 'center' }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontWeight: 900, cursor: 'pointer', color: 'var(--primary)' }} onClick={() => handleNav('home')}>
+        <div 
+          style={{ display: 'flex', alignItems: 'center', gap: '1rem', fontWeight: 900, cursor: 'pointer', color: 'var(--primary)' }} 
+          onClick={() => handleNav('home')}
+          aria-label={`${t('brand')} Home Page`}
+          role="link"
+          tabIndex={0}
+          onKeyPress={(e) => { if (e.key === 'Enter') handleNav('home'); }}
+        >
           <Icons.Logo size={36} /> <span>{t('brand')}</span>
         </div>
-        <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <NavLink onClick={() => handleAnchorNav('capabilities-section')} label={t('nav_services')} tooltip={t('nav_services')} />
-          <NavLink onClick={() => handleNav('audit')} label={t('nav_audit')} tooltip={t('nav_audit')} />
-          <NavLink onClick={() => handleNav('security')} label={t('nav_security')} tooltip={t('nav_security')} />
-          <NavLink onClick={() => handleNav('about')} label={t('nav_about')} tooltip={t('nav_about')} />
+        <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} aria-label="Main navigation menu">
+          <NavLink onClick={() => handleAnchorNav('capabilities-section')} label={t('nav_services')} tooltip={t('nav_services')} ariaLabel="View Strategic AI Capabilities" />
+          <NavLink onClick={() => handleNav('audit')} label={t('nav_audit')} tooltip={t('nav_audit')} ariaLabel="View Strategic Audit Services" />
+          <NavLink onClick={() => handleNav('security')} label={t('nav_security')} tooltip={t('nav_security')} ariaLabel="View Strategic Security Services" />
+          <NavLink onClick={() => handleNav('about')} label={t('nav_about')} tooltip={t('nav_about')} ariaLabel="View Institutional Profile" />
           <div className="tooltip-wrapper">
             <a 
               onClick={() => handleNav('advisory')} 
               style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--primary)', borderBottom: '2px solid' }}
+              aria-label="Open AI Strategic Advisory Chat"
+              role="link"
+              tabIndex={0}
+              onKeyPress={(e) => { if (e.key === 'Enter') handleNav('advisory'); }}
             >
               {t('nav_advisory')}
             </a>
-            <span className="nav-tooltip">{t('nav_advisory')}</span>
+            <span className="nav-tooltip" aria-hidden="true">{t('nav_advisory')}</span>
           </div>
-          <NavLink onClick={() => handleNav('calculator')} label={t('nav_calculator')} tooltip={t('nav_calculator')} />
-          <NavLink onClick={() => handleNav('profile')} label={t('nav_profile')} tooltip={t('nav_profile')} />
+          <NavLink onClick={() => handleNav('calculator')} label={t('nav_calculator')} tooltip={t('nav_calculator')} ariaLabel="Open Investment Roadmap Estimator" />
+          <NavLink onClick={() => handleNav('profile')} label={t('nav_profile')} tooltip={t('nav_profile')} ariaLabel="View Institutional Brief" />
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="theme-toggle" style={{ fontSize: '0.6rem' }}>{language.toUpperCase()}</button>
-            <button onClick={toggleDarkMode} className="theme-toggle">{isDarkMode ? <Icons.Sun /> : <Icons.Moon />}</button>
+            <button 
+              onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} 
+              className="theme-toggle" 
+              style={{ fontSize: '0.6rem' }}
+              aria-label={`Switch to ${language === 'en' ? 'Arabic' : 'English'} language`}
+            >
+              {language.toUpperCase()}
+            </button>
+            <button 
+              onClick={toggleDarkMode} 
+              className="theme-toggle"
+              aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} color theme`}
+            >
+              {isDarkMode ? <Icons.Sun /> : <Icons.Moon />}
+            </button>
           </div>
-          <a onClick={() => handleNav('advisory')} className="btn btn-prominent" style={{ 
-            padding: '0.8rem 2.2rem', 
-            fontSize: '0.75rem',
-            fontWeight: '900'
-          }}>
+          <a 
+            onClick={() => handleNav('advisory')} 
+            className="btn btn-prominent" 
+            style={{ 
+              padding: '0.8rem 2.2rem', 
+              fontSize: '0.75rem',
+              fontWeight: '900'
+            }}
+            aria-label="Start interactive Strategic AI Advisory session"
+          >
             {t('hero_btn_main')}
           </a>
         </nav>
@@ -1241,19 +1344,90 @@ function Header() {
 }
 
 function Hero() {
-  const { t, setActivePage } = useTheme();
+  const { t, setActivePage, heroImage, isDarkMode } = useTheme();
+  const heroStyle: React.CSSProperties = {
+    minHeight: '85vh',
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative',
+    overflow: 'hidden',
+    background: heroImage 
+      ? `linear-gradient(rgba(0, 43, 69, ${isDarkMode ? '0.8' : '0.6'}), rgba(0, 43, 69, ${isDarkMode ? '0.9' : '0.7'})), url(${heroImage})` 
+      : 'var(--white)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    transition: 'background 1s ease-in-out',
+    color: heroImage ? '#fff' : 'var(--dark)'
+  };
+
   return (
-    <section className="section" style={{ minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
-      <div className="container">
+    <section className="section" style={heroStyle}>
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div style={{ maxWidth: '850px' }}>
-          <span className="badge">{t('hero_badge')}</span>
-          <h1 style={{ fontSize: 'clamp(3.5rem, 8vw, 6rem)', lineHeight: 0.95, marginBottom: '2.5rem', fontWeight: 900 }}>
-            {t('hero_title')} <span style={{ color: 'var(--primary)' }}>{t('hero_title_accent')}</span>
+          <span className="badge" style={{ 
+            background: heroImage ? 'var(--accent)' : 'var(--primary)',
+            animation: 'popIn 0.8s ease forwards',
+            opacity: 0
+          }}>{t('hero_badge')}</span>
+          
+          <h1 style={{ 
+            fontSize: 'clamp(3.5rem, 8vw, 6rem)', 
+            lineHeight: 0.95, 
+            marginBottom: '1.5rem', 
+            fontWeight: 900,
+            color: 'inherit',
+            animation: 'popIn 0.8s ease forwards 0.15s',
+            opacity: 0
+          }}>
+            {t('hero_title')} <span style={{ color: heroImage ? '#00e5ff' : 'var(--primary)' }}>{t('hero_title_accent')}</span>
           </h1>
-          <p style={{ fontSize: '1.3rem', color: 'var(--gray-500)', marginBottom: '4rem', lineHeight: 1.6, maxWidth: '700px' }}>{t('hero_desc')}</p>
-          <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-            <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_main')}</button>
-            <button onClick={() => setActivePage('profile')} className="btn btn-outline" style={{ padding: '1.5rem 3rem' }}>{t('hero_btn_sec')}</button>
+          
+          <h2 style={{ 
+            fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', 
+            fontWeight: 600, 
+            color: heroImage ? '#00e5ff' : 'var(--accent)', 
+            marginBottom: '2.5rem', 
+            lineHeight: 1.3,
+            textTransform: 'none',
+            letterSpacing: '-0.02em',
+            animation: 'popIn 0.8s ease forwards 0.3s',
+            opacity: 0
+          }}>
+            {t('hero_subtitle')}
+          </h2>
+
+          <p style={{ 
+            fontSize: '1.15rem', 
+            color: heroImage ? 'rgba(255,255,255,0.9)' : 'var(--gray-500)', 
+            marginBottom: '4rem', 
+            lineHeight: 1.7, 
+            maxWidth: '700px',
+            animation: 'popIn 0.8s ease forwards 0.45s',
+            opacity: 0
+          }}>{t('hero_desc')}</p>
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '2rem', 
+            flexWrap: 'wrap',
+            animation: 'popIn 0.8s ease forwards 0.6s',
+            opacity: 0
+          }}>
+            <button onClick={() => setActivePage('advisory')} className="btn btn-prominent" style={{ padding: '1.5rem 3rem' }} aria-label="Start AI Strategic Advisory Dialogue">
+              {t('hero_btn_main')}
+            </button>
+            <button 
+              onClick={() => setActivePage('profile')} 
+              className="btn btn-outline" 
+              style={{ 
+                padding: '1.5rem 3rem', 
+                color: heroImage ? '#fff' : 'var(--primary)', 
+                borderColor: heroImage ? '#fff' : 'var(--primary)' 
+              }} 
+              aria-label="View Institutional Brief Architecture"
+            >
+              {t('hero_btn_sec')}
+            </button>
           </div>
         </div>
       </div>
@@ -1270,7 +1444,7 @@ function Metrics() {
     { val: "0", label: "Breach Incidents" }
   ];
   return (
-    <section style={{ background: 'var(--primary)', color: 'white', padding: '6rem 0' }}>
+    <section style={{ background: 'var(--primary)', color: 'white', padding: '6rem 0' }} aria-label="Institutional Impact Metrics">
       <div className="container">
         <div className="grid grid-4">
           {metrics.map((m, i) => (
@@ -1317,6 +1491,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
   const [language, setLanguage] = useState<Language>(() => (localStorage.getItem('lang') as Language) || 'en');
   const [activePage, setActivePage] = useState<PageView>('home');
+  const [heroImage, setHeroImage] = useState<string | null>(null);
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
@@ -1329,10 +1504,45 @@ function App() {
     localStorage.setItem('lang', language);
   }, [language]);
 
+  // Dynamic Image Generation for Hero
+  useEffect(() => {
+    const generateHeroVisual = async () => {
+      try {
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const response = await ai.models.generateContent({
+          model: 'gemini-2.5-flash-image',
+          contents: {
+            parts: [
+              {
+                text: 'A high-fidelity, abstract, cinematic background for an elite AI service provider website. Theme: intelligent systems, digital neural pathways, and business empowerment. Minimalist geometric precision with a sophisticated color palette of midnight navy (#002b45), charcoal, and vibrant royal blue (#0062ff) accents. Soft depth-of-field, sleek lines, institutional professional aesthetic, 4k resolution, no text.',
+              },
+            ],
+          },
+          config: {
+            imageConfig: {
+              aspectRatio: "16:9",
+            },
+          },
+        });
+        
+        for (const part of response.candidates[0].content.parts) {
+          if (part.inlineData) {
+            setHeroImage(`data:image/png;base64,${part.inlineData.data}`);
+            break;
+          }
+        }
+      } catch (error) {
+        console.error("AI Hero Image Generation Failed:", error);
+      }
+    };
+
+    generateHeroVisual();
+  }, []);
+
   const t = (key: string) => translations[language][key] || key;
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode: () => setIsDarkMode(!isDarkMode), language, setLanguage, activePage, setActivePage, t }}>
+    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode: () => setIsDarkMode(!isDarkMode), language, setLanguage, activePage, setActivePage, t, heroImage }}>
       <Header />
       <main>
         {activePage === 'home' ? (
@@ -1340,7 +1550,7 @@ function App() {
             <Hero />
             <Metrics />
             <AboutUsSection id="institutional-summary" />
-            <section className="section" id="capabilities-section">
+            <section className="section" id="capabilities-section" aria-label="Core Strategic Services">
               <div className="container">
                 <div className="text-center" style={{ marginBottom: '8rem' }}>
                   <h2 style={{ fontSize: '3.5rem' }}>Core Strategic Services</h2>
@@ -1377,7 +1587,7 @@ function App() {
         )}
       </main>
       <FloatingChat />
-      <footer style={{ background: 'var(--secondary)', color: 'white', padding: '10rem 0 5rem' }}>
+      <footer style={{ background: 'var(--secondary)', color: 'white', padding: '10rem 0 5rem' }} aria-label="Institutional Footer">
         <div className="container">
           <div className="grid grid-4" style={{ marginBottom: '6rem' }}>
             <div style={{ gridColumn: 'span 2' }}>
@@ -1386,22 +1596,22 @@ function App() {
             </div>
             <div>
               <h4 style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '2.5rem' }}>PORTFOLIO</h4>
-              <div className="footer-links">
-                <a onClick={() => setActivePage('audit')}>Strategic Audit</a>
-                <a onClick={() => setActivePage('security')}>Strategic Security</a>
-                <a onClick={() => setActivePage('about')}>Institutional Profile</a>
-                <a onClick={() => setActivePage('advisory')}>AI Advisory</a>
-                <a onClick={() => setActivePage('calculator')}>Pricing Estimator</a>
-                <a onClick={() => setActivePage('profile')}>Institutional Brief</a>
-              </div>
+              <nav className="footer-links" aria-label="Footer portfolio navigation">
+                <a onClick={() => setActivePage('audit')} aria-label="Navigate to Strategic Audit services page">Strategic Audit</a>
+                <a onClick={() => setActivePage('security')} aria-label="Navigate to Strategic Security services page">Strategic Security</a>
+                <a onClick={() => setActivePage('about')} aria-label="Navigate to Institutional Profile page">Institutional Profile</a>
+                <a onClick={() => setActivePage('advisory')} aria-label="Start interactive AI Advisory dialogue">AI Advisory</a>
+                <a onClick={() => setActivePage('calculator')} aria-label="Use the Pricing Estimator tool">Pricing Estimator</a>
+                <a onClick={() => setActivePage('profile')} aria-label="View the Institutional Brief document portal">Institutional Brief</a>
+              </nav>
             </div>
             <div>
               <h4 style={{ fontSize: '0.7rem', opacity: 0.6, marginBottom: '2.5rem' }}>COMPLIANCE</h4>
-              <div className="footer-links">
-                <a href="#">Security Protocol</a>
-                <a href="#">Privacy Framework</a>
-                <a href="#">Terms of Engagement</a>
-              </div>
+              <nav className="footer-links" aria-label="Footer compliance navigation">
+                <a href="#" aria-label="View our Security Protocol documentation">Security Protocol</a>
+                <a href="#" aria-label="View our Privacy Framework documentation">Privacy Framework</a>
+                <a href="#" aria-label="View our Terms of Engagement">Terms of Engagement</a>
+              </nav>
             </div>
           </div>
           <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem' }}>&copy; 2024 {t('brand')}. {t('footer_copy')}</div>
